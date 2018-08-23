@@ -115,7 +115,8 @@ public class IsiSaldo extends AppCompatActivity {
         hargaBulk = "0";
 
         initEvent();
-        getDataDenom();
+        //getDataDenom();
+        getDataPin();
     }
 
     private void initEvent() {
@@ -343,8 +344,6 @@ public class IsiSaldo extends AppCompatActivity {
 
                     dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan saat mengambil data");
                 }
-
-                getDataPin();
             }
 
             @Override
@@ -708,137 +707,18 @@ public class IsiSaldo extends AppCompatActivity {
         progressDialog.show();
 
         final String nominal = edtNominal.getText().toString().replaceAll("[,.]", "");
-        JSONArray jArrayData = new JSONArray();
-
-        /*//MKIOS
-        if(items != null && items.size() > 0){
-
-            JSONArray jArrayBarang = new JSONArray();
-            for(CustomItem item : items){
-
-                if(iv.parseNullDouble(item.getItem4()) > 0){
-
-                    JSONObject jDenom = new JSONObject();
-                    try {
-                        jDenom.put("kode", item.getItem1());
-                        jDenom.put("jumlah", item.getItem4());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    jArrayBarang.put(jDenom);
-                }
-            }
-
-            if(jArrayBarang.length() > 0){
-                JSONObject jMkios = new JSONObject();
-
-                try {
-                    jMkios.put("flag", "MK");
-                    jMkios.put("nominal", "0");
-                    jMkios.put("barang", jArrayBarang);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                jArrayData.put(jMkios);
-            }
-        }
-
-        // Bulk
-        if(!hargaBulk.equals("0")){
-
-            JSONArray jArrayBarang = new JSONArray();
-            JSONObject jData = new JSONObject();
-
-            try {
-                jData.put("kode", "-");
-                jData.put("jumlah", "0");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayBarang.put(jData);
-
-            JSONObject jBulk = new JSONObject();
-            try {
-                jBulk.put("flag", "MB");
-                jBulk.put("nominal", hargaBulk);
-                jBulk.put("barang", jArrayBarang);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayData.put(jBulk);
-        }
-
-        // Tcash
-        if(!hargaTcash.equals("0")){
-
-            JSONArray jArrayBarang = new JSONArray();
-            JSONObject jData = new JSONObject();
-
-            try {
-                jData.put("kode", "-");
-                jData.put("jumlah", "0");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayBarang.put(jData);
-
-            JSONObject jTcash = new JSONObject();
-
-            try {
-                jTcash.put("flag", "TC");
-                jTcash.put("nominal", hargaTcash);
-                jTcash.put("barang", jArrayBarang);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayData.put(jTcash);
-        }*/
-
-        // Deposit All
-        if(!nominal.equals("") && !nominal.equals("0")){
-
-            JSONArray jArrayBarang = new JSONArray();
-            JSONObject jData = new JSONObject();
-
-            try {
-                jData.put("kode", "-");
-                jData.put("jumlah", "0");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayBarang.put(jData);
-
-            JSONObject jSd = new JSONObject();
-
-            try {
-                jSd.put("flag", "SD");
-                jSd.put("nominal", nominal);
-                jSd.put("barang", jArrayBarang);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayData.put(jSd);
-        }
-
         JSONObject jBody = new JSONObject();
 
         try {
-            jBody.put("data", jArrayData);
+            jBody.put("harga", nominal);
+            jBody.put("nominal", nominal);
             jBody.put("pin", pin);
             jBody.put("nomor", session.getUsername());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveAllDeposit, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliSaldoTunai, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

@@ -82,6 +82,21 @@ public class ListTransaksiAdapter extends ArrayAdapter{
         }else if(itemSelected.getItem6().toUpperCase().trim().equals("DISETUJUI")){
 
             holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_yellow));
+        }else if(itemSelected.getItem6().toUpperCase().trim().equals("PENDING")){
+
+            holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_cocolate));
+        }else if(itemSelected.getItem6().toUpperCase().trim().equals("GAGAL")){
+
+            holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_pink));
+        }else if(itemSelected.getItem6().toUpperCase().trim().equals("PROSES")){
+
+            holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_cyan));
+        }else if(itemSelected.getItem6().toUpperCase().trim().equals("BERHASIL")){
+
+            holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_blue));
+        }else if(itemSelected.getItem6().toUpperCase().trim().equals("BATAL")){
+
+            holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_fail));
         }else{
             holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_red));
         }

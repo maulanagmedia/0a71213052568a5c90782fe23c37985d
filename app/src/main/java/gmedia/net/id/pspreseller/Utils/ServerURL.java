@@ -36,12 +36,14 @@ public class ServerURL {
     public static final String savePinFlag = baseURL + "Profile/simpan_pin/";
     public static final String getPhonebook = baseURL + "Profile/view_phonebook/";
 
-    public static final String saveMkios = baseURL + "mkios/beli/";
+    public static final String beliMkios = baseURL + "Mkios/beli_mkios/";
+    public static final String beliBulk = baseURL + "Mkios/beli_bulk/";
+    public static final String beliTcash = baseURL + "Mkios/beli_tcash/";
+    public static final String beliSaldoTunai= baseURL + "Mkios/beli_deposit/";
     public static final String getHarga = baseURL + "mkios/get_harga/";
     public static final String viewTransaksi = baseURL + "mkios/view_transaksi/";
     public static final String viewHistory = baseURL + "mkios/view_history/";
     public static final String topUpDeposit = baseURL + "deposite/topup/";
-    public static final String saveAllDeposit = baseURL + "mkios/beli/";
     public static final String viewDeposit = baseURL + "deposite/view_deposite/";
     public static final String viewHistoryDeposit = baseURL + "Deposite/view_history/";
     public static final String getBarangDS = baseURL + "Direct_Sale/view_barang/";

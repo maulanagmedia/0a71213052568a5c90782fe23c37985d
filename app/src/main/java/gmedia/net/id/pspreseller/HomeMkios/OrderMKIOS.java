@@ -286,12 +286,12 @@ public class OrderMKIOS extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        JSONArray jArrayData = new JSONArray();
+        JSONArray jArrayBarang = new JSONArray();
 
         //MKIOS
         if(items != null && items.size() > 0){
 
-            JSONArray jArrayBarang = new JSONArray();
+
             for(CustomItem item : items){
 
                 if(iv.parseNullDouble(item.getItem4()) > 0){
@@ -307,33 +307,19 @@ public class OrderMKIOS extends AppCompatActivity {
                     jArrayBarang.put(jDenom);
                 }
             }
-
-            if(jArrayBarang.length() > 0){
-                JSONObject jMkios = new JSONObject();
-
-                try {
-                    jMkios.put("flag", "MK");
-                    jMkios.put("nominal", "0");
-                    jMkios.put("barang", jArrayBarang);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                jArrayData.put(jMkios);
-            }
         }
 
         JSONObject jBody = new JSONObject();
 
         try {
-            jBody.put("data", jArrayData);
+            jBody.put("barang", jArrayBarang);
             jBody.put("pin", pin);
             jBody.put("nomor", session.getUsername());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveAllDeposit, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliMkios, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
@@ -505,7 +491,11 @@ public class OrderMKIOS extends AppCompatActivity {
                         JSONArray jsonArray = response.getJSONArray("response");
                         for(int i = 0; i < jsonArray.length(); i ++){
                             JSONObject jo = jsonArray.getJSONObject(i);
-                            listDenom.add(new CustomItem(jo.getString("kodebrg"), jo.getString("namabrg"), jo.getString("hargajual")));
+                            listDenom.add(new CustomItem(
+                                    jo.getString("kodebrg"),
+                                    jo.getString("namabrg"),
+                                    jo.getString("hargajual"),
+                                    jo.getString("flag")));
                         }
 
                     }

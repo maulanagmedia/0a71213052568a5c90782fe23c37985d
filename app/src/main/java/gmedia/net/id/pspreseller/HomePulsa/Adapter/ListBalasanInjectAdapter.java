@@ -1,6 +1,7 @@
 package gmedia.net.id.pspreseller.HomePulsa.Adapter;
 
 import android.app.Activity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class ListBalasanInjectAdapter extends ArrayAdapter{
 
         final CustomItem itemSelected = items.get(position);
         holder.tvItem0.setText(itemSelected.getItem1());
-        holder.tvItem1.setText(itemSelected.getItem2());
+        holder.tvItem1.setText(Html.fromHtml(itemSelected.getItem2()));
         return convertView;
 
     }

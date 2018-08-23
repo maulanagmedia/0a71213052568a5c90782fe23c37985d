@@ -475,43 +475,18 @@ public class OrderBulk extends AppCompatActivity {
         JSONArray jArrayData = new JSONArray();
 
         // Bulk
-        if(!hargaBulk.equals("0")){
-
-            JSONArray jArrayBarang = new JSONArray();
-            JSONObject jData = new JSONObject();
-
-            try {
-                jData.put("kode", "-");
-                jData.put("jumlah", "0");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayBarang.put(jData);
-
-            JSONObject jBulk = new JSONObject();
-            try {
-                jBulk.put("flag", "MB");
-                jBulk.put("nominal", hargaBulk);
-                jBulk.put("barang", jArrayBarang);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayData.put(jBulk);
-        }
-
         JSONObject jBody = new JSONObject();
 
         try {
-            jBody.put("data", jArrayData);
+            jBody.put("harga", hargaBulk);
+            jBody.put("nominal", hargaBulk);
             jBody.put("pin", pin);
             jBody.put("nomor", session.getUsername());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveAllDeposit, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliBulk, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

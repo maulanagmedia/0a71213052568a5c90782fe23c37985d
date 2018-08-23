@@ -20,6 +20,11 @@
     <color name="color_status">#43575e</color>
     <color name="color_status_red">#971318</color>
     <color name="color_status_yellow">#af9816</color>
+    <color name="color_status_pink">#ca3e6f</color>
+    <color name="color_status_red_dark">#932223</color>
+    <color name="color_status_blue">#6079d4</color>
+    <color name="color_status_cyan">#3ab68c</color>
+    <color name="color_status_cocolate">#b19068</color>
     <color name="color_button_red">#d80315</color>
     <color name="color_button_red_active">#f13f4e</color>
     <color name="color_cb">#0b0b45</color>

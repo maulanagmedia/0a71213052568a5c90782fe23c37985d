@@ -84,7 +84,11 @@ public class BarangPulsaAdapter extends ArrayAdapter{
 
         final CustomItem itemSelected = items.get(position);
         holder.tvItem.setText(itemSelected.getItem2());
-        holder.rbItem.setText(iv.ChangeToRupiahFormat(itemSelected.getItem3()));
+        if(itemSelected.getItem3().isEmpty() || itemSelected.getItem3().equals("0")){
+            holder.rbItem.setText("");
+        }else{
+            holder.rbItem.setText(iv.ChangeToRupiahFormat(itemSelected.getItem3()));
+        }
 
         if(selectedItem == position){
 

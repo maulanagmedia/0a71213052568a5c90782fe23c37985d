@@ -131,7 +131,7 @@ public class DetailInfoStok extends AppCompatActivity {
             if(flag.equals("0")){
 
                 CustomItem item = new CustomItem(iv.getCurrentDate(FormatItem.formatTime),
-                        "Total stok yang anda miliki sebesar " + iv.ChangeToRupiahFormat(value));
+                        "Total saldo tunai yang anda miliki sebesar <b>" + iv.ChangeToRupiahFormat(value)+"</b>");
                 balasanAdapter.addData(item);
 
                 llHistoryPbob.setVisibility(View.VISIBLE);

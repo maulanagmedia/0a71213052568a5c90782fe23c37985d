@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nomor Anda "
+                android:text="Saldo Tunai Rp 0 "
                 android:id="@+id/tv_saldo"
                 android:textSize="20sp"
                 android:textColor="@color/color_white_pure" />
@@ -40,7 +40,7 @@
                 android:paddingLeft="@dimen/margin_default"
                 android:paddingRight="@dimen/margin_default"
                 android:background="@drawable/bg_button_white"
-                android:text="Top up Deposit"
+                android:text="Top up Saldo Tunai"
                 android:id="@+id/btn_topup"
                 android:textColor="@color/color_red"
                 android:textSize="11sp"/>

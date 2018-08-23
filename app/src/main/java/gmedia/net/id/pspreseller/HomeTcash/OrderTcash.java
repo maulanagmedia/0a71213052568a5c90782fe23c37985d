@@ -473,44 +473,18 @@ public class OrderTcash extends AppCompatActivity {
         JSONArray jArrayData = new JSONArray();
 
         // Tcash
-        if(!hargaTcash.equals("0")){
-
-            JSONArray jArrayBarang = new JSONArray();
-            JSONObject jData = new JSONObject();
-
-            try {
-                jData.put("kode", "-");
-                jData.put("jumlah", "0");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayBarang.put(jData);
-
-            JSONObject jTcash = new JSONObject();
-
-            try {
-                jTcash.put("flag", "TC");
-                jTcash.put("nominal", hargaTcash);
-                jTcash.put("barang", jArrayBarang);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            jArrayData.put(jTcash);
-        }
-
         JSONObject jBody = new JSONObject();
 
         try {
-            jBody.put("data", jArrayData);
+            jBody.put("harga", hargaTcash);
+            jBody.put("nominal", hargaTcash);
             jBody.put("pin", pin);
             jBody.put("nomor", session.getUsername());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveAllDeposit, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliTcash, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
