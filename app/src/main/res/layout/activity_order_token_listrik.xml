@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gmedia.net.id.pspreseller.HomeTokenListrik.OrderTokenListrik"
+    android:background="@drawable/ic_baground">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_proses"
+        android:background="@drawable/bg_button_blue_rec"
+        android:textColor="@color/color_white_pure"
+        android:id="@+id/btn_proses"
+        android:layout_alignParentBottom="true"
+        android:text="Bayar Token Listrik"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@id/btn_proses"
+        android:id="@+id/ll_body"
+        android:weightSum="1"
+        android:layout_margin="@dimen/margin_big">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:weightSum="2"
+            android:id="@+id/rg_jenis"
+            android:paddingTop="@dimen/margin_default"
+            android:paddingBottom="@dimen/margin_default"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_token_listrik"
+                android:layout_marginRight="@dimen/margin_default"
+                android:text="Tagihan Listrik"
+                android:id="@+id/rb_pasca_bayar"
+                android:gravity="center"
+                android:checked="true"
+                android:button="@null"
+                android:textColor="@color/cb_color"
+                android:textSize="24sp"
+                android:textAllCaps="true"
+                android:padding="@dimen/margin_big"/>
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_token_listrik"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:id="@+id/rb_prabayar"
+                android:text="Token Listrik"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:button="@null"
+                android:textColor="@color/cb_color"
+                android:textSize="24sp"
+                android:padding="@dimen/margin_big"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:layout_marginTop="@dimen/margin_default"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:text="No Meter / ID Pelanggan"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/form_control_input"
+                android:text=""
+                android:id="@+id/edt_meteran"
+                android:imeOptions="actionDone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:id="@+id/ll_nominal"
+            android:layout_marginTop="@dimen/margin_default"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:text="Nominal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_small"
+                android:padding="@dimen/margin_small"
+                android:background="@drawable/bg_white_rounded">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_nominal"></Spinner>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="vertical"
+            android:gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_white"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
+                        android:text=""
+                        android:id="@+id/tv_jumlah_harga"
+                        android:textSize="25sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_line_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:background="@color/color_white"></LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Harga"
+                    android:textColor="@color/color_white"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

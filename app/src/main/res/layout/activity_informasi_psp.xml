@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_baground"
+    tools:context=".SideInfoPSP.InformasiPSP">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:padding="@dimen/margin_biger">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/labelInfo"
+                android:layout_marginTop="0dp"
+                android:text="Sales Penanggung Jawab"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueInfo"
+                android:id="@+id/tv_sales"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/labelInfo"
+                android:text="Nomor Sales Penanggung Jawab"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueInfo"
+                android:id="@+id/tv_nomor_sales"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line"
+                android:background="@color/color_grey"
+                android:layout_marginTop="@dimen/margin_big"
+                android:layout_marginBottom="@dimen/margin_default"/>
+
+            <com.maulana.custommodul.CustomView.NestedListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lv_spv"
+                android:divider="@null"></com.maulana.custommodul.CustomView.NestedListView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/labelInfo"
+                android:text="Branch Manager"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueInfo"
+                android:text=""
+                android:id="@+id/tv_bm"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/labelInfo"
+                android:text="Nomor Branch Manager"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueInfo"
+                android:text=""
+                android:id="@+id/tv_nomor_bm"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line"
+                android:background="@color/color_grey"
+                android:layout_marginTop="@dimen/margin_big"
+                android:layout_marginBottom="@dimen/margin_default"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/labelInfo"
+                android:text="Alamat Kantor"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueInfo"
+                android:text=""
+                android:id="@+id/tv_alamat_kantor"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/labelInfo"
+                android:text="Nomor T-Care"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueInfo"
+                android:text=""
+                android:id="@+id/tv_nomor_tcare"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/labelInfo"
+                android:text="Nomor Broadcast"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ValueInfo"
+                android:text=""
+                android:id="@+id/tv_nomor_broadcast"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/pb_loading"
+        android:visibility="gone"/>
+
+</RelativeLayout>

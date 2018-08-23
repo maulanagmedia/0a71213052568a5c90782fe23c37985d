@@ -1,0 +1,41 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gmedia.net.id.pspreseller.NavPromo.MainPromo">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_big">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:scrollbarSize="@dimen/default_scrollbar"
+            android:scrollbars="none"
+            android:id="@+id/lv_promo"></ListView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:id="@+id/pb_loading"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:background="@drawable/bg_white_transparent"
+            android:drawableTop="@mipmap/ic_refresh"
+            android:text="Refresh"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:id="@+id/btn_refresh"
+            android:textColor="@color/color_white"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gmedia.net.id.pspreseller.TopUP.IsiSaldo"
+    android:background="@drawable/ic_baground">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_proses"
+        android:background="@drawable/bg_button_blue_rec"
+        android:textColor="@color/color_white_pure"
+        android:id="@+id/btn_proses"
+        android:layout_alignParentBottom="true"
+        android:text="Top Up"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_proses"
+        android:scrollbarSize="@dimen/default_scrollbar"
+        android:paddingTop="@dimen/margin_default"
+        android:paddingBottom="@dimen/margin_default"
+        android:paddingRight="@dimen/margin_big"
+        android:paddingLeft="@dimen/margin_big">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:text="Top up saldo PSP semakin mudah"
+                android:textSize="@dimen/default_title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:textColor="@color/color_white"
+                android:text="Ikuti langkah-langkah berikut untuk melakukan Top up Saldo Tunai"
+                android:textSize="@dimen/default_font"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@drawable/bg_white_rounded"
+                android:padding="@dimen/margin_big"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="wrap_content"
+                        android:text="Top up saldo via sales"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/default_title"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/default_font"
+                    android:text="1. Masukkan jumlah nominal pada kolom dibawah sesuai jenis stok"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/default_font"
+                    android:text="2. Tekan tombol Top Up"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/default_font"
+                    android:text="3. Tunggu hingga sales PSP mendatangi anda"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/default_font"
+                    android:text="4. Bayar kepada sales PSP sebesar total harga yang muncul pada bagian paling bawah halaman ini"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/default_font"
+                    android:text="5. Begitu Sales PSP menyetujui top up anda, Saldo Tunai akan bertambah"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_menu"
+                android:visibility="gone"
+                android:padding="@dimen/margin_default"
+                android:layout_marginTop="@dimen/margin_default">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
+                    android:id="@+id/tv_title"
+                    android:text="Stok MKIOS"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_title"
+                    android:orientation="vertical">
+
+                    <com.maulana.custommodul.CustomView.NestedListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="afterDescendants"
+                        android:id="@+id/lv_denom"></com.maulana.custommodul.CustomView.NestedListView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_white"
+                                android:layout_marginLeft="@dimen/margin_default"
+                                android:layout_marginRight="@dimen/margin_default"
+                                android:text=""
+                                android:id="@+id/tv_jumlah_harga_mkios"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/default_line_medium"
+                                android:layout_marginTop="@dimen/margin_small"
+                                android:layout_marginBottom="@dimen/margin_small"
+                                android:background="@color/color_white"></LinearLayout>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Harga MKIOS"
+                            android:textColor="@color/color_white"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_menu"
+                android:visibility="gone"
+                android:padding="@dimen/margin_default"
+                android:layout_marginTop="@dimen/margin_default">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
+                    android:id="@+id/tv_title1"
+                    android:text="Stok TCash"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title1"
+                    android:id="@+id/ll_nominal1"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Masukkan Nominal"
+                            android:textColor="@color/color_white"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.12"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Rp"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:textColor="@color/color_white"/>
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_weight="0.88"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:id="@+id/edt_nominal_tcash"
+                            style="@style/form_control_input"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@id/ll_nominal1"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:paddingBottom="@dimen/margin_default">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:layout_marginLeft="@dimen/margin_default"
+                            android:layout_marginRight="@dimen/margin_default"
+                            android:text=""
+                            android:id="@+id/tv_jumlah_harga_tcash"
+                            android:textSize="25sp"
+                            android:textStyle="bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_line_medium"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_small"
+                            android:background="@color/color_white"></LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Harga TCash"
+                        android:textColor="@color/color_white"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_menu"
+                android:visibility="gone"
+                android:padding="@dimen/margin_default"
+                android:layout_marginTop="@dimen/margin_default">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
+                    android:id="@+id/tv_title2"
+                    android:text="Stok Bulk"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title2"
+                    android:id="@+id/ll_nominal2"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Masukkan Nominal"
+                            android:textColor="@color/color_white"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.12"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Rp"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:textColor="@color/color_white"/>
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_weight="0.88"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:inputType="number"
+                            android:imeOptions="actionDone"
+                            android:id="@+id/edt_nominal_bulk"
+                            style="@style/form_control_input"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_below="@id/ll_nominal2"
+                    android:paddingBottom="@dimen/margin_default"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:layout_marginLeft="@dimen/margin_default"
+                            android:layout_marginRight="@dimen/margin_default"
+                            android:text=""
+                            android:id="@+id/tv_jumlah_harga_bulk"
+                            android:textSize="25sp"
+                            android:textStyle="bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_line_medium"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_small"
+                            android:background="@color/color_white"></LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Harga Bulk"
+                        android:textColor="@color/color_white"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_menu"
+                android:padding="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_marginTop="@dimen/margin_default">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_white"
+                        android:id="@+id/tv_title3"
+                        android:text="Stok Saldo Tunai"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_white"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="Masukkan Nominal"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.12"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Rp"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:textColor="@color/color_white"/>
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_weight="0.88"
+                            android:layout_height="wrap_content"
+                            style="@style/form_control_input"
+                            android:id="@+id/edt_nominal"
+                            android:inputType="number"
+                            android:imeOptions="actionDone"
+                            android:text=""/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_below="@id/ll_nominal2"
+                android:paddingBottom="@dimen/margin_default"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_white"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
+                        android:text=""
+                        android:id="@+id/tv_total_harga"
+                        android:textSize="28sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_line_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:background="@color/color_white"></LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total yang harus dibayar"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_white"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

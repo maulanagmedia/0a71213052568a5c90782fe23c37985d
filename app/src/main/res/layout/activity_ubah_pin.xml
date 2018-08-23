@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PengaturanPin.UbahPinActivity"
+    android:background="@drawable/ic_baground">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_proses"
+        android:background="@drawable/bg_button_blue_rec"
+        android:textColor="@color/color_white_pure"
+        android:id="@+id/btn_proses"
+        android:layout_alignParentBottom="true"
+        android:text="Ganti Sandi"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_proses"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_big">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:text="Sandi Lama"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/form_control_input"
+                android:text=""
+                android:id="@+id/edt_pin_lama"
+                android:inputType="numberPassword"
+                android:imeOptions="actionNext"
+                android:maxLength="4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:text="Sandi Baru"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/form_control_input"
+                android:text=""
+                android:id="@+id/edt_pin_baru"
+                android:inputType="numberPassword"
+                android:imeOptions="actionNext"
+                android:maxLength="4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:text="Ketik Ulang Sandi Baru"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/form_control_input"
+                android:text=""
+                android:id="@+id/edt_re_pin_baru"
+                android:inputType="numberPassword"
+                android:imeOptions="actionDone"
+                android:maxLength="4"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

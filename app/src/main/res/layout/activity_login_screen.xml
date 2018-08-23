@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gmedia.net.id.pspreseller.LoginScreen"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:gravity="center"
+    android:background="@drawable/ic_baground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_white_transparent_bg2"
+        android:gravity="center">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_logo_psp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_big"
+                    android:gravity="center"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_default">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/margin_default"
+                            android:layout_marginBottom="@dimen/margin_default">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Username"
+                                android:textColor="@color/color_white"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_white_transparent"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.2"
+                                    android:layout_height="match_parent"
+                                    android:src="@mipmap/ic_user1"
+                                    android:scaleType="fitCenter"
+                                    android:padding="@dimen/margin_default"/>
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.8"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_small"
+                                    android:textColor="@color/color_white"
+                                    android:background="@android:color/transparent"
+                                    android:paddingTop="@dimen/margin_tanggung"
+                                    android:paddingBottom="@dimen/margin_tanggung"
+                                    android:paddingRight="@dimen/margin_default"
+                                    android:paddingLeft="@dimen/margin_default"
+                                    android:id="@+id/edt_username"
+                                    android:imeOptions="actionNext"
+                                    android:textColorHint="@color/color_white_transparent_bg"
+                                    android:inputType="phone"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/margin_default"
+                            android:layout_marginBottom="@dimen/margin_default">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Password"
+                                android:textColor="@color/color_white"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_white_transparent"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.2"
+                                    android:layout_height="match_parent"
+                                    android:src="@mipmap/ic_lock1"
+                                    android:scaleType="fitCenter"
+                                    android:padding="@dimen/margin_default"/>
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.8"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_small"
+                                    android:textColor="@color/color_white"
+                                    android:background="@android:color/transparent"
+                                    android:paddingTop="@dimen/margin_tanggung"
+                                    android:paddingBottom="@dimen/margin_tanggung"
+                                    android:paddingRight="@dimen/margin_default"
+                                    android:paddingLeft="@dimen/margin_default"
+                                    android:id="@+id/edt_password"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPassword"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cb_simpan"
+                            android:layout_marginTop="@dimen/margin_default"
+                            android:textColor="@color/color_white"
+                            android:buttonTint="@color/color_white"
+                            android:text="Remember me"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_default"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:gravity="center"
+                            android:weightSum="1">
+
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_weight="0.7"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/btn_login"
+                                android:background="@drawable/bg_button_blue"
+                                android:textColor="@color/color_white_pure"
+                                android:text="login"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/margin_default">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:id="@+id/tv_reg"
+                android:text="Belum terdaftar? Silahkan klik "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_blue_reg"
+                android:layout_toRightOf="@id/tv_reg"
+                android:id="@+id/tv_register"
+                android:text="disini"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/margin_default">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:id="@+id/tv_res"
+                android:text="Lupa password? Silahkan klik "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_blue_reg"
+                android:layout_toRightOf="@id/tv_res"
+                android:id="@+id/tv_reset"
+                android:text="reset password"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

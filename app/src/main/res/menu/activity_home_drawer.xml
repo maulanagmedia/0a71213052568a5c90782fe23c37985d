@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_user_black"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_tambah_akun"
+            android:icon="@drawable/ic_user_black"
+            android:visible="false"
+            android:title="Tambah Akun" />
+        <item
+            android:id="@+id/nav_deposit"
+            android:icon="@drawable/ic_money"
+            android:title="Riwayat Deposit" />
+        <item
+            android:id="@+id/nav_pricelist"
+            android:icon="@drawable/ic_tag"
+            android:title="Pricelist" />
+        <item
+            android:id="@+id/nav_change_pin"
+            android:icon="@mipmap/ic_finger"
+            android:title="Ubah Sandi"/>
+        <item
+            android:id="@+id/nav_change_password"
+            android:icon="@mipmap/ic_password"
+            android:title="Ubah Password"/>
+        <item
+            android:id="@+id/nav_info_psp"
+            android:icon="@mipmap/ic_building"
+            android:title="Informasi PSP"/>
+    </group>
+
+    <item android:title="Akun">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

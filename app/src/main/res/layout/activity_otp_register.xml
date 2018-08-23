@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register.OtpRegisterActivity"
+    android:background="@drawable/ic_baground">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/margin_big">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white_transparent_bg"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_biger"
+                android:text="Verifikasi Pendaftaran"
+                android:textStyle="bold"
+                android:textSize="26sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="Kode verifikasi telah dikirim ke nomor chip anda, mohon masukkan kode tersebut pada kolom dibawah"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_big">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_title"
+                    android:gravity="center_vertical|right"
+                    android:background="@drawable/bg_white_rounded"
+                    android:textColor="@color/color_white"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="2dp"
+                    android:paddingLeft="2dp"
+                    android:layout_marginRight="@dimen/margin_tiny"
+                    android:id="@+id/tv_minutes"
+                    android:text="00" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_title"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/color_white"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:layout_marginRight="@dimen/margin_tiny"
+                    android:textStyle="bold"
+                    android:text=":" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_title"
+                    android:gravity="center_vertical|right"
+                    android:background="@drawable/bg_white_rounded"
+                    android:textColor="@color/color_white"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="2dp"
+                    android:paddingLeft="2dp"
+                    android:id="@+id/tv_second"
+                    android:text="00" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_big">
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/color_white"
+                    android:textStyle="bold"
+                    android:maxLength="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:textColor="@color/color_white"
+                    android:textSize="38sp"
+                    android:id="@+id/edt_1"
+                    android:inputType="textPhonetic"
+                    android:imeOptions="actionNext"/>
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/color_white"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:textColor="@color/color_white"
+                    android:textSize="38sp"
+                    android:id="@+id/edt_2"
+                    android:inputType="textPhonetic"
+                    android:imeOptions="actionNext"/>
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/color_white"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:textColor="@color/color_white"
+                    android:textSize="38sp"
+                    android:id="@+id/edt_3"
+                    android:inputType="textPhonetic"
+                    android:imeOptions="actionNext"/>
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/color_white"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:textColor="@color/color_white"
+                    android:textSize="38sp"
+                    android:id="@+id/edt_4"
+                    android:inputType="textPhonetic"
+                    android:imeOptions="actionDone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/button_proses"
+                android:gravity="center"
+                android:weightSum="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_verifikasi"
+                    android:textSize="16sp"
+                    android:background="@drawable/bg_button_blue"
+                    android:textColor="@color/color_white_pure"
+                    android:text="Verifikasi"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:gravity="center">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_re_verifikasi"
+                    android:textSize="16sp"
+                    android:paddingLeft="@dimen/margin_default"
+                    android:paddingRight="@dimen/margin_default"
+                    android:textAllCaps="false"
+                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/color_white"
+                    android:text="Kirim ulang kode verifikasi"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/pb_loading"
+        android:visibility="gone"/>
+
+</RelativeLayout>

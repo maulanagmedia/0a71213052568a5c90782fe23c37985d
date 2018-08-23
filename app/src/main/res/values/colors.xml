@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e50216</color>
+    <color name="colorPrimaryDark">#d80215</color>
+    <color name="colorAccent">#ff020a</color>
+
+    <color name="color_notif">#465a61</color>
+    <color name="color_red">#ff020b</color>
+    <color name="color_red_active">#ed6e73</color>
+    <color name="color_white_transparent">#58ffffff</color>
+    <color name="color_white_transparent_bg">#de5e5e5e</color>
+    <color name="color_white_transparent_bg2">#3dffffff</color>
+    <color name="color_black_transparent_bg">#2e000000</color>
+    <color name="color_black_transparent_bg2">#2ececece</color>
+    <color name="color_white_transparent_input">#47ffffff</color>
+    <color name="color_blue">#130282</color>
+    <color name="color_blue1">#4d25de</color>
+    <color name="color_blue_active">#4a30f5</color>
+    <color name="color_blue_reg">#6fa8ff</color>
+    <color name="color_status">#43575e</color>
+    <color name="color_status_red">#971318</color>
+    <color name="color_status_yellow">#af9816</color>
+    <color name="color_button_red">#d80315</color>
+    <color name="color_button_red_active">#f13f4e</color>
+    <color name="color_cb">#0b0b45</color>
+    <color name="color_cb_active">#ffffff</color>
+    <color name="color_text_cb">#ffffff</color>
+    <color name="color_text_cb_active">#5943b0</color>
+    <color name="color_bg_chat">#dcdcdc</color>
+    <color name="color_grey">#9b9b9b</color>
+</resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/modul_margin_default"
+        android:layout_marginBottom="@dimen/modul_margin_default"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_head"
+            android:gravity="center"
+            android:background="@drawable/bg_dialog_red"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Masukkan Sandi"
+                android:id="@+id/tv_title"
+                android:textColor="@color/color_white_pure"
+                android:textSize="20sp"
+                android:layout_margin="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_footer"
+            android:gravity="center"
+            android:padding="@dimen/modul_margin_default"
+            android:background="@drawable/bg_dialog_white"
+            >
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberPassword"
+                android:maxLength="6"
+                android:hint="****"
+                android:id="@+id/edt_pin"
+                android:layout_marginTop="@dimen/modul_margin_default"
+                android:layout_marginRight="@dimen/modul_margin_default"
+                android:layout_marginLeft="@dimen/modul_margin_default"
+                android:gravity="center"/>
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simpan"
+                android:id="@+id/cb_simpan"
+                android:layout_marginRight="@dimen/modul_margin_default"
+                android:layout_marginLeft="@dimen/modul_margin_default"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/modul_margin_default"
+                android:gravity="center"
+                android:weightSum="2">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.8"
+                    android:layout_height="24dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/color_black"
+                    android:textSize="14sp"
+                    android:layout_marginRight="4dp"
+                    android:id="@+id/btn_tutup"
+                    android:text="Tutup"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_weight="0.8"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/color_red_dialog"
+                    android:textSize="14sp"
+                    android:id="@+id/btn_proses"
+                    android:text="Proses"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

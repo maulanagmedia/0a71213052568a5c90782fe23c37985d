@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/title_bulk_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan1"
+            android:gravity="center"
+            android:id="@+id/tv_item14"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item1"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item2"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item3"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item4"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item5"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item6"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item7"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item8"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item9"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item10"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item11"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_balasan_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item12"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+
+        <TextView
+            android:layout_width="@dimen/title_bulk_width"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_title_balasan"
+            android:gravity="center"
+            android:id="@+id/tv_item13"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/margin_cute"
+            android:layout_marginRight="@dimen/margin_cute"/>
+    </LinearLayout>
+
+</LinearLayout>

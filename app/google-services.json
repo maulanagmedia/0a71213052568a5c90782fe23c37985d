@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "406404856822",
+    "firebase_url": "https://pspreseller-72e49.firebaseio.com",
+    "project_id": "pspreseller-72e49",
+    "storage_bucket": "pspreseller-72e49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406404856822:android:d5a9ea77736898d9",
+        "android_client_info": {
+          "package_name": "gmedia.net.id.pspreseller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406404856822-mnuv88stpe5go5sug17e6sbs1e3df24u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gmedia.net.id.pspreseller",
+            "certificate_hash": "e975876398fd23dc0982c682e25ef27081c5dde4"
+          }
+        },
+        {
+          "client_id": "406404856822-sbga92lr2a8guhnsa9t7g8qfmf88l4cc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHoeJSBURACJ3T48rshB9Z42lDCW1LES4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406404856822-sbga92lr2a8guhnsa9t7g8qfmf88l4cc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

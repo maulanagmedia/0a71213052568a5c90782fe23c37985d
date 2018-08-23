@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResetActivity"
+    android:background="@drawable/ic_baground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_margin="@dimen/margin_big">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_white"
+            android:gravity="center"
+            android:text="RESET"
+            android:textStyle="bold"
+            android:textSize="32sp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_big"
+            android:padding="@dimen/margin_small"
+            android:textColorHint="@color/color_white">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nomor Chip (08xxxxxxxxxx)"
+                android:layout_margin="@dimen/margin_small"
+                android:textColor="@color/color_white"
+                android:textColorHint="@color/color_white"
+                android:backgroundTint="@color/color_white"
+                android:id="@+id/edt_nomor"
+                android:inputType="phone"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_white"
+            android:paddingLeft="@dimen/margin_default"
+            android:paddingRight="@dimen/margin_default"
+            android:text="* Nomor chip akan digunakan sebagai username"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginTop="@dimen/button_proses"
+            android:gravity="center"
+            android:weightSum="1">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_reset"
+                android:textSize="16sp"
+                android:background="@drawable/bg_button_blue"
+                android:textColor="@color/color_white_pure"
+                android:text="Reset Password"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
