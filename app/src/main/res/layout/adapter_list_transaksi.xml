@@ -101,9 +101,24 @@
                 android:text=""
                 android:textColor="@color/color_black"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                android:id="@+id/tv_item3"
+                android:id="@+id/tv_item3"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:layout_marginTop="@dimen/margin_small"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                 android:singleLine="true"
                 android:ellipsize="end"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/color_black"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:id="@+id/tv_item4"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -4,9 +4,6 @@
     package="gmedia.net.id.pspreseller">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -23,7 +20,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -175,7 +172,7 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -194,9 +191,25 @@
         <activity
             android:name=".SideChangePassword.OtpChangePassword"
             android:screenOrientation="portrait" />
-        <activity android:name=".ResetActivity" />
-        <activity android:name=".Reset.OtpResetActivity" />
-        <activity android:name=".HomeBukuPintar.BukuPintar"></activity>
+        <activity
+            android:name=".ResetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Reset.OtpResetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeBukuPintar.BukuPintar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeBeliPerdana.ListBarangPerdana"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomePreorderPerdana.ListBarangPreorder"
+            android:screenOrientation="portrait" />
+        <activity android:name=".HomeBeliPerdana.DetailBarangPerdana"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HomeBeliPerdana.DetailKeranjangPerdana"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/modul_margin_default"
+        android:layout_marginBottom="@dimen/modul_margin_default"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_head"
+            android:gravity="center"
+            android:background="@drawable/bg_dialog_red"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Cara Bayar"
+                android:id="@+id/tv_title"
+                android:textColor="@color/color_white_pure"
+                android:textSize="20sp"
+                android:paddingTop="@dimen/margin_default"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pilih Metode Cara Bayar"
+                android:textColor="@color/color_white_pure"
+                android:textSize="12sp"
+                android:paddingBottom="@dimen/margin_default"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_footer"
+            android:gravity="center"
+            android:background="@drawable/bg_dialog_white"
+            >
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:weightSum="2"
+                android:id="@+id/rg_cara_bayar"
+                android:paddingTop="@dimen/margin_default"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_default"
+                android:gravity="center">
+
+                <RadioButton
+                    android:layout_width="@dimen/cr_bayar"
+                    android:layout_height="@dimen/cr_bayar"
+                    android:background="@drawable/bg_bayar_sales"
+                    android:layout_marginRight="@dimen/margin_big"
+                    android:text=""
+                    android:id="@+id/rb_sales"
+                    android:gravity="center"
+                    android:checked="true"
+                    android:button="@null"
+                    android:textColor="@color/cb_color"
+                    android:textSize="24sp"
+                    android:textAllCaps="true"
+                    android:padding="@dimen/margin_big"/>
+
+                <RadioButton
+                    android:layout_width="@dimen/cr_bayar"
+                    android:layout_height="@dimen/cr_bayar"
+                    android:background="@drawable/bg_bayar_transfer"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:id="@+id/rb_transfer"
+                    android:textAllCaps="true"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textColor="@color/cb_color"
+                    android:textSize="24sp"
+                    android:padding="@dimen/margin_big"/>
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="@dimen/cr_bayar_text"
+                    android:layout_height="wrap_content"
+                    android:text="Jemput Sales"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/margin_default"/>
+
+                <TextView
+                    android:layout_width="@dimen/cr_bayar_text"
+                    android:layout_height="wrap_content"
+                    android:text="Transfer Bank"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/margin_default"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button_orange_rounded"
+                    android:id="@+id/btn_cancel"
+                    android:text="Batal"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_white_pure"
+                    android:paddingLeft="@dimen/margin_default"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button_blue_rounded"
+                    android:id="@+id/btn_proses"
+                    android:text="Lakukan Topup"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_white_pure"
+                    android:paddingLeft="@dimen/margin_default"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

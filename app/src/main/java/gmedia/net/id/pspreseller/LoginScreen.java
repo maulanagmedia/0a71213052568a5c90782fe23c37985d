@@ -71,7 +71,6 @@ public class LoginScreen extends RuntimePermissionsActivity {
         }
 
         if (ContextCompat.checkSelfPermission(
-                LoginScreen.this, android.Manifest.permission.WRITE_SETTINGS) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 LoginScreen.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 LoginScreen.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 LoginScreen.this, android.Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
@@ -87,7 +86,6 @@ public class LoginScreen extends RuntimePermissionsActivity {
 
             LoginScreen.super.requestAppPermissions(new
                             String[]{ android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                            android.Manifest.permission.WRITE_SETTINGS,
                             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             android.Manifest.permission.WAKE_LOCK,
                             android.Manifest.permission.VIBRATE,

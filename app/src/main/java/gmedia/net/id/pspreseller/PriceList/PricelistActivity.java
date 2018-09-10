@@ -131,6 +131,7 @@ public class PricelistActivity extends AppCompatActivity {
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
             jBody.put("keyword", keyword);
+            jBody.put("mkios", "1");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -191,6 +192,7 @@ public class PricelistActivity extends AppCompatActivity {
             jBody.put("start", String.valueOf(start));
             jBody.put("count", String.valueOf(count));
             jBody.put("keyword", keyword);
+            jBody.put("mkios", "1");
         } catch (JSONException e) {
             e.printStackTrace();
         }

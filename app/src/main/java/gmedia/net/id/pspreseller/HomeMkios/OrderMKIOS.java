@@ -89,6 +89,7 @@ public class OrderMKIOS extends AppCompatActivity {
         tvJumlahHarga = (TextView) findViewById(R.id.tv_jumlah_harga);
         tvNomor = (TextView) findViewById(R.id.tv_nomor);
         tvNomor.setText(session.getUsername());
+        items = new ArrayList<>();
 
         dialogBox = new DialogBox(context);
         //getNoRs();
@@ -495,6 +496,7 @@ public class OrderMKIOS extends AppCompatActivity {
                                     jo.getString("kodebrg"),
                                     jo.getString("namabrg"),
                                     jo.getString("hargajual"),
+                                    "",
                                     jo.getString("flag")));
                         }
 

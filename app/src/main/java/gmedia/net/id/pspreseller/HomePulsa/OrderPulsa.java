@@ -88,7 +88,7 @@ public class OrderPulsa extends AppCompatActivity {
     private ProgressBar pbProses;
     private List<CustomItem> listBalasan;
     private String nomor = "";
-    private static String lastSN = "";
+    private static String lastSN = "", lastCashback = "", lastSaldoAkhir = "";
     private static String lastSuccessBalasan = "";
     private static boolean isKonfirmasiManual = false;
     private boolean isProses = false;
@@ -124,7 +124,7 @@ public class OrderPulsa extends AppCompatActivity {
 
         context = this;
 
-        setTitle("Jual Pulsa & Tcash");
+        setTitle("Jual Pulsa/ Tcash/ Bulk");
         isActive = true;
         transactionID = iv.getCurrentDate(FormatItem.formatTimestamp2);
 
@@ -153,6 +153,8 @@ public class OrderPulsa extends AppCompatActivity {
         listBalasan = new ArrayList<>();
         nomor = "";
         lastSN = "";
+        lastCashback = "";
+        lastSaldoAkhir = "";
         lastSuccessBalasan = "";
         isProses = false;
         isKonfirmasiManual = false;
@@ -273,7 +275,7 @@ public class OrderPulsa extends AppCompatActivity {
 
             adapterBarang = new BarangPulsaAdapter((Activity) context, listBarang);
             lvBarang.setAdapter(adapterBarang);
-            if(listBarang.size() > 0) setSelectedItem(listBarang.get(0));
+            //if(listBarang.size() > 0) setSelectedItem(listBarang.get(0));
 
             /*lvBarang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -539,7 +541,9 @@ public class OrderPulsa extends AppCompatActivity {
                             String harga = response.getJSONObject("response").getString("harga");
                             String nomor = response.getJSONObject("response").getString("nomor");
                             lastSN = response.getJSONObject("response").getString("sn");
-                            edtNomor.setText(nomor);
+                            lastCashback = response.getJSONObject("response").getString("cashback");
+                            lastSaldoAkhir = response.getJSONObject("response").getString("stok_akhir");
+                            //edtNomor.setText(nomor);
                             selectedHarga = harga;
                             edtNominal.setText(harga);
 
@@ -616,6 +620,8 @@ public class OrderPulsa extends AppCompatActivity {
             jBody.put("alamat", edtAlamat.getText().toString());
             jBody.put("nomor", edtNomor.getText().toString());
             jBody.put("sn", lastSN);
+            jBody.put("cashback", lastCashback);
+            jBody.put("stok_akhir", lastSaldoAkhir);
             jBody.put("transaction_id", transactionID);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -756,6 +762,12 @@ public class OrderPulsa extends AppCompatActivity {
                     return;
                 }else{
                     edtPin.setError(null);
+                }
+
+                if(selectedItemOrder == null){
+
+                    Toast.makeText(context, "Harap pilih salah satu jenis paket/ denom", Toast.LENGTH_LONG).show();
+                    return;
                 }
 
                 if(edtNominal.getText().toString().length() == 0){

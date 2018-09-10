@@ -55,6 +55,7 @@
             <com.maulana.custommodul.CustomView.NestedListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
                 android:id="@+id/lv_spv"
                 android:divider="@null"></com.maulana.custommodul.CustomView.NestedListView>
 

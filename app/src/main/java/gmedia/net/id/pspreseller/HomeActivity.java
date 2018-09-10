@@ -19,6 +19,7 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -44,6 +45,7 @@ import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.ImageUtils;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.PermissionUtils;
 import com.maulana.custommodul.RuntimePermissionsActivity;
 import com.maulana.custommodul.SessionManager;
 
@@ -97,10 +99,12 @@ public class HomeActivity extends RuntimePermissionsActivity
     private String version = "", latestVersion = "", link = "";
     private boolean updateRequired = false;
 
-    public static boolean isAccessGranted = false;
+    public static boolean isAccessGranted = true;
     private String TAG  = "HOME";
     private AlertDialog dialogAccess;
     private AlertDialog builderVersion;
+    private TextView tvVersion;
+    private TabLayout tlMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +116,6 @@ public class HomeActivity extends RuntimePermissionsActivity
         setSupportActionBar(toolbar);
 
         if (ContextCompat.checkSelfPermission(
-                HomeActivity.this, android.Manifest.permission.WRITE_SETTINGS) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 HomeActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 HomeActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
                 HomeActivity.this, Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
@@ -128,7 +131,6 @@ public class HomeActivity extends RuntimePermissionsActivity
 
             HomeActivity.super.requestAppPermissions(new
                             String[]{ android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                            android.Manifest.permission.WRITE_SETTINGS,
                             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.WAKE_LOCK,
                             Manifest.permission.VIBRATE,
@@ -185,13 +187,13 @@ public class HomeActivity extends RuntimePermissionsActivity
 
         OrderPulsa.isActive = false;
 
-        isAccessGranted =  isAccessibilityEnabled(context.getPackageName() + "/" + context.getPackageName() + ".HomePulsa.Service.USSDService");
+        /*isAccessGranted =  isAccessibilityEnabled(context.getPackageName() + "/" + context.getPackageName() + ".HomePulsa.Service.USSDService");
         if(isAccessGranted){
 
             //Log.d(TAG, "granted");
         }else{
             //Log.d(TAG, "not granted");
-            /*View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+            *//*View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
             Snackbar.make(rlContainer, "Mohon ijinkan akses pada "+ getResources().getString(R.string.app_name)+", Cari "+ getResources().getString(R.string.app_name)+" dan ubah enable",
                     Snackbar.LENGTH_INDEFINITE).setAction("OK",
                     new View.OnClickListener() {
@@ -199,7 +201,7 @@ public class HomeActivity extends RuntimePermissionsActivity
                         public void onClick(View v) {
                             startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
                         }
-                    }).show();*/
+                    }).show();*//*
 
             dialogAccess = new AlertDialog.Builder(context)
                     .setTitle("Konfirmasi")
@@ -215,10 +217,14 @@ public class HomeActivity extends RuntimePermissionsActivity
         }
 
 
-        ServiceHandler serviceHandler = new ServiceHandler((Activity) context);
+        ServiceHandler serviceHandler = new ServiceHandler((Activity) context);*/
 
         if(stateFragment != 0){
 
+            TabLayout.Tab tab = tlMenu.getTabAt(stateFragment);
+            tab.select();
+
+            ChangeFragment(0);
             ChangeFragment(stateFragment);
             stateFragment = 0;
         }
@@ -311,10 +317,14 @@ public class HomeActivity extends RuntimePermissionsActivity
         //tvUsername = (TextView) headerView.findViewById(R.id.tv_username);
 
         tvSaldo = (TextView) findViewById(R.id.tv_saldo);
+
         btnNavHome = (Button) findViewById(R.id.btn_nav_home);
         btnNavTransaksi = (Button) findViewById(R.id.btn_nav_transaksi);
         btnNavHistory = (Button) findViewById(R.id.btn_nav_history);
         btnNavPromo = (Button) findViewById(R.id.btn_nav_promo);
+
+        tlMenu = (TabLayout) findViewById(R.id.tl_menu);
+
         //ivMenu = (ImageView) findViewById(R.id.iv_menu);
         btnTopup = (Button) findViewById(R.id.btn_topup);
 
@@ -329,6 +339,7 @@ public class HomeActivity extends RuntimePermissionsActivity
             ivLogo = (ImageView) headerView.findViewById(R.id.iv_logo);
             tvNamaOutlet = (TextView) headerView.findViewById(R.id.tv_nama);
             tvAlmatOutlet = (TextView) headerView.findViewById(R.id.tv_alamat);
+            tvVersion = (TextView) headerView.findViewById(R.id.tv_version);
 
             ImageUtils iu = new ImageUtils();
             iu.LoadCircleRealImage(HomeActivity.this, session.getImage(), ivLogo);
@@ -343,7 +354,8 @@ public class HomeActivity extends RuntimePermissionsActivity
 
         initEvent();
 
-        updateBarHandler = new Handler();
+        // Baca contact
+        /*updateBarHandler = new Handler();
         pDialog = new ProgressDialog(context);
         pDialog.setMessage("Membaca kontak");
         pDialog.setCancelable(false);
@@ -366,9 +378,10 @@ public class HomeActivity extends RuntimePermissionsActivity
                     }
                 });
             }
-        }, 1000);
-
-
+        }, 1000);*/
+        /*if(PermissionUtils.hasPermissions(context, Manifest.permission.READ_CONTACTS)){
+            if(listContact == null || listContact.size() > 0) getContacts();
+        }*/
     }
 
     private void checkVersion(){
@@ -383,7 +396,8 @@ public class HomeActivity extends RuntimePermissionsActivity
         }
 
         version = pInfo.versionName;
-        getSupportActionBar().setSubtitle(getResources().getString(R.string.app_name) + " v "+ version);
+        //getSupportActionBar().setSubtitle(getResources().getString(R.string.app_name) + " v "+ version);
+        tvVersion.setText(getResources().getString(R.string.app_name) + " v "+ version);
         latestVersion = "";
         link = "";
 
@@ -483,31 +497,27 @@ public class HomeActivity extends RuntimePermissionsActivity
             e.printStackTrace();
 
             // Dismiss the progressbar after 500 millisecondds
-            updateBarHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    try {
-                        pDialog.cancel();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-                }
-            }, 500);
+            /*try {
+                pDialog.dismiss();
+            }catch (Exception e1){
+                e1.printStackTrace();
+            }*/
         }
 
         // Iterate every contact in the phone
         if (cursor != null && cursor.getCount() > 0) {
             counter = 0;
             while (cursor.moveToNext()) {
+
                 output = new StringBuffer();
                 // Update the progress message
-                updateBarHandler.post(new Runnable() {
+
+                /*updateBarHandler.post(new Runnable() {
                     public void run() {
                         pDialog.setMessage("Membaca kontak : " + counter++ + "/" + cursor.getCount());
                     }
-                });
+                });*/
+
                 String contactId = cursor.getString(cursor.getColumnIndex(_ID));
                 int hasPhoneNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex(HAS_PHONE_NUMBER)));
 
@@ -537,18 +547,25 @@ public class HomeActivity extends RuntimePermissionsActivity
             });
 
             // Dismiss the progressbar after 500 millisecondds
-            updateBarHandler.postDelayed(new Runnable() {
+            /*updateBarHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
 
                     try {
-                        pDialog.cancel();
+                        pDialog.dismiss();
                     }catch (Exception e){
                         e.printStackTrace();
                     }
 
                 }
-            }, 500);
+            }, 500);*/
+        }else{
+
+            /*try {
+                pDialog.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }*/
         }
     }
 
@@ -601,6 +618,26 @@ public class HomeActivity extends RuntimePermissionsActivity
                 Intent intent = new Intent(HomeActivity.this, IsiSaldo.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+            }
+        });
+
+        tlMenu.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                //Log.d(TAG, "onTabReselected: "+tab.getPosition());
+                ChangeFragment(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+
             }
         });
     }

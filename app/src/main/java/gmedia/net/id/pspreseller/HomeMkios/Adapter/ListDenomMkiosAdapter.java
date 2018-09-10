@@ -74,7 +74,7 @@ public class ListDenomMkiosAdapter extends ArrayAdapter{
         holder.tvItem1.setText(itemSelected.getItem2());
         holder.tvItem2.setText("Harga " + iv.ChangeToRupiahFormat(itemSelected.getItem3()));
 
-        if(itemSelected.getItem4().equals("1")){
+        if(itemSelected.getItem5().equals("1")){
             holder.edtItem1.setEnabled(true);
         }else{
             holder.edtItem1.setEnabled(false);

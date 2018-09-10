@@ -39,11 +39,14 @@ import java.util.TimerTask;
 
 import gmedia.net.id.pspreseller.CustomView.WrapContentViewPager;
 import gmedia.net.id.pspreseller.HomeActivity;
+import gmedia.net.id.pspreseller.HomeBeliPerdana.DetailKeranjangPerdana;
+import gmedia.net.id.pspreseller.HomeBeliPerdana.ListBarangPerdana;
 import gmedia.net.id.pspreseller.HomeBukuPintar.BukuPintar;
 import gmedia.net.id.pspreseller.HomeBulk.OrderBulk;
 import gmedia.net.id.pspreseller.HomeInfoStok.ActInfoStok;
 import gmedia.net.id.pspreseller.HomeInfoStok.DetailInfoStok;
 import gmedia.net.id.pspreseller.HomeMkios.OrderMKIOS;
+import gmedia.net.id.pspreseller.HomePreorderPerdana.ListBarangPreorder;
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
 import gmedia.net.id.pspreseller.HomeTcash.OrderTcash;
 import gmedia.net.id.pspreseller.HomeTokenListrik.OrderTokenListrik;
@@ -70,7 +73,9 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
     private boolean firstLoad = true;
     private int changeHeaderTimes = 5;
     private Timer timer;
-    private LinearLayout llMkios, llBulk, llTcash, llTokenListrik, llPulsa, llInfoStok, llStokMkios, llStokTcash, llStokPPOB, llBukuPintar;
+    private LinearLayout llMkios, llBulk, llTcash, llTokenListrik
+            , llPulsa, llInfoStok, llStokMkios, llStokTcash, llStokPPOB
+            , llBukuPintar, llBeliPerdana, llPreorderPerdana;
     private String TAG = "HOME";
     private String pin = "", flagPin = "";
     private DialogBox dialogBox;
@@ -120,6 +125,8 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         llStokTcash = (LinearLayout) layout.findViewById(R.id.ll_info_stok_tcash);
         llStokPPOB = (LinearLayout) layout.findViewById(R.id.ll_info_stok_ppob);
         llBukuPintar = (LinearLayout) layout.findViewById(R.id.ll_buku_pintar);
+        llBeliPerdana = (LinearLayout) layout.findViewById(R.id.ll_perdana);
+        llPreorderPerdana = (LinearLayout) layout.findViewById(R.id.ll_preorder_perdana);
 
         session = new SessionManager(context);
         dialogBox = new DialogBox(context);
@@ -247,6 +254,28 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
                 startActivity(intent);
                 ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
 
+            }
+        });
+
+        llBeliPerdana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DetailKeranjangPerdana.listKeranjang.clear();
+                if(DetailKeranjangPerdana.adapter != null) DetailKeranjangPerdana.adapter.notifyDataSetChanged();
+                Intent intent = new Intent(context, ListBarangPerdana.class);
+                startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+            }
+        });
+
+        llPreorderPerdana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ListBarangPreorder.class);
+                startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             }
         });
     }

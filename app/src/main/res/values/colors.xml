@@ -33,4 +33,12 @@
     <color name="color_text_cb_active">#5943b0</color>
     <color name="color_bg_chat">#dcdcdc</color>
     <color name="color_grey">#9b9b9b</color>
+    <color name="color_grey1">#646464</color>
+    <color name="color_grey2">#ececec</color>
+
+    <color name="color_gradient_1">#00ffffff</color>
+    <color name="color_gradient_2">#d4d4d4</color>
+    <color name="color_pink">#ffd1d1</color>
+    <color name="color_orange_active">#ff935e</color>
+    <color name="color_orange">#f46d2b</color>
 </resources>

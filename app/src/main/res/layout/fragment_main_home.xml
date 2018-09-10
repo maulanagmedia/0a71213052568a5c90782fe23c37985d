@@ -47,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"
-            android:padding="@dimen/margin_big"
             android:scrollbars="none">
 
             <LinearLayout
@@ -65,8 +64,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Stok"
-                        android:layout_marginLeft="@dimen/margin_small"
-                        android:layout_marginRight="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:textAllCaps="true"
                         android:textColor="@color/color_white"
                         android:textSize="@dimen/menu_text"/>
@@ -75,6 +74,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/default_line"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:background="@color/color_black"/>
 
                     <LinearLayout
@@ -231,7 +232,7 @@
                                     android:layout_width="@dimen/menu_height"
                                     android:layout_height="@dimen/menu_height"
                                     android:layout_centerInParent="true"
-                                    android:src="@drawable/ic_stok_pbob"
+                                    android:src="@drawable/ic_saldo_tunai"
                                     android:scaleType="fitCenter"/>
                             </RelativeLayout>
 
@@ -268,8 +269,8 @@
                         android:layout_height="wrap_content"
                         android:text="Pembelian"
                         android:textAllCaps="true"
-                        android:layout_marginLeft="@dimen/margin_small"
-                        android:layout_marginRight="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:textColor="@color/color_white"
                         android:textSize="@dimen/menu_text"/>
 
@@ -277,13 +278,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/default_line"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:background="@color/color_black"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center"
+                        android:gravity="center_horizontal"
                         android:weightSum="3">
 
                         <LinearLayout
@@ -414,6 +417,99 @@
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="top"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="?attr/selectableItemBackground"
+                            android:id="@+id/ll_perdana"
+                            android:padding="@dimen/margin_default"
+                            android:weightSum="1">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_menu_2"
+                                android:padding="@dimen/margin_big"
+                                android:layout_margin="@dimen/margin_medium">
+
+                                <ImageView
+                                    android:layout_width="@dimen/menu_height"
+                                    android:layout_height="@dimen/menu_height"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/ic_perdana"
+                                    android:scaleType="fitCenter"/>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/margin_default"
+                                android:paddingRight="@dimen/margin_default"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Beli Perdana"
+                                    style="@style/form_control_menu"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:background="?attr/selectableItemBackground"
+                            android:id="@+id/ll_preorder_perdana"
+                            android:padding="@dimen/margin_default"
+                            android:weightSum="1">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_menu_2"
+                                android:padding="@dimen/margin_big"
+                                android:layout_margin="@dimen/margin_medium">
+
+                                <ImageView
+                                    android:layout_width="@dimen/menu_height"
+                                    android:layout_height="@dimen/menu_height"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/ic_survey_market"
+                                    android:scaleType="fitCenter"/>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/margin_default"
+                                android:paddingRight="@dimen/margin_default"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Preorder Perdana"
+                                    style="@style/form_control_menu"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -428,8 +524,8 @@
                         android:layout_height="wrap_content"
                         android:text="Penjualan"
                         android:textAllCaps="true"
-                        android:layout_marginLeft="@dimen/margin_small"
-                        android:layout_marginRight="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:textColor="@color/color_white"
                         android:textSize="@dimen/menu_text"/>
 
@@ -437,6 +533,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/default_line"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:background="@color/color_black"/>
 
                     <LinearLayout
@@ -536,8 +634,8 @@
                         android:text="Panduan"
                         android:textAllCaps="true"
                         android:layout_marginTop="@dimen/margin_big"
-                        android:layout_marginLeft="@dimen/margin_small"
-                        android:layout_marginRight="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:textColor="@color/color_white"
                         android:textSize="@dimen/menu_text"/>
 
@@ -545,6 +643,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/default_line"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:layout_marginRight="@dimen/margin_default"
                         android:background="@color/color_black"/>
 
                     <LinearLayout

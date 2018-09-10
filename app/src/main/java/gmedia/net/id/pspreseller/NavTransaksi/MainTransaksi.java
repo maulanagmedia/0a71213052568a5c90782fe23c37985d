@@ -217,7 +217,9 @@ public class MainTransaksi extends Fragment {
                                             jo.getString("tgl"),
                                             jo.getString("keterangan"),
                                             jo.getString("total"),
-                                            jo.getString("status_transaksi")));
+                                            jo.getString("status_transaksi"),
+                                            (jo.getString("rekening").isEmpty() ? "" : jo.getString("rekening")+ " ("+ jo.getString("bank")+") a/n "+ jo.getString("atasnama"))
+                                    ));
                         }
 
                         getTableList(listTransaksi);
@@ -246,6 +248,7 @@ public class MainTransaksi extends Fragment {
             @Override
             public void onError(String result) {
 
+                dialogBox.dismissDialog();
                 View.OnClickListener clickListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

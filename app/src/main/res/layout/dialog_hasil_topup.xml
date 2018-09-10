@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/modul_margin_default"
+        android:layout_marginBottom="@dimen/modul_margin_default"
+        android:gravity="center_horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_head"
+            android:gravity="center"
+            android:background="@drawable/bg_dialog_red"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pembayaran"
+                android:id="@+id/tv_title"
+                android:textColor="@color/color_white_pure"
+                android:textSize="20sp"
+                android:paddingTop="@dimen/margin_default"
+                android:paddingBottom="@dimen/margin_default"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_footer"
+            android:gravity="center"
+            android:padding="@dimen/modul_margin_default"
+            android:background="@drawable/bg_dialog_white"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:layout_marginTop="@dimen/margin_small"
+                android:textSize="@dimen/text_small"
+                android:text="Silahkan transfer sebesar jumlah dibawah (termasuk 3 angka terakhir)"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.85"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/tv_nominal"
+                    android:textColor="@color/color_grey1"
+                    android:textSize="@dimen/text_value"
+                    android:layout_marginTop="@dimen/margin_tiny"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="@dimen/icon_height"
+                    android:src="@mipmap/ic_copy"
+                    android:id="@+id/iv_nominal"
+                    android:padding="@dimen/margin_cute"
+                    android:scaleType="centerInside"
+                    android:background="?attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:layout_marginTop="@dimen/margin_default"
+                android:textSize="@dimen/text_small"
+                android:text="Ke Rekening"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.85"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/tv_rekening"
+                    android:textColor="@color/color_grey1"
+                    android:textSize="@dimen/text_value"
+                    android:layout_marginTop="@dimen/margin_tiny"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="@dimen/icon_height"
+                    android:src="@mipmap/ic_copy"
+                    android:padding="@dimen/margin_cute"
+                    android:scaleType="centerInside"
+                    android:id="@+id/iv_rekening"
+                    android:background="?attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:layout_marginTop="@dimen/margin_default"
+                android:textSize="@dimen/text_small"
+                android:text="Bank"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/tv_bank"
+                    android:textColor="@color/color_grey1"
+                    android:textSize="@dimen/text_value"
+                    android:layout_marginTop="@dimen/margin_tiny"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:layout_marginTop="@dimen/margin_default"
+                android:textSize="@dimen/text_small"
+                android:text="Atas Nama"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/tv_nama"
+                    android:textColor="@color/color_grey1"
+                    android:textSize="@dimen/text_value"
+                    android:layout_marginTop="@dimen/margin_tiny"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackground"
+                android:textColor="@color/color_red_dialog"
+                android:textSize="13sp"
+                android:id="@+id/btn_ok"
+                android:layout_marginTop="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:layout_marginRight="@dimen/margin_default"
+                android:text="Sudah Transfer"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

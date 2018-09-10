@@ -25,13 +25,13 @@ public class BarangPulsaAdapter extends ArrayAdapter{
     private Activity context;
     private List<CustomItem> items;
     private ItemValidation iv = new ItemValidation();
-    public static int selectedItem = 0;
+    public static int selectedItem = -1;
 
     public BarangPulsaAdapter(Activity context, List<CustomItem> items) {
         super(context, R.layout.cv_list_barang_pulsa, items);
         this.context = context;
         this.items = items;
-        this.selectedItem = 0;
+        this.selectedItem = -1;
     }
 
     private static class ViewHolder {
@@ -87,7 +87,8 @@ public class BarangPulsaAdapter extends ArrayAdapter{
         if(itemSelected.getItem3().isEmpty() || itemSelected.getItem3().equals("0")){
             holder.rbItem.setText("");
         }else{
-            holder.rbItem.setText(iv.ChangeToRupiahFormat(itemSelected.getItem3()));
+            holder.rbItem.setText("");
+            //holder.rbItem.setText(iv.ChangeToRupiahFormat(itemSelected.getItem3()));
         }
 
         if(selectedItem == position){

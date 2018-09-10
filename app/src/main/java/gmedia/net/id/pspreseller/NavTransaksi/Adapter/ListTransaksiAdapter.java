@@ -40,7 +40,7 @@ public class ListTransaksiAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView tvItem1, tvItem2, tvItem3, tvStatus;
+        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvStatus;
         private LinearLayout llDetail;
         private ImageView ivCollapse;
     }
@@ -61,6 +61,7 @@ public class ListTransaksiAdapter extends ArrayAdapter{
             holder.tvItem1 = (TextView) convertView.findViewById(R.id.tv_item1);
             holder.tvItem2 = (TextView) convertView.findViewById(R.id.tv_item2);
             holder.tvItem3 = (TextView) convertView.findViewById(R.id.tv_item3);
+            holder.tvItem4 = (TextView) convertView.findViewById(R.id.tv_item4);
             holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
 
             holder.ivCollapse = (ImageView) convertView.findViewById(R.id.iv_collapse);
@@ -100,6 +101,8 @@ public class ListTransaksiAdapter extends ArrayAdapter{
         }else{
             holder.tvStatus.setBackground(context.getResources().getDrawable(R.drawable.bg_status_red));
         }
+
+        holder.tvItem4.setText(itemSelected.getItem7());
         holder.tvStatus.setText(itemSelected.getItem6());
 
         final ViewHolder finalHolder = holder;

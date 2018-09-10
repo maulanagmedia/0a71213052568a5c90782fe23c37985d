@@ -223,7 +223,9 @@ public class MainHistory extends Fragment {
                                             jo.getString("total"),
                                             jo.getString("namabrg"),
                                             jo.getString("nama"),
-                                            jo.getString("jam")));
+                                            jo.getString("jam"),
+                                            jo.getString("cashback"),
+                                            jo.getString("stok_akhir")));
 
                             total += iv.parseNullDouble(jo.getString("total"));
                         }
@@ -237,8 +239,9 @@ public class MainHistory extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    getTableList(null);
 
+                    dialogBox.dismissDialog();
+                    getTableList(null);
                     View.OnClickListener clickListener = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

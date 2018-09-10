@@ -35,7 +35,8 @@ public class ListHistoryAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvStatus;
+        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvStatus;
+        private LinearLayout llCashback, llSaldoAkhir;
     }
 
     @Override
@@ -55,7 +56,11 @@ public class ListHistoryAdapter extends ArrayAdapter{
             holder.tvItem2 = (TextView) convertView.findViewById(R.id.tv_item2);
             holder.tvItem3 = (TextView) convertView.findViewById(R.id.tv_item3);
             holder.tvItem4 = (TextView) convertView.findViewById(R.id.tv_item4);
+            holder.tvItem5 = (TextView) convertView.findViewById(R.id.tv_item5);
+            holder.tvItem6 = (TextView) convertView.findViewById(R.id.tv_item6);
             holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
+            holder.llCashback = (LinearLayout) convertView.findViewById(R.id.ll_cashback);
+            holder.llSaldoAkhir = (LinearLayout) convertView.findViewById(R.id.ll_saldo_akhir);
 
             convertView.setTag(holder);
         }else{
@@ -66,8 +71,26 @@ public class ListHistoryAdapter extends ArrayAdapter{
         holder.tvItem1.setText(itemSelected.getItem8());
         holder.tvItem2.setText(itemSelected.getItem3() + " "+ itemSelected.getItem9());
         holder.tvItem3.setText(itemSelected.getItem7() + " (" +itemSelected.getItem5() + ")");
-        holder.tvItem4.setText(iv.ChangeToRupiahFormat(itemSelected.getItem6()));
+        holder.tvItem4.setText(iv.ChangeToCurrencyFormat(itemSelected.getItem6()));
         holder.tvStatus.setText(Html.fromHtml(itemSelected.getItem4()));
+
+        if(!itemSelected.getItem10().equals("null") && !itemSelected.getItem10().isEmpty() && !itemSelected.getItem10().equals("0")){
+            holder.llCashback.setVisibility(View.VISIBLE);
+            holder.tvItem5.setText(iv.ChangeToCurrencyFormat(itemSelected.getItem10()));
+        }else{
+
+            holder.llCashback.setVisibility(View.GONE);
+            holder.tvItem5.setText("");
+        }
+
+        if(!itemSelected.getItem11().equals("null") && !itemSelected.getItem11().isEmpty() && !itemSelected.getItem11().equals("0")){
+            holder.llSaldoAkhir.setVisibility(View.VISIBLE);
+            holder.tvItem6.setText(iv.ChangeToCurrencyFormat(itemSelected.getItem11()));
+        }else{
+
+            holder.llSaldoAkhir.setVisibility(View.GONE);
+            holder.tvItem6.setText("");
+        }
         return convertView;
 
     }

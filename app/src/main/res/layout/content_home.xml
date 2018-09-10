@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="@dimen/margin_small"
             android:gravity="center">
 
             <TextView
@@ -56,6 +57,7 @@
         android:paddingBottom="@dimen/margin_default"
         android:paddingLeft="@dimen/margin_default"
         android:paddingRight="@dimen/margin_default"
+        android:visibility="gone"
         android:id="@+id/ll_menu"
         android:weightSum="4">
 
@@ -139,6 +141,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/ll_container"
+        android:layout_above="@id/ll_menu_bottom"
         android:layout_below="@id/ll_menu">
 
         <FrameLayout
@@ -148,5 +152,56 @@
         </FrameLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_menu_bottom"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/bg_gradient"/>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_menu"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:tabTextAppearance="@style/MineCustomTabText">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/ti_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/bg_b_home"
+                android:paddingTop="@dimen/margin_small"
+                android:text="Home" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/ti_transaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/bg_b_transaksi"
+                android:text="Transaksi" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/ti_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/bg_b_history"
+                android:text="History" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/ti_promo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/bg_b_promo"
+                android:text="Promo" />
+        </android.support.design.widget.TabLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

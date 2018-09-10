@@ -2,6 +2,8 @@ package gmedia.net.id.pspreseller.TopUP;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +22,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -666,7 +670,7 @@ public class IsiSaldo extends AppCompatActivity {
 
                     if(iv.parseNullInteger(status) == 200){
 
-                        saveDeposit(pin);
+                        showCaraBayarDialog(pin);
                     }else{
 
                         View.OnClickListener clickListener = new View.OnClickListener() {
@@ -698,7 +702,48 @@ public class IsiSaldo extends AppCompatActivity {
         });
     }
 
-    private void saveDeposit(String pin) {
+    private void showCaraBayarDialog(final String pin){
+
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
+        View viewDialog = inflater.inflate(R.layout.dialog_cara_bayar, null);
+        builder.setView(viewDialog);
+        builder.setCancelable(false);
+
+        final RadioGroup rgCaraBayar = (RadioGroup) viewDialog.findViewById(R.id.rg_cara_bayar);
+        final Button btnCancel = (Button) viewDialog.findViewById(R.id.btn_cancel);
+        final Button btnProses = (Button) viewDialog.findViewById(R.id.btn_proses);
+
+        final android.app.AlertDialog alert = builder.create();
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                if(alert != null) alert.dismiss();
+            }
+        });
+
+        btnProses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                if(alert != null) alert.dismiss();
+                String crBayar = "2";
+                if(rgCaraBayar.getCheckedRadioButtonId() == R.id.rb_sales){
+                    crBayar = "2";
+                }else if(rgCaraBayar.getCheckedRadioButtonId() == R.id.rb_transfer){
+                    crBayar = "3";
+                }
+                saveDeposit(pin, crBayar);
+            }
+        });
+
+        alert.show();
+    }
+
+    private void saveDeposit(String pin, final String crBayar) {
 
         final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Dialog);
         progressDialog.setIndeterminate(true);
@@ -713,6 +758,7 @@ public class IsiSaldo extends AppCompatActivity {
             jBody.put("harga", nominal);
             jBody.put("nominal", nominal);
             jBody.put("pin", pin);
+            jBody.put("crbayar", crBayar);
             jBody.put("nomor", session.getUsername());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -733,8 +779,20 @@ public class IsiSaldo extends AppCompatActivity {
                     if(iv.parseNullInteger(status) == 200){
 
                         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                        HomeActivity.stateFragment = 1;
-                        onBackPressed();
+                        if(crBayar.equals("3")){
+
+                            JSONObject jo = response.getJSONObject("response");
+                            String nominal = jo.getString("nominal");
+                            String rekening = jo.getString("rekening");
+                            String atasnama = jo.getString("atasnama");
+                            String bank = jo.getString("bank");
+                            showResultDialog(nominal, rekening, bank, atasnama);
+                        }else{
+                            //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            HomeActivity.stateFragment = 1;
+                            onBackPressed();
+                        }
+
                     }else{
 
                         if(!message.toLowerCase().contains("pin")){
@@ -770,6 +828,66 @@ public class IsiSaldo extends AppCompatActivity {
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
             }
         });
+    }
+
+    private void showResultDialog(final String nominal, final String rekening, final String bank, final String an){
+
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
+        View viewDialog = inflater.inflate(R.layout.dialog_hasil_topup, null);
+        builder.setView(viewDialog);
+        builder.setCancelable(false);
+
+        final RadioGroup rgCaraBayar = (RadioGroup) viewDialog.findViewById(R.id.rg_cara_bayar);
+        final TextView tvNominal = (TextView) viewDialog.findViewById(R.id.tv_nominal);
+        final TextView tvRekening = (TextView) viewDialog.findViewById(R.id.tv_rekening);
+        final TextView tvBank = (TextView) viewDialog.findViewById(R.id.tv_bank);
+        final TextView tvAn = (TextView) viewDialog.findViewById(R.id.tv_nama);
+        final ImageView ivNominal = (ImageView) viewDialog.findViewById(R.id.iv_nominal);
+        final ImageView ivRekening = (ImageView) viewDialog.findViewById(R.id.iv_rekening);
+        final Button btnOk = (Button) viewDialog.findViewById(R.id.btn_ok);
+
+        final android.app.AlertDialog alert = builder.create();
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        tvNominal.setText(iv.ChangeToCurrencyFormat(nominal));
+        tvRekening.setText(rekening);
+        tvBank.setText(bank);
+        tvAn.setText(an);
+
+        ivNominal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("nominal", tvNominal.getText().toString().replaceAll("[,.]", ""));
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(context, "Nominal disimpan di clipboard", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ivRekening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Rekening", tvRekening.getText().toString());
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(context, "Rekening disimpan di clipboard", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                if(alert != null) alert.dismiss();
+                HomeActivity.stateFragment = 1;
+                onBackPressed();
+            }
+        });
+
+        alert.show();
     }
 
     @Override

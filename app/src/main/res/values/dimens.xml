@@ -42,8 +42,14 @@
     <dimen name="size_title1">16sp</dimen>
     <dimen name="size_title_balasan">15sp</dimen>
     <dimen name="size_title_balasan1">13sp</dimen>
+    <dimen name="size_title_balasan2">12sp</dimen>
     <dimen name="title_balasan_width">50dp</dimen>
     <dimen name="title_bulk_width">120dp</dimen>
     <dimen name="text_nomor">11sp</dimen>
     <dimen name="text_nomor_isi">18sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_value">20sp</dimen>
+    <dimen name="icon_height">24dp</dimen>
+    <dimen name="cr_bayar">80dp</dimen>
+    <dimen name="cr_bayar_text">96dp</dimen>
 </resources>
