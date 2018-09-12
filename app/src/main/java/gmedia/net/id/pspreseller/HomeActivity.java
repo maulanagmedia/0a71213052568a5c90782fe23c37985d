@@ -685,9 +685,13 @@ public class HomeActivity extends RuntimePermissionsActivity
         } else {
             if(state != 0){
 
-                state = 0;
+                /*state = 0;
                 fragment = new MainHome();
-                callFragmentBack(HomeActivity.this, fragment);
+                callFragmentBack(HomeActivity.this, fragment);*/
+                TabLayout.Tab tab = tlMenu.getTabAt(0);
+                tab.select();
+
+                ChangeFragment(0);
 
             }else{
 
