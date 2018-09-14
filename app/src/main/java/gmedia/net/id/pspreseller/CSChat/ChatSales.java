@@ -82,6 +82,8 @@ import gmedia.net.id.pspreseller.CSChat.Adapter.ChatAdapter;
 import gmedia.net.id.pspreseller.R;
 import io.codetail.widget.RevealLinearLayout;
 
+import static com.maulana.custommodul.ImageUtils.getImageUri;
+
 public class ChatSales extends AppCompatActivity {
 
     private ListView lvChat;
@@ -459,7 +461,8 @@ public class ChatSales extends AppCompatActivity {
 
             if(data != null){
 
-                Uri filePath = data.getData();
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                Uri filePath = getImageUri(getApplicationContext(), photo);
                 Cursor returnCursor =
                         getContentResolver().query(filePath, null, null, null, null);
 

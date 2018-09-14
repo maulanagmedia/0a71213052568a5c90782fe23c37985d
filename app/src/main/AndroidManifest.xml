@@ -206,10 +206,18 @@
         <activity
             android:name=".HomePreorderPerdana.ListBarangPreorder"
             android:screenOrientation="portrait" />
-        <activity android:name=".HomeBeliPerdana.DetailBarangPerdana"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".HomeBeliPerdana.DetailKeranjangPerdana"
+        <activity
+            android:name=".HomeBeliPerdana.DetailBarangPerdana"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeBeliPerdana.DetailKeranjangPerdana"
+            android:screenOrientation="portrait" />
+        <activity android:name=".HomeJualPerdana.DetailJualPerdana"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>

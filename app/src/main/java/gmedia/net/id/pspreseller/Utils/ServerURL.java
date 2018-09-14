@@ -50,10 +50,12 @@ public class ServerURL {
     public static final String getBarangDS = baseURL + "Direct_Sale/view_barang/";
     public static final String saveReplyDS = baseURL + "Direct_Sale/save_reply/";
     public static final String saveOrderDS = baseURL + "Direct_Sale/direct_order/";
+    public static final String saveDSPerdana = baseURL + "Direct_Sale/jual_perdana/";
     public static final String checkSaldo = baseURL + "Mkios/cek_saldo/";
     public static final String getLatestVersion = baseURL + "Version/";
     public static final String getBukuPintar = baseURL + "Buku/";
     public static final String beliPerdana = baseURL + "Perdana/pre_order/";
+    public static final String getCCID = baseURL + "Direct_Sale/scan_perdana/";
 
     //public static final String uploadFileURL = "http://192.168.12.147/psp/testupload/upload.php";
 }

@@ -48,6 +48,7 @@
     <dimen name="text_nomor">11sp</dimen>
     <dimen name="text_nomor_isi">18sp</dimen>
     <dimen name="text_small">12sp</dimen>
+    <dimen name="text_medium">13sp</dimen>
     <dimen name="text_value">20sp</dimen>
     <dimen name="icon_height">24dp</dimen>
     <dimen name="cr_bayar">80dp</dimen>

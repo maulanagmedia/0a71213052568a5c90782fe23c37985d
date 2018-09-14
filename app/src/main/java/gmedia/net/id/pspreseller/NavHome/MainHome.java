@@ -45,6 +45,7 @@ import gmedia.net.id.pspreseller.HomeBukuPintar.BukuPintar;
 import gmedia.net.id.pspreseller.HomeBulk.OrderBulk;
 import gmedia.net.id.pspreseller.HomeInfoStok.ActInfoStok;
 import gmedia.net.id.pspreseller.HomeInfoStok.DetailInfoStok;
+import gmedia.net.id.pspreseller.HomeJualPerdana.DetailJualPerdana;
 import gmedia.net.id.pspreseller.HomeMkios.OrderMKIOS;
 import gmedia.net.id.pspreseller.HomePreorderPerdana.ListBarangPreorder;
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
@@ -75,7 +76,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
     private Timer timer;
     private LinearLayout llMkios, llBulk, llTcash, llTokenListrik
             , llPulsa, llInfoStok, llStokMkios, llStokTcash, llStokPPOB
-            , llBukuPintar, llBeliPerdana, llPreorderPerdana;
+            , llBukuPintar, llBeliPerdana, llPreorderPerdana, llJualPerdana;
     private String TAG = "HOME";
     private String pin = "", flagPin = "";
     private DialogBox dialogBox;
@@ -127,6 +128,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         llBukuPintar = (LinearLayout) layout.findViewById(R.id.ll_buku_pintar);
         llBeliPerdana = (LinearLayout) layout.findViewById(R.id.ll_perdana);
         llPreorderPerdana = (LinearLayout) layout.findViewById(R.id.ll_preorder_perdana);
+        llJualPerdana = (LinearLayout) layout.findViewById(R.id.ll_jual_perdana);
 
         session = new SessionManager(context);
         dialogBox = new DialogBox(context);
@@ -274,6 +276,16 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, ListBarangPreorder.class);
+                startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+            }
+        });
+
+        llJualPerdana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, DetailJualPerdana.class);
                 startActivity(intent);
                 ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             }

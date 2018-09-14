@@ -35,6 +35,7 @@
                     android:paddingTop="@dimen/margin_small"
                     android:paddingBottom="@dimen/margin_small"
                     android:inputType="none"
+                    android:textSize="@dimen/text_medium"
                     android:editable="false"
                     android:id="@+id/edt_tgl_dari" />
 
@@ -82,6 +83,7 @@
                     android:textColor="@color/color_white"
                     android:inputType="none"
                     android:editable="false"
+                    android:textSize="@dimen/text_medium"
                     android:text=""
                     android:id="@+id/edt_tgl_sampai" />
 

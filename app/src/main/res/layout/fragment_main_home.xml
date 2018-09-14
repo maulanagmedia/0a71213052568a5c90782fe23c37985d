@@ -541,7 +541,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical"
+                        android:gravity="top"
                         android:weightSum="3">
 
                         <LinearLayout
@@ -581,6 +581,47 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="Pulsa/TCash/Bulk"
+                                    style="@style/form_control_menu"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="?attr/selectableItemBackground"
+                            android:id="@+id/ll_jual_perdana"
+                            android:padding="@dimen/margin_default"
+                            android:weightSum="1">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_menu_2"
+                                android:padding="@dimen/margin_big"
+                                android:layout_margin="@dimen/margin_medium">
+
+                                <ImageView
+                                    android:layout_width="@dimen/menu_height"
+                                    android:layout_height="@dimen/menu_height"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/ic_jual_perdana"/>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/margin_default"
+                                android:paddingRight="@dimen/margin_default"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Perdana"
                                     style="@style/form_control_menu"/>
                             </LinearLayout>
                         </LinearLayout>

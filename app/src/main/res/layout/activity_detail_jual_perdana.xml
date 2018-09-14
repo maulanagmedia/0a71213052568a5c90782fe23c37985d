@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeJualPerdana.DetailJualPerdana">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_proses"
+        android:background="@drawable/bg_button_blue_rec"
+        android:textColor="@color/color_white_pure"
+        android:id="@+id/btn_proses"
+        android:layout_alignParentBottom="true"
+        android:text="Simpan"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_above="@id/btn_proses">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/margin_default">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/formGroup">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nama"
+                        style="@style/formControlLabel"/>
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edt_nama"
+                        style="@style/form_control_input"
+                        android:inputType="textPersonName"
+                        android:imeOptions="actionSearch"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/formGroup">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Alamat"
+                        style="@style/formControlLabel"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edt_alamat"
+                        style="@style/form_control_input"
+                        android:inputType="textPersonName"
+                        android:imeOptions="actionNext"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scan Perdana"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:paddingRight="@dimen/margin_default"
+                    android:paddingLeft="@dimen/margin_default"
+                    android:drawableLeft="@mipmap/ic_barcode"
+                    android:background="@drawable/bg_button_red"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CCID"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"/>
+
+                <TextView
+                    android:id="@+id/tv_ccid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text_nomor_isi"
+                    android:textColor="@color/color_red"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Perdana"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"/>
+
+                <TextView
+                    android:id="@+id/tv_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text_nomor_isi"
+                    android:textColor="@color/color_red"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Harga Jual"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        style="@style/form_control_input"
+                        android:digits="0123456789"
+                        android:id="@+id/edt_harga"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                        android:text=""/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_tambah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tambahkan Ke Daftar Jual"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:paddingRight="@dimen/margin_default"
+                    android:paddingLeft="@dimen/margin_default"
+                    android:drawableLeft="@mipmap/ic_add"
+                    android:background="@drawable/bg_button_blue"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_default">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
+                    android:background="@drawable/bg_input"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView74"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:padding="@dimen/margin_tiny"
+                        android:text="No"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView73"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:padding="@dimen/margin_tiny"
+                        android:text="Barang"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView72"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.35"
+                        android:padding="@dimen/margin_tiny"
+                        android:text="CCID"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_ccid"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/margin_default">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total CCID dan Total Harga"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:textColor="@color/color_black"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    android:padding="@dimen/margin_small"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:text="Total"/>
+
+                    <TextView
+                        android:id="@+id/tv_total_harga"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:text="Rp 0"
+                        android:gravity="right"
+                        android:textColor="@color/color_black"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
