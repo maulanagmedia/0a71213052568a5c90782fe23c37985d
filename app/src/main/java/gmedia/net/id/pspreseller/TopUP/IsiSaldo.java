@@ -731,12 +731,44 @@ public class IsiSaldo extends AppCompatActivity {
 
                 if(alert != null) alert.dismiss();
                 String crBayar = "2";
+
                 if(rgCaraBayar.getCheckedRadioButtonId() == R.id.rb_sales){
+
                     crBayar = "2";
                 }else if(rgCaraBayar.getCheckedRadioButtonId() == R.id.rb_transfer){
+
                     crBayar = "3";
+                }else if(rgCaraBayar.getCheckedRadioButtonId() == R.id.rb_tcash){
+
+                    dummyDialog();
+                    return;
                 }
                 saveDeposit(pin, crBayar);
+            }
+        });
+
+        alert.show();
+    }
+
+    private void dummyDialog() {
+
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
+        View viewDialog = inflater.inflate(R.layout.dialog_hasil_topup_tcash, null);
+        builder.setView(viewDialog);
+        builder.setCancelable(false);
+
+        final Button btnOk = (Button) viewDialog.findViewById(R.id.btn_ok);
+
+
+        final android.app.AlertDialog alert = builder.create();
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+
+                if(alert != null) alert.dismiss();
             }
         });
 

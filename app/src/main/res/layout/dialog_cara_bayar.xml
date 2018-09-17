@@ -13,7 +13,7 @@
         android:weightSum="1">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/ll_head"
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.3"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:id="@+id/rg_cara_bayar"
                 android:paddingTop="@dimen/margin_default"
                 android:orientation="horizontal"
@@ -86,8 +86,20 @@
                     android:layout_width="@dimen/cr_bayar"
                     android:layout_height="@dimen/cr_bayar"
                     android:background="@drawable/bg_bayar_transfer"
-                    android:layout_marginLeft="@dimen/margin_big"
                     android:id="@+id/rb_transfer"
+                    android:textAllCaps="true"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:textColor="@color/cb_color"
+                    android:textSize="24sp"
+                    android:padding="@dimen/margin_big"/>
+
+                <RadioButton
+                    android:layout_width="@dimen/cr_bayar"
+                    android:layout_height="@dimen/cr_bayar"
+                    android:background="@drawable/bg_bayar_tcash"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:id="@+id/rb_tcash"
                     android:textAllCaps="true"
                     android:gravity="center"
                     android:button="@null"
@@ -116,6 +128,14 @@
                     android:layout_width="@dimen/cr_bayar_text"
                     android:layout_height="wrap_content"
                     android:text="Transfer Bank"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="@dimen/cr_bayar_text"
+                    android:layout_height="wrap_content"
+                    android:text="TCash"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:layout_marginLeft="@dimen/margin_default"/>
