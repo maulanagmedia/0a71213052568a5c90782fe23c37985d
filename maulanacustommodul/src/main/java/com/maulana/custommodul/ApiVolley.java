@@ -173,7 +173,7 @@ public class ApiVolley {
         };
         //endregion
 
-        //trustAllCertivicate();
+        trustAllCertivicate();
 
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -207,6 +207,7 @@ public class ApiVolley {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
                 public boolean verify(String hostname, SSLSession session) {
                     if (hostname.equalsIgnoreCase("putmasaripratama.co.id") ||
+                            hostname.equalsIgnoreCase("api.putmasaripratama.co.id") ||
                             hostname.equalsIgnoreCase("api.crashlytics.com") ||
                             hostname.equalsIgnoreCase("settings.crashlytics.com") ||
                             hostname.equalsIgnoreCase("clients4.google.com") ||

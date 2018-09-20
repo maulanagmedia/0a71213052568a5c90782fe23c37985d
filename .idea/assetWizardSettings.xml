@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="60" />
+                                                <entry key="scalingPercent" value="48" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -44,8 +44,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundImage" value="F:\rsz_ic_logo_psp.png" />
-                                      <entry key="foregroundImage" value="F:\rsz_ic_logo_psp.png" />
+                                      <entry key="backgroundImage" value="F:\ic_isidw_r.png" />
+                                      <entry key="foregroundImage" value="F:\ic_isidw_r.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -83,7 +83,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="paddingPercent" value="-10" />
+                                                <entry key="paddingPercent" value="5" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -93,9 +93,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="F:\rsz_ic_logo_psp.png" />
-                                      <entry key="outputName" value="ic_delete" />
+                                      <entry key="imageAsset" value="F:\ic_isidw_r.png" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -8,7 +8,7 @@ public class ServerURL {
 
     //private static final String baseURL = "http://192.168.12.188/psp/apiresv1/";
     //private static final String baseURL = "http://119.2.53.122/mobilesalesforce/apiresv1/";
-    private static final String baseURL = "http://putmasaripratama.co.id/mobilesalesforce/apiresv1/";
+    private static final String baseURL = "https://api.putmasaripratama.co.id/apiresv1/";
     //private static final String baseURL = "http://api.putmasaripratama.co.id/apiresv1/";
 
     public static final String login = baseURL + "auth/login/";
