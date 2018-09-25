@@ -145,9 +145,6 @@ public class ChatSales extends AppCompatActivity {
         setTitle("Chat");
         isChatActive = true;
         context = this;
-        start = 0;
-        isLoading = false;
-
         session = new SessionManager(ChatSales.this);
 
         initUI();
@@ -175,8 +172,6 @@ public class ChatSales extends AppCompatActivity {
 
             isFromNotif = bundle.getString("notif", "").equals("1");
         }
-
-        getChatData();
 
         initEvent();
     }
@@ -1263,6 +1258,10 @@ public class ChatSales extends AppCompatActivity {
         super.onResume();
 
         isChatActive = true;
+
+        start = 0;
+        isLoading = false;
+        getChatData();
     }
 
     @Override

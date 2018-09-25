@@ -96,6 +96,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0 /*request code*/, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+            if(typeContent == 2 && ChatSales.isChatActive){
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(intent);
+            }
+
             Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
             int IconColor = getResources().getColor(R.color.color_notif);
