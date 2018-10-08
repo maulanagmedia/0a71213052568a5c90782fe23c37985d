@@ -1,5 +1,6 @@
 package com.maulana.custommodul;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -17,6 +18,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.security.ProviderInstaller;
 
 import org.json.JSONObject;
 
@@ -43,6 +48,7 @@ public class ApiVolley {
     private ItemValidation iv = new ItemValidation();
     private SessionManager session;
     String token0 = "", token1 = "", token2 = "", token3 = "",token4 = "";
+    private Context context;
 
     public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, String REST_URL, final VolleyCallback callback){
 
@@ -64,6 +70,7 @@ public class ApiVolley {
         token2  = iv.getCurrentDate("SSSHHyyyyssMMddmm");
         token3  = iv.sha256(token1+"&"+token2,token1+"die");
         token4  = iv.sha256(token0 + token1 + "&"+token2,token1+"live");
+        this.context = context;
         //token3  = iv.encodeMD5(token3);
         //token3  = iv.encodeBase64(token3);
 
@@ -203,11 +210,14 @@ public class ApiVolley {
 
     private void trustAllCertivicate() {
 
+        updateAndroidSecurityProvider((Activity) context);
+
         try {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
                 public boolean verify(String hostname, SSLSession session) {
                     if (hostname.equalsIgnoreCase("putmasaripratama.co.id") ||
                             hostname.equalsIgnoreCase("api.putmasaripratama.co.id") ||
+                            hostname.equalsIgnoreCase("reports.crashlytics.com") ||
                             hostname.equalsIgnoreCase("api.crashlytics.com") ||
                             hostname.equalsIgnoreCase("settings.crashlytics.com") ||
                             hostname.equalsIgnoreCase("clients4.google.com") ||
@@ -247,6 +257,18 @@ public class ApiVolley {
                     context.getSocketFactory());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void updateAndroidSecurityProvider(Activity callingActivity) {
+        try {
+            ProviderInstaller.installIfNeeded(callingActivity);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Thrown when Google Play Services is not installed, up-to-date, or enabled
+            // Show dialog to allow users to install, update, or otherwise enable Google Play services.
+            GooglePlayServicesUtil.getErrorDialog(e.getConnectionStatusCode(), callingActivity, 0);
+        } catch (GooglePlayServicesNotAvailableException e) {
+            //Log.e("SecurityException", "Google Play Services not available.");
         }
     }
 }
