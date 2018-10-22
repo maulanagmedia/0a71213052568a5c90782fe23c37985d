@@ -7,8 +7,8 @@ android {
         applicationId "gmedia.net.id.pspreseller"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 14
-        versionName "2.10.4"
+        versionCode 15
+        versionName "2.10.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -19,6 +19,10 @@ android {
     }
     buildToolsVersion '28.0.2'
     productFlavors {
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 

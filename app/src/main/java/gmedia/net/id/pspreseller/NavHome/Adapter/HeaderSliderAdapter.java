@@ -81,7 +81,13 @@ public class HeaderSliderAdapter extends PagerAdapter {
             public void onClick(View v) {
 
                 if(data.getItem4().equals("")){
-                    new DownloadFileFromURL().execute(data.getItem2());
+
+                    try {
+                        new DownloadFileFromURL().execute(data.getItem2());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                     /*Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
                     intent.setDataAndType(Uri.parse(data.getItem2()), "image*//*");
