@@ -138,8 +138,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
         ServiceHandler serviceHandler = new ServiceHandler((Activity) context);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+
+            String stateString = bundle.getString("state", "");
+            if(!stateString.isEmpty()) ChangeFragment(iv.parseNullInteger(stateString));
+        }
     }
 
     public boolean isAccessibilityEnabled(String id){

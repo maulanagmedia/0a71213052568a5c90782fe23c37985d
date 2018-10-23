@@ -22,6 +22,7 @@ import java.util.Map;
 
 import gmedia.net.id.pspreseller.CSChat.ChatSales;
 import gmedia.net.id.pspreseller.DepositActivity;
+import gmedia.net.id.pspreseller.HomeActivity;
 import gmedia.net.id.pspreseller.MainActivity;
 import gmedia.net.id.pspreseller.R;
 
@@ -66,6 +67,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     typeContent = 2;
                 }else if(extra.get(key).trim().toUpperCase().equals("DEPOSIT")){
                     typeContent = 3;
+                }else if(extra.get(key).trim().toUpperCase().equals("HOME")){
+                    typeContent = 4;
                 }
             }
         }
@@ -73,7 +76,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if(typeContent != 9){
             switch (typeContent){
                 case 1:
-                    intent = new Intent(this, MainActivity.class);
+                    intent = new Intent(this, HomeActivity.class);
                     break;
                 case 2:
                     intent = new Intent(this, ChatSales.class);
@@ -82,8 +85,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 case 3:
                     intent = new Intent(this, DepositActivity.class);
                     break;
+                case 4:
+                    intent = new Intent(this, HomeActivity.class);
+                    break;
                 default:
-                    intent = new Intent(this, MainActivity.class);
+                    intent = new Intent(this, HomeActivity.class);
                     break;
             }
 

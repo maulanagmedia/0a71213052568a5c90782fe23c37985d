@@ -98,7 +98,14 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+            <intent-filter>
+                <action android:name="ACT_HOME" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".HomeMkios.OrderMKIOS"
             android:screenOrientation="portrait"

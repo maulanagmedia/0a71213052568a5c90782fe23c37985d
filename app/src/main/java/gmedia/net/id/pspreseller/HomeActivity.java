@@ -219,6 +219,13 @@ public class HomeActivity extends RuntimePermissionsActivity
 
         ServiceHandler serviceHandler = new ServiceHandler((Activity) context);*/
 
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+
+            String stateString = bundle.getString("state", "");
+            if(!stateString.isEmpty()) stateFragment = iv.parseNullInteger(stateString);
+        }
+
         if(stateFragment != 0){
 
             TabLayout.Tab tab = tlMenu.getTabAt(stateFragment);

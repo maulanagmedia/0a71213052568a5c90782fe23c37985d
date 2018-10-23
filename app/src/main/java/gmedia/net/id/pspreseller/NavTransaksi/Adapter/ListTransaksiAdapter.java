@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maulana.custommodul.CustomItem;
+import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 
 import java.util.List;
@@ -40,8 +41,8 @@ public class ListTransaksiAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvStatus;
-        private LinearLayout llDetail;
+        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvStatus;
+        private LinearLayout llDetail, llExpiration;
         private ImageView ivCollapse;
     }
 
@@ -62,10 +63,12 @@ public class ListTransaksiAdapter extends ArrayAdapter{
             holder.tvItem2 = (TextView) convertView.findViewById(R.id.tv_item2);
             holder.tvItem3 = (TextView) convertView.findViewById(R.id.tv_item3);
             holder.tvItem4 = (TextView) convertView.findViewById(R.id.tv_item4);
+            holder.tvItem5 = (TextView) convertView.findViewById(R.id.tv_item5);
             holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
 
             holder.ivCollapse = (ImageView) convertView.findViewById(R.id.iv_collapse);
             holder.llDetail = (LinearLayout) convertView.findViewById(R.id.ll_detail);
+            holder.llExpiration = (LinearLayout) convertView.findViewById(R.id.ll_expiration);
 
             convertView.setTag(holder);
         }else{
@@ -103,6 +106,14 @@ public class ListTransaksiAdapter extends ArrayAdapter{
         }
 
         holder.tvItem4.setText(itemSelected.getItem7());
+        if(itemSelected.getItem7().isEmpty()){
+
+            holder.llExpiration.setVisibility(View.GONE);
+        }else{
+            holder.llExpiration.setVisibility(View.VISIBLE);
+            holder.tvItem5.setText(iv.ChangeFormatDateString(itemSelected.getItem8(), FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay));
+
+        }
         holder.tvStatus.setText(itemSelected.getItem6());
 
         final ViewHolder finalHolder = holder;

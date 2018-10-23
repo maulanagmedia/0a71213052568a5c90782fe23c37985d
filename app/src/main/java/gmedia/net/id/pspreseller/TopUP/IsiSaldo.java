@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -818,7 +819,8 @@ public class IsiSaldo extends AppCompatActivity {
                             String rekening = jo.getString("rekening");
                             String atasnama = jo.getString("atasnama");
                             String bank = jo.getString("bank");
-                            showResultDialog(nominal, rekening, bank, atasnama);
+                            String expiredDate = jo.getString("expired_at");
+                            showResultDialog(nominal, rekening, bank, atasnama, expiredDate);
                         }else{
                             //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                             HomeActivity.stateFragment = 1;
@@ -862,7 +864,7 @@ public class IsiSaldo extends AppCompatActivity {
         });
     }
 
-    private void showResultDialog(final String nominal, final String rekening, final String bank, final String an){
+    private void showResultDialog(final String nominal, final String rekening, final String bank, final String an, final String expiration){
 
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
         LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -875,6 +877,7 @@ public class IsiSaldo extends AppCompatActivity {
         final TextView tvRekening = (TextView) viewDialog.findViewById(R.id.tv_rekening);
         final TextView tvBank = (TextView) viewDialog.findViewById(R.id.tv_bank);
         final TextView tvAn = (TextView) viewDialog.findViewById(R.id.tv_nama);
+        final TextView tvExpiration = (TextView) viewDialog.findViewById(R.id.tv_expiration);
         final ImageView ivNominal = (ImageView) viewDialog.findViewById(R.id.iv_nominal);
         final ImageView ivRekening = (ImageView) viewDialog.findViewById(R.id.iv_rekening);
         final Button btnOk = (Button) viewDialog.findViewById(R.id.btn_ok);
@@ -886,6 +889,7 @@ public class IsiSaldo extends AppCompatActivity {
         tvRekening.setText(rekening);
         tvBank.setText(bank);
         tvAn.setText(an);
+        tvExpiration.setText(Html.fromHtml("Harap lakukan transfer sebelum <b>"+ iv.ChangeFormatDateString(expiration, FormatItem.formatTimestamp, FormatItem.formatDateTimeDisplay) + "</b>"));
 
         ivNominal.setOnClickListener(new View.OnClickListener() {
             @Override
