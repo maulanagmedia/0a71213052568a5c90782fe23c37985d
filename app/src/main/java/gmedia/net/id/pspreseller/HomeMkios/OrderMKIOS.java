@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,6 +61,8 @@ public class OrderMKIOS extends AppCompatActivity {
     private SessionManager session;
     private TextView tvNomor;
     private String pin = "", flagPin = "";
+    private TextView tvDenom5, tvDenom10, tvDenom20, tvDenom25, tvDenom50, tvDenom100, tvHarga5, tvHarga10, tvHarga20, tvHarga25, tvHarga50, tvHarga100;
+    private EditText edtJumlah5, edtJumlah10, edtJumlah20, edtJumlah25, edtJumlah50, edtJumlah100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +93,30 @@ public class OrderMKIOS extends AppCompatActivity {
         tvJumlahHarga = (TextView) findViewById(R.id.tv_jumlah_harga);
         tvNomor = (TextView) findViewById(R.id.tv_nomor);
         tvNomor.setText(session.getUsername());
+
+        tvDenom5 = (TextView) findViewById(R.id.tv_denom5);
+        tvDenom10 = (TextView) findViewById(R.id.tv_denom10);
+        tvDenom20 = (TextView) findViewById(R.id.tv_denom20);
+        tvDenom25 = (TextView) findViewById(R.id.tv_denom25);
+        tvDenom50 = (TextView) findViewById(R.id.tv_denom50);
+        tvDenom100 = (TextView) findViewById(R.id.tv_denom100);
+
+        tvHarga5 = (TextView) findViewById(R.id.tv_harga5);
+        tvHarga10 = (TextView) findViewById(R.id.tv_harga10);
+        tvHarga20 = (TextView) findViewById(R.id.tv_harga20);
+        tvHarga25 = (TextView) findViewById(R.id.tv_harga25);
+        tvHarga50 = (TextView) findViewById(R.id.tv_harga50);
+        tvHarga100 = (TextView) findViewById(R.id.tv_harga100);
+
+        edtJumlah5 = (EditText) findViewById(R.id.edt_jumlah5);
+        edtJumlah10 = (EditText) findViewById(R.id.edt_jumlah10);
+        edtJumlah20 = (EditText) findViewById(R.id.edt_jumlah20);
+        edtJumlah25 = (EditText) findViewById(R.id.edt_jumlah25);
+        edtJumlah50 = (EditText) findViewById(R.id.edt_jumlah50);
+        edtJumlah100 = (EditText) findViewById(R.id.edt_jumlah100);
+
         items = new ArrayList<>();
+        listDenom = new ArrayList<>();
 
         dialogBox = new DialogBox(context);
         //getNoRs();
@@ -111,7 +138,7 @@ public class OrderMKIOS extends AppCompatActivity {
                     return;
                 }
 
-                if(items == null || items.size() <= 0){
+                if(listDenom == null || listDenom.size() <= 0){
                     DialogBox.showDialog(context, 3, "Harap pilih denom terlebih dahulu");
                     return;
                 }
@@ -134,6 +161,114 @@ public class OrderMKIOS extends AppCompatActivity {
                         })
                         .show();
 
+            }
+        });
+
+        edtJumlah5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJumlah10.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJumlah20.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJumlah25.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJumlah50.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
+            }
+        });
+
+        edtJumlah100.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                updateHarga();
             }
         });
     }
@@ -290,10 +425,10 @@ public class OrderMKIOS extends AppCompatActivity {
         JSONArray jArrayBarang = new JSONArray();
 
         //MKIOS
-        if(items != null && items.size() > 0){
+        if(listDenom != null && listDenom.size() > 0){
 
 
-            for(CustomItem item : items){
+            for(CustomItem item : listDenom){
 
                 if(iv.parseNullDouble(item.getItem4()) > 0){
 
@@ -498,15 +633,71 @@ public class OrderMKIOS extends AppCompatActivity {
                                     jo.getString("hargajual"),
                                     "",
                                     jo.getString("flag")));
-                        }
 
+                            if(i == 0){
+
+                                tvDenom5.setText(jo.getString("namabrg"));
+                                tvHarga5.setText("Harga " + iv.ChangeToRupiahFormat(jo.getString("hargajual")));
+                                if(jo.getString("flag").equals("1")){
+                                    edtJumlah5.setEnabled(true);
+                                }else{
+                                    edtJumlah5.setEnabled(false);
+                                }
+
+                            }else if(i == 1){
+
+                                tvDenom10.setText(jo.getString("namabrg"));
+                                tvHarga10.setText("Harga " + iv.ChangeToRupiahFormat(jo.getString("hargajual")));
+                                if(jo.getString("flag").equals("1")){
+                                    edtJumlah10.setEnabled(true);
+                                }else{
+                                    edtJumlah10.setEnabled(false);
+                                }
+                            }else if(i == 2){
+
+                                tvDenom20.setText(jo.getString("namabrg"));
+                                tvHarga20.setText("Harga " + iv.ChangeToRupiahFormat(jo.getString("hargajual")));
+                                if(jo.getString("flag").equals("1")){
+                                    edtJumlah20.setEnabled(true);
+                                }else{
+                                    edtJumlah20.setEnabled(false);
+                                }
+                            }else if(i == 3){
+
+                                tvDenom25.setText(jo.getString("namabrg"));
+                                tvHarga25.setText("Harga " + iv.ChangeToRupiahFormat(jo.getString("hargajual")));
+                                if(jo.getString("flag").equals("1")){
+                                    edtJumlah25.setEnabled(true);
+                                }else{
+                                    edtJumlah25.setEnabled(false);
+                                }
+                            }else if(i == 4){
+
+                                tvDenom50.setText(jo.getString("namabrg"));
+                                tvHarga50.setText("Harga " + iv.ChangeToRupiahFormat(jo.getString("hargajual")));
+                                if(jo.getString("flag").equals("1")){
+                                    edtJumlah50.setEnabled(true);
+                                }else{
+                                    edtJumlah50.setEnabled(false);
+                                }
+                            }else if(i == 5){
+
+                                tvDenom100.setText(jo.getString("namabrg"));
+                                tvHarga100.setText("Harga " + iv.ChangeToRupiahFormat(jo.getString("hargajual")));
+                                if(jo.getString("flag").equals("1")){
+                                    edtJumlah100.setEnabled(true);
+                                }else{
+                                    edtJumlah100.setEnabled(false);
+                                }
+                            }
+                        }
                     }
 
-                    setDenomAdapter(listDenom);
+                    //setDenomAdapter(listDenom);
                 } catch (JSONException e) {
                     e.printStackTrace();
 
-                    setDenomAdapter(null);
+                    //setDenomAdapter(null);
                     View.OnClickListener clickListener = new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -526,7 +717,7 @@ public class OrderMKIOS extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                setDenomAdapter(null);
+                //setDenomAdapter(null);
                 dialogBox.dismissDialog();
 
                 View.OnClickListener clickListener = new View.OnClickListener() {
@@ -609,16 +800,50 @@ public class OrderMKIOS extends AppCompatActivity {
         });
     }
 
-    public static void updateHarga(){
+    private void updateHarga(){
+
+        String jml5 = edtJumlah5.getText().toString();
+        String jml10 = edtJumlah10.getText().toString();
+        String jml20 = edtJumlah20.getText().toString();
+        String jml25 = edtJumlah25.getText().toString();
+        String jml50 = edtJumlah50.getText().toString();
+        String jml100 = edtJumlah100.getText().toString();
+
+        double qty5 = iv.parseNullDouble(jml5);
+        double qty10 = iv.parseNullDouble(jml10);
+        double qty20 = iv.parseNullDouble(jml20);
+        double qty25 = iv.parseNullDouble(jml25);
+        double qty50 = iv.parseNullDouble(jml50);
+        double qty100 = iv.parseNullDouble(jml100);
+
         totalHarga = 0;
 
-        if(adapterDenom != null){
-            items = adapterDenom.getItems();
+        if(listDenom != null && listDenom.size() > 0){
 
-            if(items.size() > 0){
-                for(CustomItem item : items){
-                    totalHarga += (iv.parseNullDouble(item.getItem3()) * iv.parseNullDouble(item.getItem4()));
+            int x = 0;
+            for(CustomItem item : listDenom){
+
+                if(x == 0){
+                    item.setItem4(jml5);
+                }else if(x == 1){
+
+                    item.setItem4(jml10);
+                }else if(x == 2){
+
+                    item.setItem4(jml20);
+                }else if(x == 3){
+
+                    item.setItem4(jml25);
+                }else if(x == 4){
+
+                    item.setItem4(jml50);
+                }else if(x == 5){
+
+                    item.setItem4(jml100);
                 }
+
+                totalHarga += (iv.parseNullDouble(item.getItem3()) * iv.parseNullDouble(item.getItem4()));
+                x++;
             }
         }
 

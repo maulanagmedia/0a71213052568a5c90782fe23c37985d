@@ -95,7 +95,7 @@ public class ListDenomMkiosAdapter extends ArrayAdapter{
             public void afterTextChanged(Editable editable) {
 
                 items.get(position).setItem4(editable.toString());
-                OrderMKIOS.updateHarga();
+                //OrderMKIOS.updateHarga();
             }
         });
 

@@ -145,6 +145,450 @@
             android:layout_marginRight="@dimen/margin_default"
             android:layout_marginLeft="@dimen/margin_default"
             android:descendantFocusability="afterDescendants"
+            android:visibility="gone"
             android:id="@+id/lv_denom"></ListView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_top"
+            android:layout_above="@id/ll_footer"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="@dimen/margin_default"
+                android:layout_marginLeft="@dimen/margin_default">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/tv_denom5"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/font_denom"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Harga"
+                            android:id="@+id/tv_harga5"
+                            android:textColor="@color/color_white"
+                            android:gravity="center"
+                            android:textSize="@dimen/font_denom_price"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/color_white"
+                        android:text="Jumlah"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/margin_default"
+                        android:paddingLeft="@dimen/margin_default"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:id="@+id/edt_jumlah5"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/margin_tanggung"
+                            android:paddingRight="@dimen/margin_tanggung"
+                            android:paddingTop="@dimen/margin_small"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:background="@drawable/bg_white_transparent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/color_white"></LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/tv_denom10"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/font_denom"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Harga"
+                            android:id="@+id/tv_harga10"
+                            android:textColor="@color/color_white"
+                            android:gravity="center"
+                            android:textSize="@dimen/font_denom_price"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/color_white"
+                        android:text="Jumlah"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/margin_default"
+                        android:paddingLeft="@dimen/margin_default"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:id="@+id/edt_jumlah10"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/margin_tanggung"
+                            android:paddingRight="@dimen/margin_tanggung"
+                            android:paddingTop="@dimen/margin_small"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:background="@drawable/bg_white_transparent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/color_white"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/tv_denom20"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/font_denom"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Harga"
+                            android:id="@+id/tv_harga20"
+                            android:textColor="@color/color_white"
+                            android:gravity="center"
+                            android:textSize="@dimen/font_denom_price"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/color_white"
+                        android:text="Jumlah"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/margin_default"
+                        android:paddingLeft="@dimen/margin_default"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:id="@+id/edt_jumlah20"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/margin_tanggung"
+                            android:paddingRight="@dimen/margin_tanggung"
+                            android:paddingTop="@dimen/margin_small"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:background="@drawable/bg_white_transparent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/color_white"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/tv_denom25"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/font_denom"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Harga"
+                            android:id="@+id/tv_harga25"
+                            android:textColor="@color/color_white"
+                            android:gravity="center"
+                            android:textSize="@dimen/font_denom_price"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/color_white"
+                        android:text="Jumlah"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/margin_default"
+                        android:paddingLeft="@dimen/margin_default"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:id="@+id/edt_jumlah25"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/margin_tanggung"
+                            android:paddingRight="@dimen/margin_tanggung"
+                            android:paddingTop="@dimen/margin_small"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:background="@drawable/bg_white_transparent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/color_white"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/tv_denom50"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/font_denom"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Harga"
+                            android:id="@+id/tv_harga50"
+                            android:textColor="@color/color_white"
+                            android:gravity="center"
+                            android:textSize="@dimen/font_denom_price"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/color_white"
+                        android:text="Jumlah"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/margin_default"
+                        android:paddingLeft="@dimen/margin_default"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:id="@+id/edt_jumlah50"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/margin_tanggung"
+                            android:paddingRight="@dimen/margin_tanggung"
+                            android:paddingTop="@dimen/margin_small"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:background="@drawable/bg_white_transparent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/color_white"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.4"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:id="@+id/tv_denom100"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/font_denom"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Harga"
+                            android:id="@+id/tv_harga100"
+                            android:textColor="@color/color_white"
+                            android:gravity="center"
+                            android:textSize="@dimen/font_denom_price"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:textColor="@color/color_white"
+                        android:text="Jumlah"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/margin_default"
+                        android:paddingLeft="@dimen/margin_default"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_white"
+                            android:id="@+id/edt_jumlah100"
+                            android:inputType="number"
+                            android:imeOptions="actionDone"
+                            android:paddingLeft="@dimen/margin_tanggung"
+                            android:paddingRight="@dimen/margin_tanggung"
+                            android:paddingTop="@dimen/margin_small"
+                            android:paddingBottom="@dimen/margin_small"
+                            android:background="@drawable/bg_white_transparent"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_line"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:background="@color/color_white"></LinearLayout>
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 </RelativeLayout>
