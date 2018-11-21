@@ -109,7 +109,7 @@ public class DialogBox {
 
             builder = new AlertDialog.Builder(context);
             LayoutInflater inflater = (LayoutInflater) ((Activity)context).getSystemService(LAYOUT_INFLATER_SERVICE);
-            View viewDialog = inflater.inflate(R.layout.layout_loading, null);
+            View viewDialog = inflater.inflate(R.layout.layout_outstanding, null);
             builder.setView(viewDialog);
             builder.setCancelable(false);
 

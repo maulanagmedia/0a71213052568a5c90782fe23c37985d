@@ -3,12 +3,15 @@ package gmedia.net.id.pspreseller.NavHistory;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -16,12 +19,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.leonardus.irfan.bluetoothprinter.Model.Item;
+import com.leonardus.irfan.bluetoothprinter.Model.Transaksi;
+import com.leonardus.irfan.bluetoothprinter.PspPrinter;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
+import com.maulana.custommodul.OptionItem;
 import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
@@ -40,6 +48,8 @@ import gmedia.net.id.pspreseller.NavHistory.Adapter.ListHistoryAdapter;
 import gmedia.net.id.pspreseller.NavTransaksi.Adapter.ListTransaksiAdapter;
 import gmedia.net.id.pspreseller.R;
 import gmedia.net.id.pspreseller.Utils.ServerURL;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class MainHistory extends Fragment {
 
@@ -60,6 +70,7 @@ public class MainHistory extends Fragment {
     private List<CustomItem> listHistory;
     private DialogBox dialogBox;
     private TextView tvTotal;
+    private PspPrinter printer;
 
     public MainHistory() {
         // Required empty public constructor
@@ -76,6 +87,8 @@ public class MainHistory extends Fragment {
 
         layout = inflater.inflate(R.layout.fragment_main_history, container, false);
         context = getContext();
+        printer = new PspPrinter(context);
+        printer.startService();
         session = new SessionManager(context);
 
         initUI();
@@ -225,7 +238,9 @@ public class MainHistory extends Fragment {
                                             jo.getString("nama"),
                                             jo.getString("jam"),
                                             jo.getString("cashback"),
-                                            jo.getString("stok_akhir")));
+                                            jo.getString("stok_akhir"),
+                                            jo.getString("sn")
+                                    ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
                         }
@@ -277,10 +292,94 @@ public class MainHistory extends Fragment {
 
         lvHistory.setAdapter(null);
 
-        if(listItem != null && listItem.size() >0){
+        if(listItem != null && listItem.size() > 0){
 
-            ListHistoryAdapter adapter = new ListHistoryAdapter((Activity) context, listItem);
+            final ListHistoryAdapter adapter = new ListHistoryAdapter((Activity) context, listItem);
             lvHistory.setAdapter(adapter);
+
+            lvHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View viewDialog = inflater.inflate(R.layout.dialog_cetak, null);
+                    builder.setView(viewDialog);
+                    builder.setCancelable(false);
+
+                    final Button btnTutup = (Button) viewDialog.findViewById(R.id.btn_tutup);
+                    final Button btnCetak = (Button) viewDialog.findViewById(R.id.btn_cetak);
+
+                    final AlertDialog alert = builder.create();
+                    alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                    List<Item> items = new ArrayList<>();
+
+                    items.add(new Item(item.getItem7(), 1, iv.parseNullDouble(item.getItem6())));
+
+                    Calendar date = Calendar.getInstance();
+                    final Transaksi transaksi = new Transaksi(item.getItem8(), session.getNama(), item.getItem12(), date.getTime(), items);
+
+                    btnTutup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view2) {
+
+                            if(alert != null){
+
+                                try {
+
+                                    alert.dismiss();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+
+                    btnCetak.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+
+                            if(!printer.bluetoothAdapter.isEnabled()){
+
+                                Toast.makeText(context, "Mohon hidupkan bluetooth anda, kemudian klik cetak kembali", Toast.LENGTH_LONG).show();
+                                try{
+                                    printer.dialogBluetooth.show();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }else{
+
+                                if(printer.isPrinterReady()){
+
+                                    printer.print(transaksi);
+
+                                }else{
+
+                                    Toast.makeText(context, "Harap pilih device printer telebih dahulu", Toast.LENGTH_LONG).show();
+                                    printer.showDevices();
+                                }
+                            }
+                        }
+                    });
+
+                    try {
+                        alert.show();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
+    }
+
+    @Override
+    public void onDestroy() {
+
+        printer.stopService();
+        super.onDestroy();
     }
 }

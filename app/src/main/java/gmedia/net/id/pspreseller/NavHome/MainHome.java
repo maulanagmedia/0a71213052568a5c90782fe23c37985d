@@ -47,6 +47,7 @@ import gmedia.net.id.pspreseller.HomeInfoStok.ActInfoStok;
 import gmedia.net.id.pspreseller.HomeInfoStok.DetailInfoStok;
 import gmedia.net.id.pspreseller.HomeJualPerdana.DetailJualPerdana;
 import gmedia.net.id.pspreseller.HomeMkios.OrderMKIOS;
+import gmedia.net.id.pspreseller.HomePenjualanLain.OrderLain;
 import gmedia.net.id.pspreseller.HomePreorderPerdana.ListBarangPreorder;
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
 import gmedia.net.id.pspreseller.HomeTcash.OrderTcash;
@@ -195,7 +196,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, OrderTokenListrik.class);
+                Intent intent = new Intent(context, OrderLain.class);
                 startActivity(intent);
                 ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
 

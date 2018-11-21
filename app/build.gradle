@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     productFlavors {
     }
     lintOptions {
@@ -46,8 +46,10 @@ dependencies {
     //        transitive = true;
     //    }
     implementation 'com.android.support:design:27.1.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5' // for crashlitycs
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
+    // for crashlitycs
     implementation 'com.google.zxing:core:3.3.0'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
+    implementation project(':bluetoothprinter')
 }
 apply plugin: 'com.google.gms.google-services'

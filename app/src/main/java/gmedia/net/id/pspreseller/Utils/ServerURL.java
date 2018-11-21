@@ -6,9 +6,9 @@ package gmedia.net.id.pspreseller.Utils;
 
 public class ServerURL {
 
-    //private static final String baseURL = "http://192.168.12.188/psp/apiresv1/";
+    private static final String baseURL = "http://192.168.20.33/apiresv1/";
     //private static final String baseURL = "http://119.2.53.122/mobilesalesforce/apiresv1/";
-    private static final String baseURL = "https://api.putmasaripratama.co.id/apiresv1/";
+    //private static final String baseURL = "https://api.putmasaripratama.co.id/apiresv1/";
     //private static final String baseURL = "http://api.putmasaripratama.co.id/apiresv1/";
 
     public static final String login = baseURL + "auth/login/";
@@ -56,6 +56,10 @@ public class ServerURL {
     public static final String getBukuPintar = baseURL + "Buku/";
     public static final String beliPerdana = baseURL + "Perdana/pre_order/";
     public static final String getCCID = baseURL + "Direct_Sale/scan_perdana/";
+    public static final String getKategoriPPOB = baseURL + "Ppob/kategori/";
+    public static final String getProdukPPOB = baseURL + "Ppob/produk/";
+    public static final String payPPBOB = baseURL + "Ppob/transaksi/";
+    public static final String transaksiPPBOB = baseURL + "Ppob/transaksi/";
 
     //public static final String uploadFileURL = "http://192.168.12.147/psp/testupload/upload.php";
 }

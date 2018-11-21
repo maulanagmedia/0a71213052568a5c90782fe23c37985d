@@ -98,8 +98,7 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
-
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="ACT_HOME" />
 
@@ -219,12 +218,18 @@
         <activity
             android:name=".HomeBeliPerdana.DetailKeranjangPerdana"
             android:screenOrientation="portrait" />
-        <activity android:name=".HomeJualPerdana.DetailJualPerdana"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".HomeJualPerdana.DetailJualPerdana"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
+        <activity
+            android:name=".HomePenjualanLain.OrderLain"
+            android:screenOrientation="portrait" />
+        <activity android:name=".HomePenjualanLain.DetailOrderLain"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

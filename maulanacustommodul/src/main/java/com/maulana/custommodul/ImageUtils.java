@@ -102,6 +102,11 @@ public class ImageUtils {
         Glide.with(context).load(Uri.parse(uri)).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).error(context.getResources().getDrawable(R.drawable.ic_thumb_adv)).override(360,78).placeholder(context.getResources().getDrawable(R.drawable.ic_thumb_adv)).into(image);
     }*/
 
+    public void LoadCategoryImage(Context context, String uri, final ImageView image){
+
+        Picasso.with(context).load(Uri.parse(uri)).resize(120,120).into(image);
+    }
+
     public static Bitmap decodeBitmap(Uri bitmapUri, ContentResolver resolver, int width, int height) throws IOException {
         InputStream is = resolver.openInputStream(bitmapUri);
         BitmapFactory.Options options = new BitmapFactory.Options();
