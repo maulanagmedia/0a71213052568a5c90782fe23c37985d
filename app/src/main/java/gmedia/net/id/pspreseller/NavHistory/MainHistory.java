@@ -71,6 +71,8 @@ public class MainHistory extends Fragment {
     private DialogBox dialogBox;
     private TextView tvTotal;
     private PspPrinter printer;
+    private String isPPOB = "", jml = "", denda = "", admin = "";
+    private String msisdn = "", periode = "", standMeter = "";
 
     public MainHistory() {
         // Required empty public constructor
@@ -239,7 +241,14 @@ public class MainHistory extends Fragment {
                                             jo.getString("jam"),
                                             jo.getString("cashback"),
                                             jo.getString("stok_akhir"),
-                                            jo.getString("sn")
+                                            jo.getString("sn"),
+                                            jo.getString("ppob"),
+                                            jo.getString("jml"),
+                                            jo.getString("admin"),
+                                            jo.getString("denda"),
+                                            jo.getString("tanggal"),
+                                            jo.getString("periode"),
+                                            jo.getString("stand_meter")
                                     ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
@@ -301,7 +310,7 @@ public class MainHistory extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
+                    final CustomItem item = (CustomItem) adapterView.getItemAtPosition(i);
 
                     final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -309,18 +318,28 @@ public class MainHistory extends Fragment {
                     builder.setView(viewDialog);
                     builder.setCancelable(false);
 
+                    isPPOB = item.getItem13();
+                    jml = item.getItem14();
+                    admin = item.getItem15();
+                    denda = item.getItem16();
+                    msisdn = item.getItem5();
+                    periode = item.getItem18();
+                    standMeter = item.getItem19();
+
                     final Button btnTutup = (Button) viewDialog.findViewById(R.id.btn_tutup);
                     final Button btnCetak = (Button) viewDialog.findViewById(R.id.btn_cetak);
+                    final EditText edtBiaya = (EditText) viewDialog.findViewById(R.id.edt_biaya);
+                    if(isPPOB.equals("0"))edtBiaya.setHint("Total Harga");
 
                     final AlertDialog alert = builder.create();
                     alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
                     List<Item> items = new ArrayList<>();
 
-                    items.add(new Item(item.getItem7(), 1, iv.parseNullDouble(item.getItem6())));
+                    items.add(new Item(item.getItem7(), 1, iv.parseNullDouble(isPPOB.equals("0") ? edtBiaya.getText().toString() : jml)));
 
                     Calendar date = Calendar.getInstance();
-                    final Transaksi transaksi = new Transaksi(item.getItem8(), session.getNama(), item.getItem12(), date.getTime(), items);
+                    final Transaksi transaksi = new Transaksi(item.getItem8(), session.getNama(), item.getItem12(), date.getTime(), items, iv.ChangeFormatDateString(item.getItem17(), FormatItem.formatDate, FormatItem.formatDateDisplay) + " " + item.getItem9());
 
                     btnTutup.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -342,6 +361,17 @@ public class MainHistory extends Fragment {
                         @Override
                         public void onClick(View view) {
 
+                            if(edtBiaya.getText().toString().isEmpty()){
+
+                                String message = "Biaya Admin harap diisi";
+                                if(isPPOB.equals("0")) message = "Total Harga harap diisi";
+                                edtBiaya.setError(message);
+                                edtBiaya.requestFocus();
+                                return;
+                            }else{
+
+                                edtBiaya.setError(null);
+                            }
 
                             if(!printer.bluetoothAdapter.isEnabled()){
 
@@ -355,7 +385,38 @@ public class MainHistory extends Fragment {
 
                                 if(printer.isPrinterReady()){
 
-                                    printer.print(transaksi);
+                                    if(isPPOB.equals("0")){
+
+                                        List<Item> items1 = new ArrayList<>();
+
+                                        items1.add(new Item(item.getItem7(), 1, iv.parseNullDouble(edtBiaya.getText().toString())));
+
+                                        Calendar date = Calendar.getInstance();
+                                        final Transaksi transaksi1 = new Transaksi(item.getItem8(), session.getNama(), item.getItem12(), date.getTime(), items1, iv.ChangeFormatDateString(item.getItem17(), FormatItem.formatDate, FormatItem.formatDateDisplay) + " " + item.getItem9());
+                                        transaksi1.setMsisdn(msisdn);
+
+                                        printer.print(transaksi1,"Nama");
+                                    }else{
+
+                                        double biayaAdmin = iv.parseNullDouble(edtBiaya.getText().toString());
+                                        double dpp = biayaAdmin / 1.1;
+                                        double ppn = biayaAdmin - dpp;
+                                        double nonPPn = iv.parseNullDouble(item.getItem6()) - biayaAdmin;
+                                        if(nonPPn < 0) nonPPn = iv.parseNullDouble(item.getItem6());
+
+                                        transaksi.setBiayaAdmin(iv.ChangeToCurrencyFormat(iv.doubleToString(biayaAdmin)));
+                                        transaksi.setDpp(iv.ChangeToCurrencyFormat(iv.doubleToString(dpp)));
+                                        transaksi.setPpn(iv.ChangeToCurrencyFormat(iv.doubleToString(ppn)));
+                                        transaksi.setNonPPN(iv.ChangeToCurrencyFormat(iv.doubleToString(nonPPn)));
+                                        transaksi.setJml(iv.parseNullDouble(jml));
+                                        transaksi.setDenda(iv.parseNullDouble(denda));
+                                        transaksi.setAdmin(iv.parseNullDouble(admin));
+                                        transaksi.setMsisdn(msisdn);
+                                        transaksi.setPeriode(periode);
+                                        transaksi.setStandMeter(standMeter);
+
+                                        printer.print(transaksi);
+                                    }
 
                                 }else{
 

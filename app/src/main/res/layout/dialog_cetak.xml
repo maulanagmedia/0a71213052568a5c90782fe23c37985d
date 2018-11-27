@@ -11,7 +11,6 @@
         app:cardCornerRadius="15dp"
         app:cardElevation="2dp">
 
-
         <LinearLayout
             android:layout_width="240dp"
             android:layout_height="wrap_content"
@@ -26,6 +25,18 @@
                 android:layout_marginBottom="@dimen/margin_default"
                 android:src="@mipmap/ic_print"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_input"
+                android:layout_marginBottom="@dimen/margin_small"
+                style="@style/form_control_input"
+                android:inputType="number"
+                android:layout_marginRight="@dimen/margin_default"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:imeOptions="actionDone"
+                android:id="@+id/edt_biaya"
+                android:hint="Biaya Admin"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

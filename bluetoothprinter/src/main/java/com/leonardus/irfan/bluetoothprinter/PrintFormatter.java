@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,45 @@ public class PrintFormatter {
     public static final byte[] ALIGN_RIGHT = new byte[] { 0x1b, 'a', 0x02 };
     public static final byte[] ALIGN_CENTER = new byte[] { 0x1b, 'a', 0x01 };
     public static byte[] NEW_LINE = {10};
+    public static byte[] DEFAULT_STYLE = new byte[]{(byte) 27, (byte) 64};
+    public static byte[] BOLD_STYLE = new byte[]{0x1B,0x21,0x10};
+
+    private static byte[] arrayOfByte1 = { 27, 33, 0 };
+
+    byte[] cc = new byte[]{0x1B,0x21,0x00};  // 0- normal size text
+    byte[] bb = new byte[]{0x1B,0x21,0x08};  // 1- only bold text
+    byte[] bb2 = new byte[]{0x1B,0x21,0x20}; // 2- bold with medium text
+    byte[] bb3 = new byte[]{0x1B,0x21,0x10}; // 3- bold with large text
 
     private static String hexStr = "0123456789ABCDEF";
     private static String[] binaryArray = { "0000", "0001", "0010", "0011",
             "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011",
             "1100", "1101", "1110", "1111" };
+
+    public static byte[] getSmall(){
+        byte[] format = arrayOfByte1;
+        format[2] = ((byte)(0x1 | format[2]));
+        return format;
+    }
+
+    public static byte[] getBold() {
+
+        byte[] format = arrayOfByte1;
+        format[2] = ((byte)(0x8 | format[2]));
+        return format;
+    }
+
+    public static byte[] textHight(){
+        byte[] format = arrayOfByte1;
+        format[2] = ((byte)(0x10 | format[2]));
+        return format;
+    }
+
+    public static byte[] textWidth(){
+        byte[] format = arrayOfByte1;
+        format[2] = ((byte)(0x20 | format[2]));
+        return format;
+    }
 
     public static byte[] decodeBitmap(Bitmap bmp){
         int bmpWidth = bmp.getWidth();
@@ -161,5 +196,21 @@ public class PrintFormatter {
 
     private static byte charToByte(char c) {
         return (byte) "0123456789ABCDEF".indexOf(c);
+    }
+
+    public static void setBold(OutputStream outputStream, boolean bold) {
+        byte[] cmd = new byte[]{0x1B, 0x45, bold ? (byte) 1 : 0};
+        printUnicode(outputStream, cmd);
+    }
+
+    public static boolean printUnicode(OutputStream outputStream, byte[] data) {
+        try {
+            outputStream.write(data);
+            Thread.sleep(50);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

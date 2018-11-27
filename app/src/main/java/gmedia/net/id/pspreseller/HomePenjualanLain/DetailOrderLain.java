@@ -26,6 +26,7 @@ import com.leonardus.irfan.bluetoothprinter.Model.Transaksi;
 import com.leonardus.irfan.bluetoothprinter.PspPrinter;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomView.DialogBox;
+import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.OptionItem;
 import com.maulana.custommodul.SessionManager;
@@ -62,7 +63,8 @@ public class DetailOrderLain extends AppCompatActivity {
     private int state = 1;
     private String idProduk = "";
     private String currentCounter = "";
-    private String harga = "", namaPIC = "", msisdn = "", sn = "", namaProduk = "";
+    private String harga = "", namaPIC = "", msisdn = "", sn = "", namaProduk = "", jml = "", denda = "", admin = "", periode = "", standMeter = "";
+    private String isPPOB = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +139,26 @@ public class DetailOrderLain extends AppCompatActivity {
                 }
 
                 currentCounter = "";
-                doTransaksi(false);
+
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle("Konfirmasi")
+                        .setMessage("Apakah anda yakin ingin memproses transaksi?")
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                doTransaksi(false);
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .show();
+
+
                 /*List<Item> items = new ArrayList<>();
                 items.add(new Item("Item 1", 1, 20000));
                 items.add(new Item("Item 2", 1, 21000));
@@ -220,11 +241,17 @@ public class DetailOrderLain extends AppCompatActivity {
             public void onSuccess(String result) {
 
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                iv.hideSoftKey(context);
                 String message = "Terjadi kesalahan saat memuat data";
                 harga = "";
+                jml = "";
+                denda = "";
+                admin = "";
                 sn = "";
                 namaPIC = "";
                 msisdn = "";
+                periode = "";
+                standMeter = "";
 
                 try {
 
@@ -235,10 +262,17 @@ public class DetailOrderLain extends AppCompatActivity {
 
                     if(iv.parseNullInteger(status) == 200){
 
-                        harga =  currentCounter = response.getJSONObject("response").getJSONObject("transaksi").getString("harga");
-                        sn = currentCounter = response.getJSONObject("response").getJSONObject("transaksi").getString("sn");
-                        msisdn = currentCounter = response.getJSONObject("response").getJSONObject("transaksi").getString("msisdn");
-                        namaPIC= currentCounter = response.getJSONObject("response").getJSONObject("transaksi").getString("nama");
+                        harga = response.getJSONObject("response").getJSONObject("transaksi").getString("harga");
+
+                        jml =  response.getJSONObject("response").getJSONObject("transaksi").getString("jml");
+                        admin = response.getJSONObject("response").getJSONObject("transaksi").getString("admin");
+                        denda = response.getJSONObject("response").getJSONObject("transaksi").getString("denda");
+                        periode = response.getJSONObject("response").getJSONObject("transaksi").getString("periode");
+                        standMeter = response.getJSONObject("response").getJSONObject("transaksi").getString("stand_meter");
+
+                        sn = response.getJSONObject("response").getJSONObject("transaksi").getString("sn");
+                        msisdn = response.getJSONObject("response").getJSONObject("transaksi").getString("msisdn");
+                        namaPIC = response.getJSONObject("response").getJSONObject("transaksi").getString("nama");
 
                         edtTotal.setText(iv.ChangeToCurrencyFormat(harga));
                         edtNama.setText(namaPIC);
@@ -255,16 +289,18 @@ public class DetailOrderLain extends AppCompatActivity {
 
                             final Button btnTutup = (Button) viewDialog.findViewById(R.id.btn_tutup);
                             final Button btnCetak = (Button) viewDialog.findViewById(R.id.btn_cetak);
+                            final EditText edtBiaya = (EditText) viewDialog.findViewById(R.id.edt_biaya);
+                            if(isPPOB.equals("0"))edtBiaya.setHint("Total Harga");
 
                             final AlertDialog alert = builder.create();
                             alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
                             List<Item> items = new ArrayList<>();
 
-                            items.add(new Item(namaProduk, 1, iv.parseNullDouble(harga)));
+                            items.add(new Item(namaProduk, 1, iv.parseNullDouble(isPPOB.equals("0") ? edtBiaya.getText().toString() : jml)));
 
                             Calendar date = Calendar.getInstance();
-                            final Transaksi transaksi = new Transaksi(namaPIC, session.getNama(), sn, date.getTime(), items);
+                            final Transaksi transaksi = new Transaksi(namaPIC, session.getNama(), sn, date.getTime(), items, iv.getCurrentDate(FormatItem.formatDateTimeDisplay));
 
                             final String finalMessage = message;
 
@@ -296,6 +332,17 @@ public class DetailOrderLain extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
 
+                                    if(edtBiaya.getText().toString().isEmpty()){
+
+                                        String message = "Biaya Admin harap diisi";
+                                        if(isPPOB.equals("0")) message = "Total Harga harap diisi";
+                                        edtBiaya.setError(message);
+                                        edtBiaya.requestFocus();
+                                        return;
+                                    }else{
+
+                                        edtBiaya.setError(null);
+                                    }
 
                                     if(!printer.bluetoothAdapter.isEnabled()){
 
@@ -309,7 +356,36 @@ public class DetailOrderLain extends AppCompatActivity {
 
                                         if(printer.isPrinterReady()){
 
-                                            printer.print(transaksi);
+                                            if(isPPOB.equals("0")){
+
+                                                List<Item> items1 = new ArrayList<>();
+                                                items1.add(new Item(namaProduk, 1, iv.parseNullDouble(edtBiaya.getText().toString())));
+                                                Calendar date = Calendar.getInstance();
+                                                final Transaksi transaksi1 = new Transaksi(namaPIC, session.getNama(), sn, date.getTime(), items1, iv.getCurrentDate(FormatItem.formatDateTimeDisplay));
+                                                transaksi1.setMsisdn(msisdn);
+
+                                                printer.print(transaksi1,"Nama");
+                                            }else{
+
+                                                double biayaAdmin = iv.parseNullDouble(edtBiaya.getText().toString());
+                                                double dpp = biayaAdmin / 1.1;
+                                                double ppn = biayaAdmin - dpp;
+                                                double nonPPn = iv.parseNullDouble(harga) - biayaAdmin;
+                                                if(nonPPn < 0) nonPPn = iv.parseNullDouble(harga);
+
+                                                transaksi.setBiayaAdmin(iv.ChangeToCurrencyFormat(iv.doubleToString(biayaAdmin)));
+                                                transaksi.setDpp(iv.ChangeToCurrencyFormat(iv.doubleToString(dpp)));
+                                                transaksi.setPpn(iv.ChangeToCurrencyFormat(iv.doubleToString(ppn)));
+                                                transaksi.setNonPPN(iv.ChangeToCurrencyFormat(iv.doubleToString(nonPPn)));
+                                                transaksi.setJml(iv.parseNullDouble(jml));
+                                                transaksi.setDenda(iv.parseNullDouble(denda));
+                                                transaksi.setAdmin(iv.parseNullDouble(admin));
+                                                transaksi.setMsisdn(msisdn);
+                                                transaksi.setPeriode(periode);
+                                                transaksi.setStandMeter(standMeter);
+
+                                                printer.print(transaksi);
+                                            }
 
                                         }else{
 
@@ -352,8 +428,8 @@ public class DetailOrderLain extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                String message = "Terjadi kesalahan saat memuat data";
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                //String message = "Terjadi kesalahan saat memuat data";
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
             }
         });
@@ -372,6 +448,7 @@ public class DetailOrderLain extends AppCompatActivity {
                 OptionItem item = (OptionItem) adapterView.getItemAtPosition(i);
                 idProduk = item.getValue();
                 namaProduk = item.getText();
+                isPPOB = item.getAtt4();
 
                 if(item.getAtt2().equals("1")){
                     isInquery = true;
@@ -422,6 +499,7 @@ public class DetailOrderLain extends AppCompatActivity {
                                             ,jo.getString("kode")
                                             ,jo.getString("xml")
                                             ,jo.getString("get")
+                                            ,jo.getString("ppob")
                                     ));
                         }
 
