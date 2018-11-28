@@ -59,7 +59,7 @@ public class ServerURL {
     public static final String getKategoriPPOB = baseURL + "Ppob/kategori/";
     public static final String getProdukPPOB = baseURL + "Ppob/produk/";
     public static final String payPPBOB = baseURL + "Ppob/transaksi/";
-    public static final String transaksiPPBOB = baseURL + "Ppob/transaksi/";
+    public static final String saveHargaPPOB = baseURL + "Ppob/add_harga_custom/";
 
     //public static final String uploadFileURL = "http://192.168.12.147/psp/testupload/upload.php";
 }

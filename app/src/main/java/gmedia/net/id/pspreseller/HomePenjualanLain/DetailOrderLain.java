@@ -356,6 +356,8 @@ public class DetailOrderLain extends AppCompatActivity {
 
                                         if(printer.isPrinterReady()){
 
+                                            saveCustomHarga(edtBiaya.getText().toString());
+
                                             if(isPPOB.equals("0")){
 
                                                 List<Item> items1 = new ArrayList<>();
@@ -431,6 +433,49 @@ public class DetailOrderLain extends AppCompatActivity {
                 //String message = "Terjadi kesalahan saat memuat data";
                 Toast.makeText(context, result, Toast.LENGTH_LONG).show();
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+        });
+    }
+
+    private void saveCustomHarga(String hargaCustom) {
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("id", currentCounter);
+            jBody.put("harga", hargaCustom);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveHargaPPOB, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "Terjadi kesalahan saat memuat data, mohon coba kembali";
+
+                try {
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(status.equals("200")){
+
+
+                    }else{
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -72,7 +72,7 @@ public class MainHistory extends Fragment {
     private TextView tvTotal;
     private PspPrinter printer;
     private String isPPOB = "", jml = "", denda = "", admin = "";
-    private String msisdn = "", periode = "", standMeter = "";
+    private String msisdn = "", periode = "", standMeter = "", hargaCustom = "", currentCounter = "";
 
     public MainHistory() {
         // Required empty public constructor
@@ -248,7 +248,9 @@ public class MainHistory extends Fragment {
                                             jo.getString("denda"),
                                             jo.getString("tanggal"),
                                             jo.getString("periode"),
-                                            jo.getString("stand_meter")
+                                            jo.getString("stand_meter"),
+                                            jo.getString("harga_custom"),
+                                            jo.getString("transaction_id")
                                     ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
@@ -325,11 +327,14 @@ public class MainHistory extends Fragment {
                     msisdn = item.getItem5();
                     periode = item.getItem18();
                     standMeter = item.getItem19();
+                    hargaCustom = item.getItem20();
+                    currentCounter = item.getItem21();
 
                     final Button btnTutup = (Button) viewDialog.findViewById(R.id.btn_tutup);
                     final Button btnCetak = (Button) viewDialog.findViewById(R.id.btn_cetak);
                     final EditText edtBiaya = (EditText) viewDialog.findViewById(R.id.edt_biaya);
                     if(isPPOB.equals("0"))edtBiaya.setHint("Total Harga");
+                    edtBiaya.setText(hargaCustom);
 
                     final AlertDialog alert = builder.create();
                     alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -361,6 +366,8 @@ public class MainHistory extends Fragment {
                         @Override
                         public void onClick(View view) {
 
+                            hargaCustom = edtBiaya.getText().toString();
+
                             if(edtBiaya.getText().toString().isEmpty()){
 
                                 String message = "Biaya Admin harap diisi";
@@ -384,6 +391,8 @@ public class MainHistory extends Fragment {
                             }else{
 
                                 if(printer.isPrinterReady()){
+
+                                    saveCustomHarga(hargaCustom);
 
                                     if(isPPOB.equals("0")){
 
@@ -435,6 +444,49 @@ public class MainHistory extends Fragment {
                 }
             });
         }
+    }
+
+    private void saveCustomHarga(String hargaCustom) {
+
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("id", currentCounter);
+            jBody.put("harga", hargaCustom);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveHargaPPOB, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                String message = "Terjadi kesalahan saat memuat data, mohon coba kembali";
+
+                try {
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(status.equals("200")){
+
+
+                    }else{
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
