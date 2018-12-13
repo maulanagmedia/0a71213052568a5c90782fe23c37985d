@@ -489,10 +489,10 @@ public class MainHistory extends Fragment {
         });
     }
 
-    @Override
+    /*@Override
     public void onDestroy() {
 
         printer.stopService();
         super.onDestroy();
-    }
+    }*/
 }

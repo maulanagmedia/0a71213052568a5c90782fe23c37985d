@@ -599,11 +599,11 @@ public class DetailOrderLain extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     protected void onDestroy() {
         printer.stopService();
         super.onDestroy();
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

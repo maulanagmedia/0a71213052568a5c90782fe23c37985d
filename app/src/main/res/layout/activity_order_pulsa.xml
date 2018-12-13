@@ -154,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/edt_pin"
                     android:inputType="numberPassword"
-                    style="@style/form_control_input.disable"/>
+                    style="@style/form_control_input"/>
 
                 <CheckBox
                     android:layout_width="match_parent"

@@ -41,6 +41,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leonardus.irfan.bluetoothprinter.PspPrinter;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.ImageUtils;
@@ -105,6 +106,7 @@ public class HomeActivity extends RuntimePermissionsActivity
     private AlertDialog builderVersion;
     private TextView tvVersion;
     private TabLayout tlMenu;
+    private PspPrinter printer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,9 @@ public class HomeActivity extends RuntimePermissionsActivity
         context = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        printer = new PspPrinter(context);
+        printer.startService();
 
         if (ContextCompat.checkSelfPermission(
                 HomeActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
@@ -153,6 +158,8 @@ public class HomeActivity extends RuntimePermissionsActivity
         if (bundle != null) {
 
             if (bundle.getBoolean("exit", false)) {
+
+                printer.stopService();
                 exitState = true;
                 finish();
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
