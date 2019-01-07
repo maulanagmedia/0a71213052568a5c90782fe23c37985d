@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +43,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import gmedia.net.id.pspreseller.HomeActivity;
 import gmedia.net.id.pspreseller.R;
@@ -50,9 +56,9 @@ public class DetailOrderLain extends AppCompatActivity {
     private SessionManager session;
     private ItemValidation iv = new ItemValidation();
     private DialogBox dialogBox;
-    private EditText edtJenis, edtNomor, edtMsisdn, edtNama, edtTotal, edtSN;
+    private EditText edtJenis, edtNomor, edtMsisdn, edtNama, edtTotal, edtSN, edtGolongan, edtStandMeter;
     private Button btnProses;
-    private String idKategori = "", nama = "";
+    private String idKategori = "", nama = "", flag = "";
     private Spinner spnNamaProduk;
     private List<OptionItem> listProduk = new ArrayList<>();
     private ArrayAdapter adapterProduk;
@@ -63,8 +69,11 @@ public class DetailOrderLain extends AppCompatActivity {
     private int state = 1;
     private String idProduk = "";
     private String currentCounter = "";
-    private String harga = "", namaPIC = "", msisdn = "", sn = "", namaProduk = "", jml = "", denda = "", admin = "", periode = "", standMeter = "";
+    private String harga = "", namaPIC = "", msisdn = "", sn = "", namaProduk = "", jml = "", denda = "", admin = "", periode = "", standMeter = "", golongan = "";
     private String isPPOB = "";
+    private Timer timer = new Timer();
+    private final long DELAY = 1500;
+    private ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +93,7 @@ public class DetailOrderLain extends AppCompatActivity {
         printer.startService();
         initUI();
         initEvent();
-        initData();
+        if(!flag.equals("1")) initData();
     }
 
     private void initUI() {
@@ -100,6 +109,9 @@ public class DetailOrderLain extends AppCompatActivity {
         edtNama = (EditText) findViewById(R.id.edt_nama);
         edtSN = (EditText) findViewById(R.id.edt_sn);
         edtTotal = (EditText) findViewById(R.id.edt_total);
+        edtGolongan = (EditText) findViewById(R.id.edt_golongan);
+        edtStandMeter = (EditText) findViewById(R.id.edt_stand_meter);
+        pbLoading = (ProgressBar) findViewById(R.id.pb_loading);
 
         isInquery = false;
         state = 1;
@@ -112,7 +124,10 @@ public class DetailOrderLain extends AppCompatActivity {
 
             idKategori = bundle.getString("kategori", "");
             nama = bundle.getString("nama", "");
+            flag = bundle.getString("flag", ""); // 1 : all operator
+            if(flag.equals("1")) setInquiry(false);
             edtJenis.setText(nama);
+
         }
     }
 
@@ -213,6 +228,44 @@ public class DetailOrderLain extends AppCompatActivity {
                 doTransaksi(true);
             }
         });
+
+        if(flag.equals("1")){
+
+            edtNomor.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count,
+                                              int after) {
+                }
+                @Override
+                public void onTextChanged(final CharSequence s, int start, int before,
+                                          int count) {
+                    if(timer != null)
+                        timer.cancel();
+                }
+                @Override
+                public void afterTextChanged(final Editable s) {
+                    //avoid triggering event when text is too short
+                    if (s.length() >= 3) {
+
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        getProvider(s.toString());
+                                    }
+                                });
+                            }
+
+                        }, DELAY);
+                    }
+                }
+            });
+        }
     }
 
     private void doTransaksi(final boolean checkHarga) {
@@ -243,7 +296,7 @@ public class DetailOrderLain extends AppCompatActivity {
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
                 iv.hideSoftKey(context);
                 String message = "Terjadi kesalahan saat memuat data";
-                harga = "";
+                harga = "0";
                 jml = "";
                 denda = "";
                 admin = "";
@@ -252,6 +305,13 @@ public class DetailOrderLain extends AppCompatActivity {
                 msisdn = "";
                 periode = "";
                 standMeter = "";
+
+                edtTotal.setText(iv.ChangeToCurrencyFormat(harga));
+                edtNama.setText(namaPIC);
+                edtSN.setText(sn);
+                edtMsisdn.setText(msisdn);
+                edtGolongan.setText(golongan);
+                edtStandMeter.setText(standMeter);
 
                 try {
 
@@ -273,14 +333,43 @@ public class DetailOrderLain extends AppCompatActivity {
                         sn = response.getJSONObject("response").getJSONObject("transaksi").getString("sn");
                         msisdn = response.getJSONObject("response").getJSONObject("transaksi").getString("msisdn");
                         namaPIC = response.getJSONObject("response").getJSONObject("transaksi").getString("nama");
+                        golongan = response.getJSONObject("response").getJSONObject("transaksi").getString("daya") + "/" + response.getJSONObject("response").getJSONObject("transaksi").getString("kwh");
 
                         edtTotal.setText(iv.ChangeToCurrencyFormat(harga));
                         edtNama.setText(namaPIC);
                         edtSN.setText(sn);
                         edtMsisdn.setText(msisdn);
+                        edtGolongan.setText(golongan);
+                        edtStandMeter.setText(standMeter);
 
                         if(!checkHarga){
 
+                            final String finalMessage = message;
+                            new CountDownTimer(2000, 1000) {
+
+                                public void onTick(long millisUntilFinished) {
+
+                                }
+
+                                public void onFinish() {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            Toast.makeText(context, finalMessage, Toast.LENGTH_LONG).show();
+                                            HomeActivity.stateFragment = 2;
+                                            //onBackPressed();
+                                            Intent intent = new Intent(context, HomeActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                }
+
+                            }.start();
+
+                            // semtara tidak ditampilkan
                             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
                             LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
                             View viewDialog = inflater.inflate(R.layout.dialog_cetak, null);
@@ -288,9 +377,15 @@ public class DetailOrderLain extends AppCompatActivity {
                             builder.setCancelable(false);
 
                             final Button btnTutup = (Button) viewDialog.findViewById(R.id.btn_tutup);
+                            final Button btnShare = (Button) viewDialog.findViewById(R.id.btn_share);
                             final Button btnCetak = (Button) viewDialog.findViewById(R.id.btn_cetak);
+                            final TextView tvTitle = (TextView) viewDialog.findViewById(R.id.tv_title);
                             final EditText edtBiaya = (EditText) viewDialog.findViewById(R.id.edt_biaya);
-                            if(isPPOB.equals("0"))edtBiaya.setHint("Total Harga");
+                            if(isPPOB.equals("0")){
+
+                                tvTitle.setText("Total Harga");
+                                edtBiaya.setHint("Total Harga");
+                            }
 
                             final AlertDialog alert = builder.create();
                             alert.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -301,8 +396,6 @@ public class DetailOrderLain extends AppCompatActivity {
 
                             Calendar date = Calendar.getInstance();
                             final Transaksi transaksi = new Transaksi(namaPIC, session.getNama(), sn, date.getTime(), items, iv.getCurrentDate(FormatItem.formatDateTimeDisplay));
-
-                            final String finalMessage = message;
 
                             btnTutup.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -325,6 +418,53 @@ public class DetailOrderLain extends AppCompatActivity {
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finish();
+                                }
+                            });
+
+                            btnShare.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    if(edtBiaya.getText().toString().isEmpty()){
+
+                                        String message = "Biaya Admin harap diisi";
+                                        if(isPPOB.equals("0")) message = "Total Harga harap diisi";
+                                        edtBiaya.setError(message);
+                                        edtBiaya.requestFocus();
+                                        return;
+                                    }else{
+
+                                        edtBiaya.setError(null);
+                                    }
+
+                                    saveCustomHarga(edtBiaya.getText().toString());
+
+                                    String shareBody = "";
+                                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                                    sharingIntent.setType("text/plain");
+                                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Penjualan " +getResources().getString(R.string.app_name));
+                                    if(isPPOB.equals("0")){
+
+                                        shareBody += "nama   : " + namaPIC +"\n";
+                                        shareBody += "Item   : " + namaProduk +"\n";
+                                        shareBody += "Token  : " + sn +"\n";
+                                        shareBody += "MSISDN : " + msisdn +"\n";
+                                        shareBody += "Harga  : " + iv.ChangeToCurrencyFormat(edtBiaya.getText().toString()) +"\n";
+
+                                    }else{
+
+                                        shareBody += "Nama   : " + namaPIC +"\n";
+                                        shareBody += "Item   : " + namaProduk +"\n";
+                                        shareBody += "Token  : " + sn +"\n";
+                                        shareBody += "MSISDN : " + msisdn +"\n";
+                                        shareBody += "denda  : " + iv.ChangeToCurrencyFormat(denda) +"\n";
+                                        shareBody += "admin  : " + iv.ChangeToCurrencyFormat(admin) +"\n";
+                                        shareBody += "Harga  : " + iv.ChangeToCurrencyFormat(jml) +"\n";
+                                    }
+
+                                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                                    startActivity(Intent.createChooser(sharingIntent, "Bagikan"));
+
                                 }
                             });
 
@@ -385,6 +525,7 @@ public class DetailOrderLain extends AppCompatActivity {
                                                 transaksi.setMsisdn(msisdn);
                                                 transaksi.setPeriode(periode);
                                                 transaksi.setStandMeter(standMeter);
+                                                transaksi.setGolongan(golongan);
 
                                                 printer.print(transaksi);
                                             }
@@ -399,7 +540,7 @@ public class DetailOrderLain extends AppCompatActivity {
                             });
 
                             try {
-                                alert.show();
+                                //alert.show();
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
@@ -527,6 +668,7 @@ public class DetailOrderLain extends AppCompatActivity {
 
                 dialogBox.dismissDialog();
                 String message = "Terjadi kesalahan saat memuat data, mohon coba kembali";
+                listProduk.clear();
 
                 try {
                     JSONObject response = new JSONObject(result);
@@ -579,6 +721,86 @@ public class DetailOrderLain extends AppCompatActivity {
 
                         dialogBox.dismissDialog();
                         initData();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+            }
+        });
+    }
+
+    private void getProvider(final String nomor) {
+
+        pbLoading.setVisibility(View.VISIBLE);
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("nomor", nomor);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        listProduk.clear();
+        adapterProduk.notifyDataSetChanged();
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getProvider, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                pbLoading.setVisibility(View.GONE);
+                dialogBox.dismissDialog();
+                String message = "Terjadi kesalahan saat memuat data, mohon coba kembali";
+                listProduk.clear();
+
+                try {
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    if(status.equals("200")){
+
+                        JSONArray jsonArray = response.getJSONArray("response");
+                        for(int i = 0; i < jsonArray.length(); i ++){
+                            JSONObject jo = jsonArray.getJSONObject(i);
+                            listProduk.add(
+                                    new OptionItem(jo.getString("id")
+                                            ,jo.getString("namabrg")
+                                            ,jo.getString("kode")
+                                            ,jo.getString("xml")
+                                            ,jo.getString("get")
+                                            ,jo.getString("ppob")
+                                    ));
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getProvider(nomor);
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", message);
+                }
+
+                adapterProduk.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                pbLoading.setVisibility(View.GONE);
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getProvider(nomor);
                     }
                 };
 

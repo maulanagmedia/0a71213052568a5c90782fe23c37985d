@@ -144,6 +144,15 @@
                 android:resource="@xml/config_service" />
         </service>
 
+        <service
+            android:name=".HomePulsa.Service.NotificationService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
         <receiver android:name=".HomePulsa.Service.SmsReceiverService">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />

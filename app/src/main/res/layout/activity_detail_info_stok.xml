@@ -7,10 +7,60 @@
     tools:context=".HomeInfoStok.DetailInfoStok"
     android:background="@drawable/ic_baground">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_header"
+        android:layout_marginTop="@dimen/margin_big"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_big">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal"
+            android:textSize="11sp"
+            android:textColor="@color/color_black"
+            android:layout_marginBottom="@dimen/margin_small"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_white_transparent"
+            android:padding="@dimen/margin_small"
+            android:gravity="center">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:minWidth="130dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textColor="@color/color_white"
+                android:text=""
+                android:gravity="center"
+                android:textSize="@dimen/text_medium"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
+                android:inputType="none"
+                android:editable="false"
+                android:id="@+id/edt_tgl" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_date"
+                android:id="@+id/iv_tgl"/>
+        </LinearLayout>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:layout_below="@id/ll_header">
 
         <LinearLayout
             android:layout_width="match_parent"

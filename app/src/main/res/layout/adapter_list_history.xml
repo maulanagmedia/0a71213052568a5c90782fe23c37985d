@@ -19,7 +19,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.7"
+                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginRight="@dimen/margin_small">
@@ -44,7 +44,6 @@
                     android:singleLine="true"
                     android:ellipsize="end"/>
 
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,11 +53,37 @@
                     android:singleLine="true"
                     android:ellipsize="end"/>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/rl_token">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Token : "
+                        android:id="@+id/tv_title1"
+                        android:textSize="@dimen/size_title_balasan2"
+                        android:textColor="@color/color_black"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:ellipsize="end"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:layout_toRightOf="@id/tv_title1"
+                        android:id="@+id/tv_item7"
+                        android:textColor="@color/color_black"/>
+                </RelativeLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.25"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -176,5 +201,7 @@
                     android:ellipsize="end"/>
             </LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
 </RelativeLayout>

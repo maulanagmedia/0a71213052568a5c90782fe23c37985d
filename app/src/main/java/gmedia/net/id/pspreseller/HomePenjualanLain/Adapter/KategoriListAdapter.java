@@ -81,6 +81,7 @@ public class KategoriListAdapter extends RecyclerView.Adapter<KategoriListAdapte
                 Intent intent = new Intent(context, DetailOrderLain.class);
                 intent.putExtra("kategori", kategori.getItem1());
                 intent.putExtra("nama", kategori.getItem2());
+                intent.putExtra("flag", kategori.getItem4());
                 ((Activity)context).startActivity(intent);
                 ((Activity)context).overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
             }

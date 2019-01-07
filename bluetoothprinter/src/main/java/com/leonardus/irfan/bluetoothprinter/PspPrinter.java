@@ -82,11 +82,12 @@ public class PspPrinter extends BluetoothPrinter {
 
             outputStream.write(PrintFormatter.ALIGN_LEFT);
             outputStream.write(String.format("Nama        :  %s\n", transaksi.getOutlet()).getBytes());
-            outputStream.write(String.format("No. SN      :  %s\n", transaksi.getNo_nota()).getBytes());
+            outputStream.write(String.format("Token       :  %s\n", transaksi.getNo_nota()).getBytes());
             outputStream.write(String.format("Tgl Nota    :  %s\n", transaksi.getTglNota()).getBytes());
             outputStream.write(String.format("Periode     :  %s\n", transaksi.getPeriode()).getBytes());
             outputStream.write(String.format("ID Pelanggan:  %s\n", transaksi.getMsisdn()).getBytes());
             outputStream.write(String.format("Stand Meter :  %s\n", transaksi.getStandMeter()).getBytes());
+            outputStream.write(String.format("Gol/daya/kwh:  %s\n", transaksi.getGolongan()).getBytes());
 
             outputStream.write(PrintFormatter.NEW_LINE);
 
@@ -220,7 +221,7 @@ public class PspPrinter extends BluetoothPrinter {
 
             outputStream.write(PrintFormatter.ALIGN_LEFT);
             outputStream.write(String.format("Nama        :  %s\n", transaksi.getOutlet()).getBytes());
-            outputStream.write(String.format("No. SN      :  %s\n", transaksi.getNo_nota()).getBytes());
+            outputStream.write(String.format("Token       :  %s\n", transaksi.getNo_nota()).getBytes());
             outputStream.write(String.format("Tgl Nota    :  %s\n", transaksi.getTglNota()).getBytes());
             outputStream.write(String.format("ID Pelanggan:  %s\n", transaksi.getMsisdn()).getBytes());
 

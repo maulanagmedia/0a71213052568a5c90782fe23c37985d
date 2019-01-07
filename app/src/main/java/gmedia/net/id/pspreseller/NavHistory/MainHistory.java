@@ -3,6 +3,7 @@ package gmedia.net.id.pspreseller.NavHistory;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,7 +73,7 @@ public class MainHistory extends Fragment {
     private TextView tvTotal;
     private PspPrinter printer;
     private String isPPOB = "", jml = "", denda = "", admin = "";
-    private String msisdn = "", periode = "", standMeter = "", hargaCustom = "", currentCounter = "";
+    private String msisdn = "", periode = "", standMeter = "", hargaCustom = "", currentCounter = "", golongan = "";
 
     public MainHistory() {
         // Required empty public constructor
@@ -250,7 +251,8 @@ public class MainHistory extends Fragment {
                                             jo.getString("periode"),
                                             jo.getString("stand_meter"),
                                             jo.getString("harga_custom"),
-                                            jo.getString("transaction_id")
+                                            jo.getString("transaction_id"),
+                                            jo.getString("daya")+"/"+jo.getString("kwh")
                                     ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
@@ -329,11 +331,18 @@ public class MainHistory extends Fragment {
                     standMeter = item.getItem19();
                     hargaCustom = item.getItem20();
                     currentCounter = item.getItem21();
+                    golongan = item.getItem22();
 
                     final Button btnTutup = (Button) viewDialog.findViewById(R.id.btn_tutup);
+                    final Button btnShare = (Button) viewDialog.findViewById(R.id.btn_share);
                     final Button btnCetak = (Button) viewDialog.findViewById(R.id.btn_cetak);
+                    final TextView tvTitle = (TextView) viewDialog.findViewById(R.id.tv_title);
                     final EditText edtBiaya = (EditText) viewDialog.findViewById(R.id.edt_biaya);
-                    if(isPPOB.equals("0"))edtBiaya.setHint("Total Harga");
+                    if(isPPOB.equals("0")){
+
+                        tvTitle.setText("Total Harga");
+                        edtBiaya.setHint("Total Harga");
+                    }
                     edtBiaya.setText(hargaCustom);
 
                     final AlertDialog alert = builder.create();
@@ -341,7 +350,9 @@ public class MainHistory extends Fragment {
 
                     List<Item> items = new ArrayList<>();
 
-                    items.add(new Item(item.getItem7(), 1, iv.parseNullDouble(isPPOB.equals("0") ? edtBiaya.getText().toString() : jml)));
+                    items.add(new Item(item.getItem7()
+                            , 1
+                            , iv.parseNullDouble(isPPOB.equals("0") ? edtBiaya.getText().toString() : jml)));
 
                     Calendar date = Calendar.getInstance();
                     final Transaksi transaksi = new Transaksi(item.getItem8(), session.getNama(), item.getItem12(), date.getTime(), items, iv.ChangeFormatDateString(item.getItem17(), FormatItem.formatDate, FormatItem.formatDateDisplay) + " " + item.getItem9());
@@ -359,6 +370,55 @@ public class MainHistory extends Fragment {
                                     e.printStackTrace();
                                 }
                             }
+                        }
+                    });
+
+                    btnShare.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            hargaCustom = edtBiaya.getText().toString();
+
+                            if(edtBiaya.getText().toString().isEmpty()){
+
+                                String message = "Biaya Admin harap diisi";
+                                if(isPPOB.equals("0")) message = "Total Harga harap diisi";
+                                edtBiaya.setError(message);
+                                edtBiaya.requestFocus();
+                                return;
+                            }else{
+
+                                edtBiaya.setError(null);
+                            }
+
+                            saveCustomHarga(hargaCustom);
+
+                            String shareBody = "";
+                            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                            sharingIntent.setType("text/plain");
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Penjualan " +getResources().getString(R.string.app_name));
+                            if(isPPOB.equals("0")){
+
+                                shareBody += "Nama   : " + item.getItem8() +"\n";
+                                shareBody += "Item   : " + item.getItem7() +"\n";
+                                shareBody += "Token  : " + item.getItem12() +"\n";
+                                shareBody += "MSISDN : " + msisdn +"\n";
+                                shareBody += "Harga  : " + iv.ChangeToCurrencyFormat(edtBiaya.getText().toString()) +"\n";
+
+                            }else{
+
+                                shareBody += "Nama   : " + item.getItem8() +"\n";
+                                shareBody += "Item   : " + item.getItem7() +"\n";
+                                shareBody += "Token  : " + item.getItem12() +"\n";
+                                shareBody += "MSISDN : " + msisdn +"\n";
+                                shareBody += "denda  : " + iv.ChangeToCurrencyFormat(denda) +"\n";
+                                shareBody += "admin  : " + iv.ChangeToCurrencyFormat(admin) +"\n";
+                                shareBody += "Harga  : " + iv.ChangeToCurrencyFormat(jml) +"\n";
+                            }
+
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                            startActivity(Intent.createChooser(sharingIntent, "Bagikan"));
+
                         }
                     });
 
@@ -423,6 +483,7 @@ public class MainHistory extends Fragment {
                                         transaksi.setMsisdn(msisdn);
                                         transaksi.setPeriode(periode);
                                         transaksi.setStandMeter(standMeter);
+                                        transaksi.setGolongan(golongan);
 
                                         printer.print(transaksi);
                                     }

@@ -2,11 +2,18 @@ package gmedia.net.id.pspreseller.HomeInfoStok;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.Settings;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -53,11 +60,12 @@ public class DetailInfoStok extends AppCompatActivity {
     private static ListBalasanInjectAdapter balasanAdapter;
     private static ListBalasanMkiosAdapter balasanMkiosAdapter;
     private static String flag = "", value = "", kode = "";
-    private LinearLayout llHistoryPbob;
-    private EditText edtTglDari, edtTglSampai;
-    private ImageView ivTglDari, ivTglSampai, ivNext;
+    private LinearLayout llHistoryPbob, llHeader;
+    private EditText edtTglDari, edtTglSampai, edtTanggal;
+    private ImageView ivTglDari, ivTglSampai, ivNext, ivTanggal;
     private ListView lvHistoryPbob;
     private String dateFrom = "", dateTo = "";
+    private static String dateNow = "";
     private static DialogBox dialogBox;
     private List<CustomItem> listHistory;
     private TextView tvTotal;
@@ -81,6 +89,14 @@ public class DetailInfoStok extends AppCompatActivity {
         dialogBox = new DialogBox(context);
         isActive = true;
 
+
+        /*if(!checkNotificationEnabled()){
+
+            Intent intent = new Intent(
+                    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }*/
+
         initUI();
     }
 
@@ -96,6 +112,9 @@ public class DetailInfoStok extends AppCompatActivity {
         lvBalasan.setAdapter(balasanAdapter);
         lvBalasanMkios.setAdapter(balasanMkiosAdapter);
         llHistoryPbob = (LinearLayout) findViewById(R.id.ll_history_pbob);
+        llHeader = (LinearLayout) findViewById(R.id.ll_header);
+        edtTanggal = (EditText) findViewById(R.id.edt_tgl);
+        ivTanggal = (ImageView) findViewById(R.id.iv_tgl);
         edtTglDari = (EditText) findViewById(R.id.edt_tgl_dari);
         ivTglDari = (ImageView) findViewById(R.id.iv_tgl_dari);
         edtTglSampai = (EditText) findViewById(R.id.edt_tgl_sampai);
@@ -126,6 +145,9 @@ public class DetailInfoStok extends AppCompatActivity {
             }else if(kode.equals("SD")){
 
                 setTitle("Stok Saldo Tunai");
+                llHeader.setVisibility(View.GONE);
+            }else{
+                llHeader.setVisibility(View.VISIBLE);
             }
 
             if(flag.equals("0")){
@@ -152,7 +174,101 @@ public class DetailInfoStok extends AppCompatActivity {
                 startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + value)));
             }
         }
+
+        ivTanggal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar customDate;
+                SimpleDateFormat sdf = new SimpleDateFormat(FormatItem.formatDateDisplay);
+
+                Date dateValue = null;
+
+                try {
+                    dateValue = sdf.parse(dateNow);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                customDate = Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        customDate.set(Calendar.YEAR,year);
+                        customDate.set(Calendar.MONTH,month);
+                        customDate.set(Calendar.DATE,date);
+
+                        SimpleDateFormat sdFormat = new SimpleDateFormat(FormatItem.formatDateDisplay, Locale.US);
+                        dateNow = sdFormat.format(customDate.getTime());
+                        edtTanggal.setText(dateNow);
+
+                        getHistoryBalasan();
+                    }
+                };
+
+                SimpleDateFormat yearOnly = new SimpleDateFormat("yyyy");
+                new DatePickerDialog(context ,date , iv.parseNullInteger(yearOnly.format(dateValue)),dateValue.getMonth(),dateValue.getDate()).show();
+            }
+        });
+
+        dateNow = iv.getCurrentDate(FormatItem.formatDateDisplay);
+        edtTanggal.setText(dateNow);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
     }
+
+    //check notification access setting is enabled or not
+    public boolean checkNotificationEnabled() {
+        try{
+            if(Settings.Secure.getString(getContentResolver(),
+                    "enabled_notification_listeners").contains(context.getPackageName()))
+            {
+                return true;
+            } else {
+                return false;
+            }
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private BroadcastReceiver onNotice= new BroadcastReceiver() {
+
+        private String TAG = "MAIN";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // String pack = intent.getStringExtra("package");
+            String title = intent.getStringExtra("title");
+            String text = intent.getStringExtra("text");
+
+            Log.d(TAG, "title: " + title);
+            Log.d(TAG, "text: " + text);
+            /*//int id = intent.getIntExtra("icon",0);
+
+            Context remotePackageContext = null;
+            try {
+//                remotePackageContext = getApplicationContext().createPackageContext(pack, 0);
+//                Drawable icon = remotePackageContext.getResources().getDrawable(id);
+//                if(icon !=null) {
+//                    ((ImageView) findViewById(R.id.imageView)).setBackground(icon);
+//                }
+                byte[] byteArray =intent.getByteArrayExtra("icon");
+                Bitmap bmp = null;
+                if(byteArray !=null) {
+                    bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                }
+
+                Model model = new Model();
+                model.setName(title +" " +text);
+                model.setImage(bmp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+        }
+    };
 
     private static void getHistoryBalasan() {
 
@@ -162,6 +278,7 @@ public class DetailInfoStok extends AppCompatActivity {
 
         JSONObject jBody = new JSONObject();
         try {
+            if(!dateNow.isEmpty())jBody.put("tgl", iv.ChangeFormatDateString(dateNow, FormatItem.formatDateDisplay, FormatItem.formatDate));
             jBody.put("tipe", tipe);
         } catch (JSONException e) {
             e.printStackTrace();

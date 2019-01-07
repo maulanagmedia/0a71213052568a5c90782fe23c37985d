@@ -8,6 +8,7 @@ public class Transaksi {
     private String outlet;
     private String sales;
     private String no_nota;
+    private String golongan;
     private Date tgl_transaksi;
     private double tunai, jml, admin, denda;
     private List<Item> listItem;
@@ -136,5 +137,13 @@ public class Transaksi {
 
     public void setStandMeter(String standMeter) {
         this.standMeter = standMeter;
+    }
+
+    public String getGolongan() {
+        return golongan;
+    }
+
+    public void setGolongan(String golongan) {
+        this.golongan = golongan;
     }
 }

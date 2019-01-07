@@ -189,13 +189,18 @@ public class HeaderSliderAdapter extends PagerAdapter {
 
             // Displaying downloaded image into image view
             // Reading image path from sdcard
-            String imagePath = String.valueOf(FileProvider.getUriForFile(context, context.getPackageName() + ".provider", f));
-            // setting downloaded into image view
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.parse(imagePath), "image/*");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            context.startActivity(intent);
+            try {
+
+                String imagePath = String.valueOf(FileProvider.getUriForFile(context, context.getPackageName() + ".provider", f));
+                // setting downloaded into image view
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(imagePath), "image/*");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                context.startActivity(intent);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         private void showDialog(){
             progressDialog = new ProgressDialog(context);

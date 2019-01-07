@@ -54,13 +54,16 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nama Produk"
+                    android:text="Nomor"
                     style="@style/formControlLabel"/>
 
-                <Spinner
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spn_nama_produk"></Spinner>
+                    android:id="@+id/edt_nomor"
+                    style="@style/form_control_input"
+                    android:inputType="textPhonetic"
+                    android:imeOptions="actionDone"/>
 
             </LinearLayout>
 
@@ -72,16 +75,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nomor"
+                    android:text="Nama Produk"
                     style="@style/formControlLabel"/>
 
-                <EditText
+                <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edt_nomor"
-                    style="@style/form_control_input"
-                    android:inputType="textPhonetic"
-                    android:imeOptions="actionDone"/>
+                    android:id="@+id/spn_nama_produk"></Spinner>
 
             </LinearLayout>
 
@@ -193,8 +193,54 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/formGroup">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Golongan/daya/kwh"
+                        style="@style/formControlLabel"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edt_golongan"
+                        style="@style/form_control_input.disable" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/formGroup">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Stand Meter"
+                        style="@style/formControlLabel"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edt_stand_meter"
+                        style="@style/form_control_input.disable" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:visibility="gone"
+        android:id="@+id/pb_loading"/>
 
 </RelativeLayout>

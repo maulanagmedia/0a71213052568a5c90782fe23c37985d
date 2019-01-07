@@ -114,7 +114,7 @@ public class OrderLain extends AppCompatActivity {
         Display display = ((Activity)context).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         try {
-            // this is why the minimal sdk must be JB
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 display.getRealSize(size);
             }else {
@@ -188,9 +188,12 @@ public class OrderLain extends AppCompatActivity {
                         for(int i = 0; i < jsonArray.length(); i ++){
                             JSONObject jo = jsonArray.getJSONObject(i);
                             listKategori.add(
-                                    new CustomItem(jo.getString("id"),
-                                            jo.getString("kategori"),
-                                            jo.getString("image")));
+                                    new CustomItem(
+                                            jo.getString("id")
+                                            ,jo.getString("kategori")
+                                            ,jo.getString("image")
+                                            ,jo.getString("custom")
+                                    ));
                         }
 
                     }else{

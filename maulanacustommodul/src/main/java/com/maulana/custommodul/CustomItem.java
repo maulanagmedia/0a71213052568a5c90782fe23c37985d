@@ -7,7 +7,7 @@ package com.maulana.custommodul;
 
 public class CustomItem {
 
-    private String item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17, item18, item19, item20, item21;
+    private String item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17, item18, item19, item20, item21, item22;
 
     public CustomItem(String item1){
         this.item1 = item1;
@@ -259,6 +259,31 @@ public class CustomItem {
         this.item21 = item21;
     }
 
+    public CustomItem(String item1, String item2, String item3, String item4, String item5, String item6, String item7, String item8, String item9, String item10, String item11, String item12, String item13, String item14, String item15, String item16, String item17, String item18, String item19, String item20, String item21, String item22) {
+        this.item1 = item1;
+        this.item2 = item2;
+        this.item3 = item3;
+        this.item4 = item4;
+        this.item5 = item5;
+        this.item6 = item6;
+        this.item7 = item7;
+        this.item8 = item8;
+        this.item9 = item9;
+        this.item10 = item10;
+        this.item11 = item11;
+        this.item12 = item12;
+        this.item13 = item13;
+        this.item14 = item14;
+        this.item15 = item15;
+        this.item16 = item16;
+        this.item17 = item17;
+        this.item18 = item18;
+        this.item19 = item19;
+        this.item20 = item20;
+        this.item21 = item21;
+        this.item22 = item22;
+    }
+
     public String getItem1() {
         return item1;
     }
@@ -425,5 +450,13 @@ public class CustomItem {
 
     public void setItem21(String item21) {
         this.item21 = item21;
+    }
+
+    public String getItem22() {
+        return item22;
+    }
+
+    public void setItem22(String item22) {
+        this.item22 = item22;
     }
 }
