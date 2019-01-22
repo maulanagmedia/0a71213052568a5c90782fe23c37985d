@@ -36,9 +36,9 @@ public class ListHistoryAdapter extends ArrayAdapter{
     }
 
     private static class ViewHolder {
-        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvItem7,tvStatus;
+        private TextView tvItem1, tvItem2, tvItem3, tvItem4, tvItem5, tvItem6, tvItem7, tvItem8, tvStatus;
         private LinearLayout llCashback, llSaldoAkhir;
-        private RelativeLayout rlToken;
+        private RelativeLayout rlToken, rlDaya;
     }
 
     @Override
@@ -61,10 +61,12 @@ public class ListHistoryAdapter extends ArrayAdapter{
             holder.tvItem5 = (TextView) convertView.findViewById(R.id.tv_item5);
             holder.tvItem6 = (TextView) convertView.findViewById(R.id.tv_item6);
             holder.tvItem7 = (TextView) convertView.findViewById(R.id.tv_item7);
+            holder.tvItem8 = (TextView) convertView.findViewById(R.id.tv_item8);
             holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
             holder.llCashback = (LinearLayout) convertView.findViewById(R.id.ll_cashback);
             holder.llSaldoAkhir = (LinearLayout) convertView.findViewById(R.id.ll_saldo_akhir);
             holder.rlToken = (RelativeLayout) convertView.findViewById(R.id.rl_token);
+            holder.rlDaya = (RelativeLayout) convertView.findViewById(R.id.rl_daya);
 
             convertView.setTag(holder);
         }else{
@@ -101,6 +103,13 @@ public class ListHistoryAdapter extends ArrayAdapter{
 
             holder.llSaldoAkhir.setVisibility(View.GONE);
             holder.tvItem6.setText("");
+        }
+
+        if(!itemSelected.getItem22().trim().equals("/0")){
+            holder.rlDaya.setVisibility(View.VISIBLE);
+            holder.tvItem8.setText(itemSelected.getItem22());
+        }else{
+            holder.rlDaya.setVisibility(View.GONE);
         }
         return convertView;
 

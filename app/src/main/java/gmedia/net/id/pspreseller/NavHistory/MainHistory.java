@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,6 +49,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import gmedia.net.id.pspreseller.DetailSharePrintout;
 import gmedia.net.id.pspreseller.NavHistory.Adapter.ListHistoryAdapter;
 import gmedia.net.id.pspreseller.NavTransaksi.Adapter.ListTransaksiAdapter;
 import gmedia.net.id.pspreseller.R;
@@ -231,28 +236,29 @@ public class MainHistory extends Fragment {
                         for(int i = 0; i < jsonArray.length(); i ++){
                             JSONObject jo = jsonArray.getJSONObject(i);
                             listHistory.add(
-                                    new CustomItem(jo.getString("id"),
-                                            jo.getString("nobukti"),
-                                            jo.getString("tgl"),
-                                            jo.getString("status_transaksi"),
-                                            jo.getString("nomor"),
-                                            jo.getString("total"),
-                                            jo.getString("namabrg"),
-                                            jo.getString("nama"),
-                                            jo.getString("jam"),
-                                            jo.getString("cashback"),
-                                            jo.getString("stok_akhir"),
-                                            jo.getString("sn"),
-                                            jo.getString("ppob"),
-                                            jo.getString("jml"),
-                                            jo.getString("admin"),
-                                            jo.getString("denda"),
-                                            jo.getString("tanggal"),
-                                            jo.getString("periode"),
-                                            jo.getString("stand_meter"),
-                                            jo.getString("harga_custom"),
-                                            jo.getString("transaction_id"),
-                                            jo.getString("daya")+"/"+jo.getString("kwh")
+                                    new CustomItem(
+                                            jo.getString("id"),                 // 1
+                                            jo.getString("nobukti"),            // 2
+                                            jo.getString("tgl"),                // 3
+                                            jo.getString("status_transaksi"),   // 4
+                                            jo.getString("nomor"),              // 5
+                                            jo.getString("total"),              // 6
+                                            jo.getString("namabrg"),            // 7
+                                            jo.getString("nama"),               // 8
+                                            jo.getString("jam"),                // 9
+                                            jo.getString("cashback"),           // 10
+                                            jo.getString("stok_akhir"),         // 11
+                                            jo.getString("sn"),                 // 12
+                                            jo.getString("ppob"),               // 13
+                                            jo.getString("jml"),                // 14
+                                            jo.getString("admin"),              // 15
+                                            jo.getString("denda"),              // 16
+                                            jo.getString("tanggal"),            // 17
+                                            jo.getString("periode"),            // 18
+                                            jo.getString("stand_meter"),        // 19
+                                            jo.getString("harga_custom"),       // 20
+                                            jo.getString("transaction_id"),     // 21
+                                            jo.getString("daya")+"/"+jo.getString("kwh") // 22
                                     ));
 
                             total += iv.parseNullDouble(jo.getString("total"));
@@ -394,30 +400,61 @@ public class MainHistory extends Fragment {
                             saveCustomHarga(hargaCustom);
 
                             String shareBody = "";
-                            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                            /*Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                             sharingIntent.setType("text/plain");
-                            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Penjualan " +getResources().getString(R.string.app_name));
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Penjualan " +getResources().getString(R.string.app_name));*/
+
+                            Intent intent = new Intent(context, DetailSharePrintout.class);
+
+                            shareBody += "Nama   : " + item.getItem8() +"\n";
+                            shareBody += "Item   : " + item.getItem7() +"\n";
+                            shareBody += "Tanggal: " + item.getItem3() +" "+ item.getItem9()+"\n";
+                            shareBody += "Token  : " + item.getItem12() +"\n";
+                            shareBody += "MSISDN : " + msisdn +"\n";
+
+                            intent.putExtra("nama", item.getItem8());
+                            intent.putExtra("item", item.getItem7());
+                            intent.putExtra("token", item.getItem12());
+                            intent.putExtra("msisdn", msisdn);
+                            intent.putExtra("tanggal", item.getItem3() +" "+ item.getItem9());
+
+                            if(!item.getItem22().trim().equals("/0")){
+                                shareBody += "Daya   : " + item.getItem22() +"\n";
+                                intent.putExtra("daya", item.getItem22());
+                            }
+
                             if(isPPOB.equals("0")){
 
-                                shareBody += "Nama   : " + item.getItem8() +"\n";
-                                shareBody += "Item   : " + item.getItem7() +"\n";
-                                shareBody += "Token  : " + item.getItem12() +"\n";
-                                shareBody += "MSISDN : " + msisdn +"\n";
                                 shareBody += "Harga  : " + iv.ChangeToCurrencyFormat(edtBiaya.getText().toString()) +"\n";
+                                intent.putExtra("harga", iv.ChangeToCurrencyFormat(edtBiaya.getText().toString()));
 
                             }else{
 
-                                shareBody += "Nama   : " + item.getItem8() +"\n";
-                                shareBody += "Item   : " + item.getItem7() +"\n";
-                                shareBody += "Token  : " + item.getItem12() +"\n";
-                                shareBody += "MSISDN : " + msisdn +"\n";
-                                shareBody += "denda  : " + iv.ChangeToCurrencyFormat(denda) +"\n";
-                                shareBody += "admin  : " + iv.ChangeToCurrencyFormat(admin) +"\n";
+                                shareBody += "Denda  : " + iv.ChangeToCurrencyFormat(denda) +"\n";
+                                shareBody += "Admin  : " + iv.ChangeToCurrencyFormat(admin) +"\n";
                                 shareBody += "Harga  : " + iv.ChangeToCurrencyFormat(jml) +"\n";
+
+                                double biayaAdmin = iv.parseNullDouble(edtBiaya.getText().toString());
+                                double dpp = biayaAdmin / 1.1;
+                                double ppn = biayaAdmin - dpp;
+                                double nonPPn = iv.parseNullDouble(item.getItem6()) - biayaAdmin;
+                                if(nonPPn < 0) nonPPn = iv.parseNullDouble(item.getItem6());
+
+                                intent.putExtra("denda", iv.ChangeToCurrencyFormat(denda));
+                                intent.putExtra("admin", iv.ChangeToCurrencyFormat(admin));
+                                intent.putExtra("harga", iv.ChangeToCurrencyFormat(jml));
+
+                                intent.putExtra("ppn", "DPP : " + iv.ChangeToCurrencyFormat(dpp)
+                                    + ", PPN : " + iv.ChangeToCurrencyFormat(ppn) + ", NonPPN : " + iv.ChangeToCurrencyFormat(nonPPn)
+                                );
+
                             }
 
-                            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                            startActivity(Intent.createChooser(sharingIntent, "Bagikan"));
+                            intent.putExtra("text", shareBody);
+                            startActivity(intent);
+
+                            /*sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                            startActivity(Intent.createChooser(sharingIntent, "Bagikan"));*/
 
                         }
                     });

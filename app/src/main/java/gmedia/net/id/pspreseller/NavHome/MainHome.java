@@ -577,6 +577,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
 
                             sliderList.add(new CustomItem(item.getString("id"), item.getString("image"), item.getString("keterangan"), item.getString("link")));
                         }
+
                     }
 
                     if(firstLoad){

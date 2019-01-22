@@ -491,7 +491,7 @@ public class OrderBulk extends AppCompatActivity {
             public void onSuccess(String result) {
 
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
-                String message = "Terjadi kesalahan saat memuat data";
+                String message = "Terjadi kesalahan saat menyimpan, atau anda pernah order dengan nominal yang sama pada hari ini";
 
                 try {
 
@@ -533,7 +533,7 @@ public class OrderBulk extends AppCompatActivity {
             @Override
             public void onError(String result) {
 
-                String message = "Terjadi kesalahan saat memuat data";
+                String message = "Terjadi kesalahan saat menyimpan, atau anda pernah order dengan nominal yang sama pada hari ini";
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
             }
