@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ import gmedia.net.id.pspreseller.Utils.ServerURL;
 
 public class OtpChangePassword extends AppCompatActivity {
 
-    private Context context;
+    private static Context context;
     private ItemValidation iv = new ItemValidation();
     private SessionManager session;
     private TextView tvMinutes, tvSecond;
@@ -382,29 +383,66 @@ public class OtpChangePassword extends AppCompatActivity {
         }
     }
 
-    public static void fillOTP(String message){
+    @Override
+    protected void onResume() {
 
-        if(message.contains("Your One Time Password (OTP) for PSP is")){
+        if(!checkNotificationEnabled()){
 
-            String otp = message.replace("Your One Time Password (OTP) for PSP is ","");
-            otp = otp.replace(" and valid for 3 minutes","");
-            otp = otp.trim();
-            if(otp.length() == 4){
+            Toast.makeText(context, "Harap ijinkan aksesbilitas untuk menunjang berjalannya sistem", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(
+                    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }
 
-                edt1.setText(String.valueOf(otp.charAt(0)));
-                edt2.setText(String.valueOf(otp.charAt(1)));
-                edt3.setText(String.valueOf(otp.charAt(2)));
-                edt4.setText(String.valueOf(otp.charAt(3)));
+        super.onResume();
+    }
 
-                if(!edt4.getText().toString().isEmpty()){
+    //check notification access setting is enabled or not
+    public boolean checkNotificationEnabled() {
+        try{
+            if(Settings.Secure.getString(getContentResolver(),
+                    "enabled_notification_listeners").contains(context.getPackageName()))
+            {
+                return true;
+            } else {
+                return false;
+            }
 
-                    edt4.requestFocus();
-                    edt4.setSelection(1);
-                }else{
-                    edt4.requestFocus();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void fillOTP(final String message){
+
+        ((Activity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if(message.contains("Your One Time Password (OTP) for PSP is")){
+
+                    String otp = message.replace("Your One Time Password (OTP) for PSP is ","");
+                    otp = otp.replace(" and valid for 3 minutes","");
+                    otp = otp.trim();
+                    if(otp.length() == 4){
+
+                        edt1.setText(String.valueOf(otp.charAt(0)));
+                        edt2.setText(String.valueOf(otp.charAt(1)));
+                        edt3.setText(String.valueOf(otp.charAt(2)));
+                        edt4.setText(String.valueOf(otp.charAt(3)));
+
+                        if(!edt4.getText().toString().isEmpty()){
+
+                            edt4.requestFocus();
+                            edt4.setSelection(1);
+                        }else{
+                            edt4.requestFocus();
+                        }
+                    }
                 }
             }
-        }
+        });
     }
 
     @Override

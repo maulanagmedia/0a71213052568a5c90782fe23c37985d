@@ -479,32 +479,38 @@ public class OrderPulsa extends AppCompatActivity {
         }
     }
 
-    public static void addTambahBalasan(String sender, String text){
+    public static void addTambahBalasan(final String sender, final String text){
 
-        if(session != null
-                && edtNomor != null
-                && edtNominal != null
-                && context != null
-                && selectedItemOrder != null
-                && !text.toLowerCase().equals("[ussd code running…]")
-                && !text.toLowerCase().equals("[phone]")
-                && !text.toLowerCase().equals("[detail inject pulsa]")
-                && !text.toLowerCase().equals("[]")
-                && !text.toLowerCase().equals("[clipboard]")){
+        ((Activity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-            try {
+                if(session != null
+                        && edtNomor != null
+                        && edtNominal != null
+                        && context != null
+                        && selectedItemOrder != null
+                        && !text.toLowerCase().equals("[ussd code running…]")
+                        && !text.toLowerCase().equals("[phone]")
+                        && !text.toLowerCase().equals("[detail inject pulsa]")
+                        && !text.toLowerCase().equals("[]")
+                        && !text.toLowerCase().equals("[clipboard]")){
 
-                if(balasanAdapter != null){
+                    try {
 
-                    CustomItem item = new CustomItem(iv.getCurrentDate(FormatItem.formatTime), text);
-                    balasanAdapter.addData(item);
+                        if(balasanAdapter != null){
+
+                            CustomItem item = new CustomItem(iv.getCurrentDate(FormatItem.formatTime), text);
+                            balasanAdapter.addData(item);
+                        }
+
+                        logBalasan(sender, text);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
-
-                logBalasan(sender, text);
-            }catch (Exception e){
-                e.printStackTrace();
             }
-        }
+        });
     }
 
     private static void logBalasan(final String sender, final String text) {
@@ -1332,6 +1338,29 @@ public class OrderPulsa extends AppCompatActivity {
 
         ServiceHandler serviceHandler = new ServiceHandler(OrderPulsa.this);
 
+        if(!checkNotificationEnabled()){
+
+            Toast.makeText(context, "Harap ijinkan aksesbilitas untuk menunjang berjalannya sistem", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(
+                    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }
+    }
+
+    public boolean checkNotificationEnabled() {
+        try{
+            if(Settings.Secure.getString(getContentResolver(),
+                    "enabled_notification_listeners").contains(context.getPackageName()))
+            {
+                return true;
+            } else {
+                return false;
+            }
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

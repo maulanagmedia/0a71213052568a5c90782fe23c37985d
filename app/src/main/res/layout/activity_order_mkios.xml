@@ -222,6 +222,7 @@
                             android:paddingRight="@dimen/margin_tanggung"
                             android:paddingTop="@dimen/margin_small"
                             android:paddingBottom="@dimen/margin_small"
+                            android:enabled="false"
                             android:background="@drawable/bg_white_transparent"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -290,6 +291,7 @@
                             android:id="@+id/edt_jumlah10"
                             android:inputType="number"
                             android:imeOptions="actionNext"
+                            android:enabled="false"
                             android:paddingLeft="@dimen/margin_tanggung"
                             android:paddingRight="@dimen/margin_tanggung"
                             android:paddingTop="@dimen/margin_small"
@@ -360,6 +362,7 @@
                             android:textColor="@color/color_white"
                             android:id="@+id/edt_jumlah20"
                             android:inputType="number"
+                            android:enabled="false"
                             android:imeOptions="actionNext"
                             android:paddingLeft="@dimen/margin_tanggung"
                             android:paddingRight="@dimen/margin_tanggung"
@@ -431,6 +434,7 @@
                             android:textColor="@color/color_white"
                             android:id="@+id/edt_jumlah25"
                             android:inputType="number"
+                            android:enabled="false"
                             android:imeOptions="actionNext"
                             android:paddingLeft="@dimen/margin_tanggung"
                             android:paddingRight="@dimen/margin_tanggung"
@@ -502,6 +506,7 @@
                             android:textColor="@color/color_white"
                             android:id="@+id/edt_jumlah50"
                             android:inputType="number"
+                            android:enabled="false"
                             android:imeOptions="actionNext"
                             android:paddingLeft="@dimen/margin_tanggung"
                             android:paddingRight="@dimen/margin_tanggung"
@@ -573,6 +578,7 @@
                             android:textColor="@color/color_white"
                             android:id="@+id/edt_jumlah100"
                             android:inputType="number"
+                            android:enabled="false"
                             android:imeOptions="actionDone"
                             android:paddingLeft="@dimen/margin_tanggung"
                             android:paddingRight="@dimen/margin_tanggung"

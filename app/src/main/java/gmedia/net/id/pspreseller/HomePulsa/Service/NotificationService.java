@@ -17,7 +17,12 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
-@RequiresApi(api = Build.VERSION_CODES.KITKAT)
+import gmedia.net.id.pspreseller.HomeInfoStok.DetailInfoStok;
+import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
+import gmedia.net.id.pspreseller.Register.OtpRegisterActivity;
+import gmedia.net.id.pspreseller.Reset.OtpResetActivity;
+import gmedia.net.id.pspreseller.SideChangePassword.OtpChangePassword;
+
 public class NotificationService extends NotificationListenerService {
 
     private static final String TAG = "NOTIF";
@@ -34,43 +39,63 @@ public class NotificationService extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        String pack = sbn.getPackageName();
-        String ticker ="";
-        if(sbn.getNotification().tickerText !=null) {
-            ticker = sbn.getNotification().tickerText.toString();
+
+        try {
+
+            String pack = sbn.getPackageName();
+            String ticker = "";
+            if(sbn.getNotification().tickerText !=null) {
+                ticker = sbn.getNotification().tickerText.toString();
+            }
+            Bundle extras = sbn.getNotification().extras;
+            String title = extras.getString("android.title");
+            String text = extras.getCharSequence("android.text").toString();
+            int id1 = extras.getInt(Notification.EXTRA_SMALL_ICON);
+
+            Log.i("Package",pack);
+            Log.i("Ticker",ticker);
+            Log.i("Title",title);
+            Log.i("Text",text);
+
+            Intent msgrcv = new Intent("Msg");
+            msgrcv.putExtra("package", pack);
+            msgrcv.putExtra("ticker", ticker);
+            msgrcv.putExtra("title", title);
+            msgrcv.putExtra("text", text);
+
+            saveNotif(title, ticker);
+            LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        Bundle extras = sbn.getNotification().extras;
-        String title = extras.getString("android.title");
-        String text = extras.getCharSequence("android.text").toString();
-        int id1 = extras.getInt(Notification.EXTRA_SMALL_ICON);
-        Bitmap id = sbn.getNotification().largeIcon;
-
-
-        Log.i("Package",pack);
-        Log.i("Ticker",ticker);
-        Log.i("Title",title);
-        Log.i("Text",text);
-
-        Intent msgrcv = new Intent("Msg");
-        msgrcv.putExtra("package", pack);
-        msgrcv.putExtra("ticker", ticker);
-        msgrcv.putExtra("title", title);
-        msgrcv.putExtra("text", text);
-        if(id != null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            id.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            msgrcv.putExtra("icon",byteArray);
-        }
-        
-        saveNotif(title, text);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
     }
 
     private void saveNotif(String title, String text) {
 
-        Log.d(TAG, "title: " + title);
-        Log.d(TAG, "text: " + text);
+        /*Log.d(TAG, "title: " + title);
+        Log.d(TAG, "text: " + text);*/
+
+        String[] separated = text.split(": ");
+
+        if(separated.length > 0){
+
+            text = text.replace(separated[0]+": ", "");
+
+            if(DetailInfoStok.isActive){
+                DetailInfoStok.addTambahBalasan(separated[0], text);
+            }else if (OrderPulsa.isActive){
+                OrderPulsa.addTambahBalasan(separated[0], text);
+            }else if(OtpRegisterActivity.isActive){
+                OtpRegisterActivity.fillOTP(text);
+            }else if(OtpChangePassword.isActive){
+                OtpChangePassword.fillOTP(text);
+            }else if(OtpResetActivity.isActive){
+                OtpResetActivity.fillOTP(text);
+            }
+
+            Log.d(TAG, "title: " + separated[0]);
+            Log.d(TAG, "text: " + text);
+        }
     }
 
     @Override

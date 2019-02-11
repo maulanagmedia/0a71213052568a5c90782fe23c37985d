@@ -89,14 +89,6 @@ public class DetailInfoStok extends AppCompatActivity {
         dialogBox = new DialogBox(context);
         isActive = true;
 
-
-        /*if(!checkNotificationEnabled()){
-
-            Intent intent = new Intent(
-                    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-            startActivity(intent);
-        }*/
-
         initUI();
     }
 
@@ -171,7 +163,7 @@ public class DetailInfoStok extends AppCompatActivity {
 
                 getHistoryBalasan();
                 value = value.replace("#", Uri.encode("#"));
-                startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + value)));
+                 startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + value)));
             }
         }
 
@@ -215,6 +207,20 @@ public class DetailInfoStok extends AppCompatActivity {
         edtTanggal.setText(dateNow);
 
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
+    }
+
+    @Override
+    protected void onResume() {
+
+        if(!checkNotificationEnabled()){
+
+            Toast.makeText(context, "Harap ijinkan aksesbilitas untuk menunjang berjalannya sistem", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(
+                    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }
+
+        super.onResume();
     }
 
     //check notification access setting is enabled or not
@@ -617,28 +623,34 @@ public class DetailInfoStok extends AppCompatActivity {
         });
     }
 
-    public static void addTambahBalasan(String sender, String text){
+    public static void addTambahBalasan(final String sender, final String text){
 
-        if(session != null
-                && !text.toLowerCase().equals("[ussd code running…]")
-                && !text.toLowerCase().equals("[phone]")
-                && !text.toLowerCase().equals("[detail inject pulsa]")
-                && !text.toLowerCase().equals("[]")
-                && !text.toLowerCase().equals("[clipboard]")){
+        ((Activity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-            try {
+                if(session != null
+                        && !text.toLowerCase().equals("[ussd code running…]")
+                        && !text.toLowerCase().equals("[phone]")
+                        && !text.toLowerCase().equals("[detail inject pulsa]")
+                        && !text.toLowerCase().equals("[]")
+                        && !text.toLowerCase().equals("[clipboard]")){
 
-                if(balasanAdapter != null){
+                    try {
 
-                    CustomItem item = new CustomItem(iv.getCurrentDate(FormatItem.formatTime), text);
-                    saveInfoStok(sender, text);
-                    //balasanAdapter.addData(item);
+                        if(balasanAdapter != null){
+
+                            CustomItem item = new CustomItem(iv.getCurrentDate(FormatItem.formatTime), text);
+                            saveInfoStok(sender, text);
+                            //balasanAdapter.addData(item);
+                        }
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
-
-            }catch (Exception e){
-                e.printStackTrace();
             }
-        }
+        });
     }
 
     private static void saveInfoStok(final String sender, final String balasan){
