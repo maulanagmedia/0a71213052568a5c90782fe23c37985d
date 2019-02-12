@@ -178,12 +178,16 @@ public class ItemValidation {
         SimpleDateFormat sdfCustom = new SimpleDateFormat(formatDateTo);
 
         Date date1 = null;
+
+        String hasil = "";
         try {
             date1 = sdf.parse(date);
+            hasil = (sdfCustom.format(date1) == null) ? "" : sdfCustom.format(date1);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return (sdfCustom.format(date1) == null) ? "" : sdfCustom.format(date1);
+
+        return hasil;
     }
 
     public int dpToPx(Context context, int dp) {

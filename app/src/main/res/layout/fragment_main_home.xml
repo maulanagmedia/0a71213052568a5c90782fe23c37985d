@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.35"
             android:id="@+id/rl_header_slide">
 
             <gmedia.net.id.pspreseller.CustomView.WrapContentViewPager
@@ -46,7 +46,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.65"
             android:scrollbars="none">
 
             <LinearLayout
@@ -58,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:id="@+id/ll_stok">
 
                     <TextView
@@ -82,7 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="4">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -134,11 +135,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_info_stok_mkios"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -148,8 +150,8 @@
                                     android:layout_width="@dimen/menu_height"
                                     android:layout_height="@dimen/menu_height"
                                     android:layout_centerInParent="true"
-                                    android:src="@drawable/ic_stok_mkios"
-                                    android:scaleType="fitCenter" />
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/ic_stok_mkios" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -176,11 +178,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_info_stok_tcash"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -218,11 +221,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_info_stok_ppob"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -231,9 +235,9 @@
                                 <ImageView
                                     android:layout_width="@dimen/menu_height"
                                     android:layout_height="@dimen/menu_height"
-                                    android:layout_centerInParent="true"
-                                    android:src="@drawable/ic_saldo_tunai"
-                                    android:scaleType="fitCenter"/>
+                                    android:layout_centerHorizontal="true"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/ic_saldo_tunai" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -286,8 +290,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center_horizontal"
-                        android:weightSum="3">
+                        android:weightSum="4">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -296,11 +299,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_mkios"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -338,11 +342,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_bulk"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -380,21 +385,20 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_tcash"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
                                 android:layout_margin="@dimen/margin_medium">
 
                                 <ImageView
-                                    android:layout_width="@dimen/menu_height1"
-                                    android:layout_height="@dimen/menu_height1"
-                                    android:layout_marginTop="@dimen/menu_height2"
-                                    android:layout_marginBottom="@dimen/menu_height2"
+                                    android:layout_width="@dimen/menu_height"
+                                    android:layout_height="@dimen/menu_height"
                                     android:layout_centerInParent="true"
                                     android:src="@drawable/ic_order_tcash"
                                     android:scaleType="fitCenter"/>
@@ -416,14 +420,6 @@
                                     style="@style/form_control_menu"/>
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="top"
-                        android:weightSum="3">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -432,11 +428,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_perdana"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -466,6 +463,14 @@
                                     style="@style/form_control_menu"/>
                             </LinearLayout>
                         </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="top"
+                        android:weightSum="4">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -537,12 +542,22 @@
                         android:layout_marginRight="@dimen/margin_default"
                         android:background="@color/color_black"/>
 
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/rv_kategori"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_below="@id/ll_search">
+
+                    </android.support.v7.widget.RecyclerView>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="top"
-                        android:weightSum="3">
+                        android:visibility="gone"
+                        android:weightSum="4">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -551,11 +566,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_pulsa"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -592,11 +608,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_jual_perdana"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -633,11 +650,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_token_listrik"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"
@@ -693,7 +711,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:weightSum="3">
+                        android:weightSum="4">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -702,11 +720,12 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_buku_pintar"
-                            android:padding="@dimen/margin_default"
+                            android:padding="@dimen/margin_tiny"
+                            android:gravity="center"
                             android:weightSum="1">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_menu_2"
                                 android:padding="@dimen/margin_big"

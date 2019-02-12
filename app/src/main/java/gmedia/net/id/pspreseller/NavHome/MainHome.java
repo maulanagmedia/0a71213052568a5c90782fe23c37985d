@@ -5,12 +5,18 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +31,7 @@ import android.widget.Toast;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
+import com.maulana.custommodul.EndlessScroll;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
 
@@ -47,6 +54,7 @@ import gmedia.net.id.pspreseller.HomeInfoStok.ActInfoStok;
 import gmedia.net.id.pspreseller.HomeInfoStok.DetailInfoStok;
 import gmedia.net.id.pspreseller.HomeJualPerdana.DetailJualPerdana;
 import gmedia.net.id.pspreseller.HomeMkios.OrderMKIOS;
+import gmedia.net.id.pspreseller.HomePenjualanLain.Adapter.KategoriListAdapter;
 import gmedia.net.id.pspreseller.HomePenjualanLain.OrderLain;
 import gmedia.net.id.pspreseller.HomePreorderPerdana.ListBarangPreorder;
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
@@ -81,6 +89,11 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
     private String TAG = "HOME";
     private String pin = "", flagPin = "";
     private DialogBox dialogBox;
+    private RecyclerView rvKategori;
+    private List<CustomItem> listKategori = new ArrayList<>();
+    private KategoriListAdapter adapter;
+    private int start = 0, count = 1000;
+    private boolean isLoading = false;
 
     public MainHome() {
         // Required empty public constructor
@@ -131,6 +144,8 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         llPreorderPerdana = (LinearLayout) layout.findViewById(R.id.ll_preorder_perdana);
         llJualPerdana = (LinearLayout) layout.findViewById(R.id.ll_jual_perdana);
 
+        rvKategori = (RecyclerView) layout.findViewById(R.id.rv_kategori);
+
         session = new SessionManager(context);
         dialogBox = new DialogBox(context);
 
@@ -158,6 +173,8 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         initEvent();
 
         getDataPin();
+
+        setKategoriAdapter();
     }
 
     private void initEvent() {
@@ -293,6 +310,51 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         });
     }
 
+    private void setKategoriAdapter(){
+
+        Display display = ((Activity)context).getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        try {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                display.getRealSize(size);
+            }else {
+                display.getSize(size);
+            }
+        } catch (NoSuchMethodError err) {
+            display.getSize(size);
+        }
+
+        int jumlahKolom = 4;
+
+        int menuWidth = 0;
+        double menuFloat = (size.x) / jumlahKolom;
+        menuWidth = (int) menuFloat;
+
+        int jmlBaris = (int)(Math.ceil((double) listKategori.size() / jumlahKolom));
+
+        //rvKategori.setLayoutParams(new RelativeLayout.LayoutParams(rvKategori.getLayoutParams().width, (((size.x - iv.dpToPx(context, 32)) / 4 * jmlBaris))));
+
+        adapter = new KategoriListAdapter(context, listKategori, menuWidth);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, jumlahKolom);
+        rvKategori.setLayoutManager(mLayoutManager);
+//        rvListMenu.addItemDecoration(new NavMenu.GridSpacingItemDecoration(2, dpToPx(10), true));
+        rvKategori.setItemAnimator(new DefaultItemAnimator());
+        rvKategori.setAdapter(adapter);
+
+        EndlessScroll scrollListener = new EndlessScroll((GridLayoutManager) mLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                start += count;
+                Log.d(TAG, "onLoadMore: ");
+            }
+
+        };
+
+        rvKategori.addOnScrollListener(scrollListener);
+    }
+
     private void getDataPin() {
 
         dialogBox.showDialog(false);
@@ -335,6 +397,8 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
 
                     dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan saat mengambil data");
                 }
+
+                initData();
             }
 
             @Override
@@ -658,6 +722,106 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
             });
 
         }
+    }
+
+    private void initData() {
+
+        isLoading = true;
+        if(start == 0) dialogBox.showDialog(true);
+        JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("start", String.valueOf(start));
+            jBody.put("count", String.valueOf(count));
+            jBody.put("keyword", "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getKategoriPPOB, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                if(start == 0) dialogBox.dismissDialog();
+                String message = "Terjadi kesalahan saat memuat data, mohon coba kembali";
+                isLoading = false;
+                listKategori.clear();
+
+                try {
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+
+                    listKategori.add(
+                            new CustomItem(
+                                    "pulsa"
+                                    ,"Pulsa/Tcash"
+                                    ,R.drawable.ic_jual_pulsa
+                                    ,""
+                                    ,"0"
+                            ));
+
+                    listKategori.add(
+                            new CustomItem(
+                                    "perdana"
+                                    ,"Perdana"
+                                    ,R.drawable.ic_jual_perdana
+                                    ,""
+                                    ,"0"
+                            ));
+
+                    if(status.equals("200")){
+
+                        JSONArray jsonArray = response.getJSONArray("response");
+                        for(int i = 0; i < jsonArray.length(); i ++){
+                            JSONObject jo = jsonArray.getJSONObject(i);
+                            listKategori.add(
+                                    new CustomItem(
+                                            jo.getString("id")
+                                            ,jo.getString("kategori")
+                                            ,jo.getString("image")
+                                            ,jo.getString("custom")
+                                            ,"1"
+                                    ));
+                        }
+
+                    }else{
+                        //if(start == 0) DialogBox.showDialog(context, 3, message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            initData();
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", message);
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String result) {
+
+                isLoading = false;
+                if(start == 0) dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        initData();
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", result);
+            }
+        });
     }
 
     @Override

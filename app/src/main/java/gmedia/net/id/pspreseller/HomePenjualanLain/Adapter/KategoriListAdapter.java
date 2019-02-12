@@ -20,7 +20,9 @@ import com.maulana.custommodul.ItemValidation;
 import java.util.HashMap;
 import java.util.List;
 
+import gmedia.net.id.pspreseller.HomeJualPerdana.DetailJualPerdana;
 import gmedia.net.id.pspreseller.HomePenjualanLain.DetailOrderLain;
+import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
 import gmedia.net.id.pspreseller.R;
 
 /**
@@ -36,13 +38,11 @@ public class KategoriListAdapter extends RecyclerView.Adapter<KategoriListAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout llContainer;
-        public RelativeLayout cvContainer;
         public ImageView ivIcon;
         public TextView tvTitle;
 
         public MyViewHolder(View view) {
             super(view);
-            cvContainer = (RelativeLayout) view.findViewById(R.id.rl_container);
             ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
             tvTitle = (TextView) view.findViewById(R.id.tv_title);
             llContainer = (LinearLayout) view.findViewById(R.id.ll_container);
@@ -67,23 +67,43 @@ public class KategoriListAdapter extends RecyclerView.Adapter<KategoriListAdapte
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final CustomItem kategori = masterList.get(position);
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(menuWidth , menuWidth);
-        holder.llContainer.setLayoutParams(lp);
+        /*LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(menuWidth , menuWidth);
+        holder.llContainer.setLayoutParams(lp);*/
         holder.tvTitle.setText(kategori.getItem2());
         // loading image using Picasso library
         ImageUtils iu = new ImageUtils();
-        iu.LoadCategoryImage(context, kategori.getItem3(), holder.ivIcon);
 
-        holder.cvContainer.setOnClickListener(new View.OnClickListener() {
+        if(kategori.getItem5().equals("0")){
+            iu.LoadCategoryImage(context, kategori.getItemInt1(), holder.ivIcon);
+        }else{
+            iu.LoadCategoryImage(context, kategori.getItem3(), holder.ivIcon);
+        }
+
+
+        holder.llContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, DetailOrderLain.class);
-                intent.putExtra("kategori", kategori.getItem1());
-                intent.putExtra("nama", kategori.getItem2());
-                intent.putExtra("flag", kategori.getItem4());
-                ((Activity)context).startActivity(intent);
-                ((Activity)context).overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+                if(kategori.getItem5().equals("0")){
+                    if(kategori.getItem1().equals("pulsa")){
+
+                        Intent intent = new Intent(context, OrderPulsa.class);
+                        ((Activity) context).startActivity(intent);
+                        ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                    }else{
+
+                        Intent intent = new Intent(context, DetailJualPerdana.class);
+                        ((Activity) context).startActivity(intent);
+                        ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                    }
+                }else{
+                    Intent intent = new Intent(context, DetailOrderLain.class);
+                    intent.putExtra("kategori", kategori.getItem1());
+                    intent.putExtra("nama", kategori.getItem2());
+                    intent.putExtra("flag", kategori.getItem4());
+                    ((Activity)context).startActivity(intent);
+                    ((Activity)context).overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+                }
             }
         });
     }

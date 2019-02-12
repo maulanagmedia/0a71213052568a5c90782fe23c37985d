@@ -107,6 +107,11 @@ public class ImageUtils {
         Picasso.with(context).load(Uri.parse(uri)).resize(120,120).into(image);
     }
 
+    public void LoadCategoryImage(Context context, int uri, final ImageView image){
+
+        Picasso.with(context).load(uri).centerInside().resize(120,120).into(image);
+    }
+
     public static Bitmap decodeBitmap(Uri bitmapUri, ContentResolver resolver, int width, int height) throws IOException {
         InputStream is = resolver.openInputStream(bitmapUri);
         BitmapFactory.Options options = new BitmapFactory.Options();

@@ -9,6 +9,8 @@ public class CustomItem {
 
     private String item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item16, item17, item18, item19, item20, item21, item22;
 
+    private int itemInt1;
+
     public CustomItem(String item1){
         this.item1 = item1;
     }
@@ -35,6 +37,14 @@ public class CustomItem {
         this.item1 = item1;
         this.item2 = item2;
         this.item3 = item3;
+        this.item4 = item4;
+        this.item5 = item5;
+    }
+
+    public CustomItem(String item1, String item2, int item3, String item4, String item5) {
+        this.item1 = item1;
+        this.item2 = item2;
+        this.itemInt1 = item3;
         this.item4 = item4;
         this.item5 = item5;
     }
@@ -458,5 +468,13 @@ public class CustomItem {
 
     public void setItem22(String item22) {
         this.item22 = item22;
+    }
+
+    public int getItemInt1() {
+        return itemInt1;
+    }
+
+    public void setItemInt1(int itemInt1) {
+        this.itemInt1 = itemInt1;
     }
 }
