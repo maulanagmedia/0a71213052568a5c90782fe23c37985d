@@ -4,14 +4,15 @@
     <item android:state_enabled="true"
         android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/color_white_transparent_bg2"></solid>
+            <solid android:color="@color/color_white_pure1"></solid>
             <stroke android:color="@color/color_white" android:width="@dimen/default_stroke"></stroke>
+            <corners android:radius="3dp"></corners>
         </shape>
     </item>
     <item android:state_enabled="true"
         android:state_focused="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/color_white_transparent_bg2"></solid>
+            <solid android:color="@color/color_white_pure1"></solid>
             <stroke android:color="@color/color_white" android:width="@dimen/default_stroke"></stroke>
             <corners android:radius="3dp"></corners>
         </shape>
@@ -19,14 +20,14 @@
     <item android:state_enabled="true"
         android:state_selected="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/color_white_transparent_bg2"></solid>
+            <solid android:color="@color/color_white_pure1"></solid>
             <stroke android:color="@color/color_white" android:width="@dimen/default_stroke"></stroke>
             <corners android:radius="3dp"></corners>
         </shape>
     </item>
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/color_white_transparent_bg2"></solid>
+            <solid android:color="@color/color_white_pure1"></solid>
             <stroke android:color="@color/color_white" android:width="@dimen/default_stroke"></stroke>
             <corners android:radius="3dp"></corners>
         </shape>

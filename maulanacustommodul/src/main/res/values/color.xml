@@ -2,6 +2,7 @@
 <resources>
     <color name="color_white">#000000</color>
     <color name="color_white_pure">#ffffff</color>
+    <color name="color_white_pure1">#C7C0C0</color>
     <color name="color_black">#000000</color>
     <color name="color_blue_dialog">#0297d5</color>
     <color name="color_orange_dialog">#feb103</color>

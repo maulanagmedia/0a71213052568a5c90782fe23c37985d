@@ -25,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,6 +95,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
     private KategoriListAdapter adapter;
     private int start = 0, count = 1000;
     private boolean isLoading = false;
+    private RelativeLayout rlHeaderSlide;
 
     public MainHome() {
         // Required empty public constructor
@@ -143,6 +145,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         llBeliPerdana = (LinearLayout) layout.findViewById(R.id.ll_perdana);
         llPreorderPerdana = (LinearLayout) layout.findViewById(R.id.ll_preorder_perdana);
         llJualPerdana = (LinearLayout) layout.findViewById(R.id.ll_jual_perdana);
+        rlHeaderSlide = (RelativeLayout) layout.findViewById(R.id.rl_header_slide);
 
         rvKategori = (RecyclerView) layout.findViewById(R.id.rv_kategori);
 
@@ -152,6 +155,12 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         int[] dimension = iv.getScreenResolution(context);
 
         int heightLine = (dimension[0] / 3);
+
+        int heightHeader = (dimension[0] * 400 / 720);
+
+        LinearLayout.LayoutParams lpHeader = (LinearLayout.LayoutParams) rlHeaderSlide.getLayoutParams();
+        lpHeader.height = heightHeader;
+        rlHeaderSlide.setLayoutParams(lpHeader);
 
         LinearLayout.LayoutParams l1LayoutParams1 = (LinearLayout.LayoutParams) llLine1.getLayoutParams();
         LinearLayout.LayoutParams l1LayoutParams2 = (LinearLayout.LayoutParams) llLine2.getLayoutParams();
