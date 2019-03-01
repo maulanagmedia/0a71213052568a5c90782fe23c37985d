@@ -76,7 +76,7 @@ public class OrderTcash extends AppCompatActivity {
         context = this;
         session = new SessionManager(context);
 
-        setTitle("Beli Stok Tcash");
+        setTitle("Beli Stok Link Aja");
 
         initUI();
     }

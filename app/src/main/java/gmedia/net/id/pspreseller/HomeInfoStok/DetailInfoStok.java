@@ -133,7 +133,7 @@ public class DetailInfoStok extends AppCompatActivity {
                 llMKios.setVisibility(View.VISIBLE);
             }else if(kode.equals("TC")){
 
-                setTitle("Stok TCash");
+                setTitle("Stok Link Aja");
             }else if(kode.equals("SD")){
 
                 setTitle("Stok Saldo Tunai");

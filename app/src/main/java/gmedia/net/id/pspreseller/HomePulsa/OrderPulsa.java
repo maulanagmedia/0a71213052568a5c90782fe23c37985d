@@ -124,7 +124,7 @@ public class OrderPulsa extends AppCompatActivity {
 
         context = this;
 
-        setTitle("Jual Pulsa/ Tcash/ Bulk");
+        setTitle("Jual Pulsa");
         isActive = true;
         transactionID = iv.getCurrentDate(FormatItem.formatTimestamp2);
 

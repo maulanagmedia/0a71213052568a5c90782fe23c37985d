@@ -207,7 +207,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Stok Tcash"
+                                    android:text="Stok Link Aja"
                                     style="@style/form_control_menu"/>
                             </LinearLayout>
                         </LinearLayout>
@@ -410,7 +410,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Beli Stok TCash"
+                                    android:text="Beli Stok Link Aja"
                                     style="@style/form_control_menu"/>
                             </LinearLayout>
                         </LinearLayout>

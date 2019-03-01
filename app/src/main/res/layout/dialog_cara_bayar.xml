@@ -135,7 +135,7 @@
                 <TextView
                     android:layout_width="@dimen/cr_bayar_text"
                     android:layout_height="wrap_content"
-                    android:text="TCash"
+                    android:text="Link Aja"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:layout_marginLeft="@dimen/margin_default"/>
