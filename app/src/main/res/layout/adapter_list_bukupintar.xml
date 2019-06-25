@@ -40,6 +40,17 @@
                         android:background="?attr/selectableItemBackground"
                         android:layout_alignParentRight="true"/>
 
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_download"
+                        android:id="@+id/iv_download"
+                        android:visibility="gone"
+                        android:padding="@dimen/margin_small"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:background="?attr/selectableItemBackground"
+                        android:layout_toLeftOf="@id/iv_icon"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -47,7 +58,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:id="@+id/tv_item1"
-                        android:layout_toLeftOf="@id/iv_icon"
+                        android:layout_toLeftOf="@id/iv_download"
                         android:singleLine="true"
                         android:ellipsize="end"/>
                 </RelativeLayout>

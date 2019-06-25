@@ -207,7 +207,8 @@ public class BukuPintar extends AppCompatActivity {
                             masterList.add(
                                     new CustomItem(jo.getString("id"),
                                             jo.getString("judul"),
-                                            jo.getString("keterangan")));
+                                            jo.getString("keterangan"),
+                                            jo.getString("file_upload")));
                         }
 
                         setAdapter(masterList);
