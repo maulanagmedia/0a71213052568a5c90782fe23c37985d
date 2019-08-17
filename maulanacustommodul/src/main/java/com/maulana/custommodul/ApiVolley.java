@@ -29,6 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,7 @@ public class ApiVolley {
     private SessionManager session;
     String token0 = "", token1 = "", token2 = "", token3 = "",token4 = "";
     private Context context;
+    private String imei1 = "", imei2 = "";
 
     public ApiVolley(final Context context, JSONObject jsonBody, String requestMethod, String REST_URL, final VolleyCallback callback){
 
@@ -150,6 +152,19 @@ public class ApiVolley {
             // Request Header
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
+
+                ArrayList<String> imeiList = iv.getIMEI(context);
+
+                if(imeiList.size() > 1){ // dual sim
+
+                    imei1 = imeiList.get(0);
+                    imei2 = imeiList.get(1);
+                }else if(imeiList.size() == 1){ // single sim
+
+                    imei1 = imeiList.get(0);
+                    imei2 = imeiList.get(0);
+                }
+
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("Client-Service", "frontend-client");
@@ -159,6 +174,8 @@ public class ApiVolley {
                 params.put("token2", token2);
                 params.put("token3", token3);
                 params.put("nomor", session.getUsername());
+                params.put("imei1", imei1);
+                params.put("imei2", imei2);
                 return params;
             }
 

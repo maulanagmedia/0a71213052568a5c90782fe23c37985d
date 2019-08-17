@@ -7,6 +7,7 @@ package gmedia.net.id.pspreseller.Utils;
 public class ServerURL {
 
     //private static final String baseURL = "http://192.168.20.33/apiresv1/";
+    //private static final String baseURL = "http://112.78.37.52/apiresv1/";
     //private static final String baseURL = "http://119.2.53.122/mobilesalesforce/apiresv1/";
     private static final String baseURL = "https://api.putmasaripratama.co.id/apiresv1/";
     //private static final String baseURL = "http://api.putmasaripratama.co.id/apiresv1/";

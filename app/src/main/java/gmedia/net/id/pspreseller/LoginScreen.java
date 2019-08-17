@@ -265,6 +265,8 @@ public class LoginScreen extends RuntimePermissionsActivity {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+
+
         JSONObject jBody = new JSONObject();
         try {
             jBody.put("username", edtUsername.getText().toString());
