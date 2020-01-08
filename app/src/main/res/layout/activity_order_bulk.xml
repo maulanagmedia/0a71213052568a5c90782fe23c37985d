@@ -196,6 +196,44 @@
                         style="@style/form_control_input"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_menu"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pembayaran"
+                        android:textColor="@color/color_black"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+                        android:id="@+id/rg_bayar"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Saldo Tunai"
+                            android:id="@+id/rb_tunai"
+                            android:visibility="gone"
+                            ></RadioButton>
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rb_link_aja"
+                            android:checked="true"
+                            android:text="Link Aja"></RadioButton>
+                    </RadioGroup>
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

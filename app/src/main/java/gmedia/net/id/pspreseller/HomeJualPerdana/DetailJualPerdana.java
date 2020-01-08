@@ -8,11 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
@@ -226,7 +226,7 @@ public class DetailJualPerdana extends AppCompatActivity {
                     return;
                 }
 
-                android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(context)
+                androidx.appcompat.app.AlertDialog alertDialog = new androidx.appcompat.app.AlertDialog.Builder(context)
                         .setIcon(R.mipmap.ic_launcher)
                         .setTitle("Konfirmasi")
                         .setMessage("Apakah anda yakin ingin menyimpan data penjualan ?")

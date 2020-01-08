@@ -1,11 +1,10 @@
 package gmedia.net.id.pspreseller.PengaturanPin;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

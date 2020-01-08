@@ -2,39 +2,31 @@ package gmedia.net.id.pspreseller;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Handler;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.view.menu.MenuPopupHelper;
-import android.support.v7.widget.PopupMenu;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.appcompat.widget.PopupMenu;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
-
-import java.util.ArrayList;
 
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
 import gmedia.net.id.pspreseller.HomePulsa.Service.ServiceHandler;

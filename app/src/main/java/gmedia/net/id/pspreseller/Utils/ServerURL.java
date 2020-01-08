@@ -19,6 +19,8 @@ public class ServerURL {
     public static final String changePassword = baseURL + "Auth/change_password/";
     public static final String getPromosi = baseURL + "promosi/get_promosi/";
     public static final String uploadFileURL = baseURL + "upload/upload_file/";
+    public static final String uploadFileURLKTP = baseURL + "upload/upload_file_ktp/";
+    public static final String uploadFileURLSelfi = baseURL + "upload/upload_file_selfi/";
 
     public static final String getChat = baseURL + "chat/get_chat/";
     public static final String saveChat = baseURL + "chat/insert/";
@@ -39,7 +41,9 @@ public class ServerURL {
     public static final String getPhonebook = baseURL + "Profile/view_phonebook/";
 
     public static final String beliMkios = baseURL + "Mkios/beli_mkios/";
+    public static final String beliMkiosLinkAja = baseURL + "Mkios/beli_mkios_v2/";
     public static final String beliBulk = baseURL + "Mkios/beli_bulk/";
+    public static final String beliBulkLinkAja = baseURL + "Mkios/beli_bulk_v2/";
     public static final String beliTcash = baseURL + "Mkios/beli_tcash/";
     public static final String beliSaldoTunai= baseURL + "Mkios/beli_deposit/";
     public static final String getHarga = baseURL + "mkios/get_harga/";
@@ -56,12 +60,17 @@ public class ServerURL {
     public static final String getLatestVersion = baseURL + "Version/";
     public static final String getBukuPintar = baseURL + "Buku/";
     public static final String beliPerdana = baseURL + "Perdana/pre_order/";
+    public static final String beliPerdanaLinkAja = baseURL + "Perdana/pre_order_v2/";
     public static final String getCCID = baseURL + "Direct_Sale/scan_perdana/";
     public static final String getKategoriPPOB = baseURL + "Ppob/kategori/";
     public static final String getProdukPPOB = baseURL + "Ppob/produk/";
     public static final String payPPBOB = baseURL + "Ppob/transaksi/";
     public static final String saveHargaPPOB = baseURL + "Ppob/add_harga_custom/";
     public static final String getProvider = baseURL + "Ppob/provider/";
+    public static final String getStokLinkAja = baseURL + "Linkaja/balance_linkaja/";
+    public static final String buyLinkAja = baseURL + "Linkaja/inq_linkaja_deposit/";
+    public static final String confirmLinkAja = baseURL + "Linkaja/conf_linkaja_deposit/";
+    public static final String getAktivasiLinkAja = baseURL + "Linkaja/get_aktivasi/";
 
     //public static final String uploadFileURL = "http://192.168.12.147/psp/testupload/upload.php";
 }

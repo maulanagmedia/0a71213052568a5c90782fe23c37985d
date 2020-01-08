@@ -6,10 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +62,9 @@ public class OrderBulk extends AppCompatActivity {
     private String pin = "", flagPin = "";
     private String currentString = "";
     private boolean isProcess = false;
+    private boolean isLinkAja = false;
+    private final String TAG = "BULK";
+    private RadioGroup rgBayar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +97,21 @@ public class OrderBulk extends AppCompatActivity {
         tvNomor.setText(session.getUsername());
         isProcess = false;
 
+        rgBayar = (RadioGroup) findViewById(R.id.rg_bayar);
+
         //getNoRs();
+
+        //Aturan Pembayaran
+        //isLinkAja = false;
+        isLinkAja = true;
+        rgBayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                isLinkAja = checkedId == R.id.rb_link_aja;
+                Log.d(TAG, "onCheckedChanged: "+isLinkAja);
+            }
+        });
 
         initEvent();
         getDataPin();
@@ -486,7 +505,7 @@ public class OrderBulk extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliBulk, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", isLinkAja ? ServerURL.beliBulkLinkAja : ServerURL.beliBulk, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

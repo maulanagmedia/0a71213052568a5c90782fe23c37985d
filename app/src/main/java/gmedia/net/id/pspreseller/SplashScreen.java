@@ -2,14 +2,12 @@ package gmedia.net.id.pspreseller;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
-import com.maulana.custommodul.ItemValidation;
 
 import gmedia.net.id.pspreseller.NotificationUtil.InitFirebaseSetting;
 

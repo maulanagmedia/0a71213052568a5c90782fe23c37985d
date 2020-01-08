@@ -6,9 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,10 @@ public class DetailKeranjangPerdana extends AppCompatActivity {
     private String pin = "", flagPin = "";
     private double totalHarga, totalJumlah;
 
+    private boolean isLinkAja = false;
+    private final String TAG = "PERDANA";
+    private RadioGroup rgBayar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +85,22 @@ public class DetailKeranjangPerdana extends AppCompatActivity {
         llTambah = (LinearLayout) findViewById(R.id.ll_tambah);
         llSelesai = (LinearLayout) findViewById(R.id.ll_selesai);
 
+        rgBayar = (RadioGroup) findViewById(R.id.rg_bayar);
+
         adapter = new ListKeranjangPerdanaAdapter((Activity) context, listKeranjang);
         lvKeranjang.setAdapter(adapter);
 
+        //Aturan Pembayaran
+        //isLinkAja = false;
+        isLinkAja = true;
+        rgBayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                isLinkAja = checkedId == R.id.rb_link_aja;
+                Log.d(TAG, "onCheckedChanged: "+isLinkAja);
+            }
+        });
     }
 
     private void initEvent() {
@@ -400,7 +419,7 @@ public class DetailKeranjangPerdana extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliPerdana, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", isLinkAja ? ServerURL.beliPerdanaLinkAja : ServerURL.beliPerdana, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

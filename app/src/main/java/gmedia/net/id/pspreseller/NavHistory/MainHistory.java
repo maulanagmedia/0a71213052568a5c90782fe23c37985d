@@ -4,15 +4,10 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +29,6 @@ import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.CustomView.DialogBox;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
-import com.maulana.custommodul.OptionItem;
 import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONArray;
@@ -51,7 +45,6 @@ import java.util.Locale;
 
 import gmedia.net.id.pspreseller.DetailSharePrintout;
 import gmedia.net.id.pspreseller.NavHistory.Adapter.ListHistoryAdapter;
-import gmedia.net.id.pspreseller.NavTransaksi.Adapter.ListTransaksiAdapter;
 import gmedia.net.id.pspreseller.R;
 import gmedia.net.id.pspreseller.Utils.ServerURL;
 

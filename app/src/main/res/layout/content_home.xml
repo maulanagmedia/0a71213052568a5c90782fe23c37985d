@@ -29,7 +29,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saldo Tunai Rp 0 "
+                android:textColor="@color/color_white_pure"
+                android:text="Saldo Anda"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 0 "
                 android:id="@+id/tv_saldo"
                 android:textSize="20sp"
                 android:textColor="@color/color_white_pure" />
@@ -40,6 +46,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:paddingLeft="@dimen/margin_default"
                 android:paddingRight="@dimen/margin_default"
+                android:visibility="gone"
                 android:background="@drawable/bg_button_white"
                 android:text="Top up Saldo Tunai"
                 android:id="@+id/btn_topup"
@@ -161,13 +168,13 @@
         android:layout_alignParentBottom="true"
         >
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_menu"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:tabTextAppearance="@style/MineCustomTabText">
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/ti_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,27 +182,27 @@
                 android:paddingTop="@dimen/margin_small"
                 android:text="Home" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/ti_transaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/bg_b_transaksi"
                 android:text="Transaksi" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/ti_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/bg_b_history"
                 android:text="History" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/ti_promo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/bg_b_promo"
                 android:text="Promo" />
-        </android.support.design.widget.TabLayout>
+        </com.google.android.material.tabs.TabLayout>
     </LinearLayout>
 
     <TextView

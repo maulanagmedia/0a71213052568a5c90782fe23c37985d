@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -30,7 +30,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import gmedia.net.id.pspreseller.MainActivity;
 import gmedia.net.id.pspreseller.R;
 
 public class DetailPromo extends AppCompatActivity {

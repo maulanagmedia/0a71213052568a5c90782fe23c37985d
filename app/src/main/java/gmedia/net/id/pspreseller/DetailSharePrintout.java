@@ -8,11 +8,9 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,8 +18,6 @@ import android.widget.TextView;
 import com.maulana.custommodul.FormatItem;
 import com.maulana.custommodul.ItemValidation;
 import com.maulana.custommodul.SessionManager;
-
-import java.text.Format;
 
 public class DetailSharePrintout extends AppCompatActivity {
 

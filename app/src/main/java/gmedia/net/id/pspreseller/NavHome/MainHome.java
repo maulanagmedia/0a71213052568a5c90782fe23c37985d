@@ -7,14 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -47,6 +46,7 @@ import java.util.TimerTask;
 
 import gmedia.net.id.pspreseller.CustomView.WrapContentViewPager;
 import gmedia.net.id.pspreseller.HomeActivity;
+import gmedia.net.id.pspreseller.HomeAktifasiLinkAja.HomeAktifasiLinkAja;
 import gmedia.net.id.pspreseller.HomeBeliPerdana.DetailKeranjangPerdana;
 import gmedia.net.id.pspreseller.HomeBeliPerdana.ListBarangPerdana;
 import gmedia.net.id.pspreseller.HomeBukuPintar.BukuPintar;
@@ -60,8 +60,6 @@ import gmedia.net.id.pspreseller.HomePenjualanLain.OrderLain;
 import gmedia.net.id.pspreseller.HomePreorderPerdana.ListBarangPreorder;
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
 import gmedia.net.id.pspreseller.HomeTcash.OrderTcash;
-import gmedia.net.id.pspreseller.HomeTokenListrik.OrderTokenListrik;
-import gmedia.net.id.pspreseller.MainActivity;
 import gmedia.net.id.pspreseller.NavHome.Adapter.HeaderSliderAdapter;
 import gmedia.net.id.pspreseller.R;
 import gmedia.net.id.pspreseller.Utils.ServerURL;
@@ -86,7 +84,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
     private Timer timer;
     private LinearLayout llMkios, llBulk, llTcash, llTokenListrik
             , llPulsa, llInfoStok, llStokMkios, llStokTcash, llStokPPOB
-            , llBukuPintar, llBeliPerdana, llPreorderPerdana, llJualPerdana;
+            , llBukuPintar, llBeliPerdana, llPreorderPerdana, llJualPerdana, llAktivasiLinkAja;
     private String TAG = "HOME";
     private String pin = "", flagPin = "";
     private DialogBox dialogBox;
@@ -142,6 +140,7 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
         llStokTcash = (LinearLayout) layout.findViewById(R.id.ll_info_stok_tcash);
         llStokPPOB = (LinearLayout) layout.findViewById(R.id.ll_info_stok_ppob);
         llBukuPintar = (LinearLayout) layout.findViewById(R.id.ll_buku_pintar);
+        llAktivasiLinkAja = (LinearLayout) layout.findViewById(R.id.ll_aktivasi_linkaja);
         llBeliPerdana = (LinearLayout) layout.findViewById(R.id.ll_perdana);
         llPreorderPerdana = (LinearLayout) layout.findViewById(R.id.ll_preorder_perdana);
         llJualPerdana = (LinearLayout) layout.findViewById(R.id.ll_jual_perdana);
@@ -313,6 +312,16 @@ public class MainHome extends Fragment implements ViewPager.OnPageChangeListener
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, DetailJualPerdana.class);
+                startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+            }
+        });
+
+        llAktivasiLinkAja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, HomeAktifasiLinkAja.class);
                 startActivity(intent);
                 ((Activity) context).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             }

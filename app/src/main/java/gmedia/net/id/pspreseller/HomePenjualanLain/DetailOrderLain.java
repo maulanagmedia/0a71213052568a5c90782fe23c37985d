@@ -6,8 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -41,7 +41,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -285,6 +284,7 @@ public class DetailOrderLain extends AppCompatActivity {
             jBody.put("proses", proses);
             jBody.put("konter", currentCounter);
             jBody.put("pay", isInquery ? harga : "");
+            jBody.put("crbayar", "1");
         } catch (JSONException e) {
             e.printStackTrace();
         }

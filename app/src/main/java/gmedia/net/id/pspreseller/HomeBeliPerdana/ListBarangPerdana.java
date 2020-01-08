@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,9 +17,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
@@ -34,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gmedia.net.id.pspreseller.HomeBeliPerdana.Adapter.ListPerdanaAdapter;
-import gmedia.net.id.pspreseller.PriceList.Adapter.ListPricelistAdapter;
 import gmedia.net.id.pspreseller.R;
 import gmedia.net.id.pspreseller.Utils.ServerURL;
 

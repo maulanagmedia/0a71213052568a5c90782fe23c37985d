@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,7 +33,6 @@ import org.json.JSONObject;
 
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
 import gmedia.net.id.pspreseller.HomePulsa.Service.ServiceHandler;
-import gmedia.net.id.pspreseller.HomePulsa.Service.USSDService;
 import gmedia.net.id.pspreseller.R;
 import gmedia.net.id.pspreseller.Utils.ServerURL;
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".HomePreorderPerdana.ListBarangPreorder">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/srl_container">
@@ -18,6 +18,6 @@
             android:divider="@null"
             android:paddingTop="@dimen/margin_small"
             android:paddingBottom="@dimen/margin_small"></ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

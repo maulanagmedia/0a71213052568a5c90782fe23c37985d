@@ -6,7 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -461,7 +461,7 @@ public class OrderTcash extends AppCompatActivity {
         });
     }
 
-    private void saveData(String pin) {
+    /*private void saveData(String pin) {
 
         final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Dialog);
         progressDialog.setIndeterminate(true);
@@ -485,6 +485,161 @@ public class OrderTcash extends AppCompatActivity {
         }
 
         ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliTcash, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                String message = "Terjadi kesalahan saat menyimpan, atau anda pernah order dengan nominal yang sama pada hari ini";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    if(iv.parseNullInteger(status) == 200){
+
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                        HomeActivity.stateFragment = 1;
+                        onBackPressed();
+                    }else{
+
+                        if(!message.toLowerCase().contains("pin")){
+
+                            DialogBox.showDialog(context, 3,message);
+                        }else{
+                            View.OnClickListener clickListener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    dialogBox.dismissDialog();
+                                    showPinDialog();
+
+                                }
+                            };
+
+                            dialogBox.showDialog(clickListener, "Ulangi Proses", message);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+
+                String message = "Terjadi kesalahan saat menyimpan, atau anda pernah order dengan nominal yang sama pada hari ini";
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+        });
+    }*/
+
+    private void saveData(String pin) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        final String hargaTcash = edtNominal.getText().toString().replaceAll("[,.]", "");
+        JSONArray jArrayData = new JSONArray();
+
+        // Tcash
+        JSONObject jBody = new JSONObject();
+
+        try {
+
+            //jBody.put("receiver", session.getUsername());
+            jBody.put("receiver", session.getUsername());
+            jBody.put("amount", hargaTcash);
+            jBody.put("pin", pin);
+            jBody.put("nomor", session.getUsername());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.buyLinkAja, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+                String message = "Terjadi kesalahan saat menyimpan, atau anda pernah order dengan nominal yang sama pada hari ini";
+
+                try {
+
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+                    message = response.getJSONObject("metadata").getString("message");
+                    if(iv.parseNullInteger(status) == 200){
+
+                        String initiator = response.getJSONObject("response").getString("initiator");
+                        String sessionId = response.getJSONObject("response").getString("umc_session_id");
+                        String amount = response.getJSONObject("response").getString("amount");
+                        confirmData(initiator,sessionId,amount);
+                    }else{
+
+                        if(!message.toLowerCase().contains("pin")){
+
+                            DialogBox.showDialog(context, 3,message);
+                        }else{
+                            View.OnClickListener clickListener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    dialogBox.dismissDialog();
+                                    showPinDialog();
+
+                                }
+                            };
+
+                            dialogBox.showDialog(clickListener, "Ulangi Proses", message);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onError(String result) {
+
+                String message = "Terjadi kesalahan saat menyimpan, atau anda pernah order dengan nominal yang sama pada hari ini";
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                if(progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            }
+        });
+    }
+
+    private void confirmData(String initiator, String sessionId, String amount) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme_Login_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Menyimpan...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        // Tcash
+        JSONObject jBody = new JSONObject();
+
+        try {
+
+            jBody.put("initiator", initiator);
+            jBody.put("umc_session_id", sessionId);
+            jBody.put("amount", amount);
+            jBody.put("confirmation_action", "1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.confirmLinkAja, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

@@ -2,7 +2,7 @@ package gmedia.net.id.pspreseller.SideProfile;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
@@ -20,8 +20,6 @@ import com.maulana.custommodul.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Map;
 
 import gmedia.net.id.pspreseller.CSChat.ChatSales;
 import gmedia.net.id.pspreseller.R;

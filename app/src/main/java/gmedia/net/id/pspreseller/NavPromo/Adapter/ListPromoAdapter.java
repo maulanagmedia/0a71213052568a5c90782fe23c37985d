@@ -1,17 +1,13 @@
 package gmedia.net.id.pspreseller.NavPromo.Adapter;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.support.v7.widget.CardView;
-import android.text.Html;
+import androidx.cardview.widget.CardView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.ImageUtils;

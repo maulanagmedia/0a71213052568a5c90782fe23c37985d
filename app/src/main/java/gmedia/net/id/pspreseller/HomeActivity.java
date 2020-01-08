@@ -1,6 +1,5 @@
 package gmedia.net.id.pspreseller;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -17,39 +16,37 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.leonardus.irfan.bluetoothprinter.PspPrinter;
 import com.maulana.custommodul.ApiVolley;
 import com.maulana.custommodul.CustomItem;
 import com.maulana.custommodul.ImageUtils;
 import com.maulana.custommodul.ItemValidation;
-import com.maulana.custommodul.PermissionUtils;
 import com.maulana.custommodul.RuntimePermissionsActivity;
 import com.maulana.custommodul.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -58,7 +55,6 @@ import java.util.List;
 
 import gmedia.net.id.pspreseller.CSChat.ChatSales;
 import gmedia.net.id.pspreseller.HomePulsa.OrderPulsa;
-import gmedia.net.id.pspreseller.HomePulsa.Service.ServiceHandler;
 import gmedia.net.id.pspreseller.NavHistory.MainHistory;
 import gmedia.net.id.pspreseller.NavHome.MainHome;
 import gmedia.net.id.pspreseller.NavPromo.MainPromo;
@@ -240,9 +236,57 @@ public class HomeActivity extends RuntimePermissionsActivity
         }
 
         //tvSaldo.setText("Nomor Anda " + session.getUsername());
-        getTotalDeposit();
+        //getTotalDeposit();
+        getSaldoLinkAja();
 
         checkVersion();
+    }
+
+    private void getSaldoLinkAja() {
+
+        final JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("receiver", session.getUsername());
+            //jBody.put("receiver", "081215351409");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getStokLinkAja, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                try {
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+
+                    boolean isLoadData = false;
+
+                    if(status.equals("200")){
+
+                        JSONArray jArray = response.getJSONObject("response").getJSONArray("tcash_account_balance");
+                        if(jArray.length() > 0){
+
+                            JSONObject data = jArray.getJSONObject(0);
+                            String accountName = data.getString("account_holder_name");
+                            String balance = data.getString("current_balance");
+                            isLoadData = true;
+                            tvSaldo.setText("Rp " + iv.ChangeToCurrencyFormat(iv.parseNullDouble(balance)));
+                        }
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+            }
+        });
     }
 
     public boolean isAccessibilityEnabled(String id){

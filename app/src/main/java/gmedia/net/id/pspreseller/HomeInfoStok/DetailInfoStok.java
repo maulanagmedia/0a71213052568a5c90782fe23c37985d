@@ -6,12 +6,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -161,9 +159,16 @@ public class DetailInfoStok extends AppCompatActivity {
                 getHistoryPBOB();
             }else{
 
-                getHistoryBalasan();
-                value = value.replace("#", Uri.encode("#"));
-                 startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + value)));
+                if(!kode.equals("TC")) // Bukan link Aja
+                {
+                    value = value.replace("#", Uri.encode("#"));
+                    startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + value)));
+                    getHistoryBalasan();
+                }else{
+
+                    getSaldoLinkAja();
+                }
+
             }
         }
 
@@ -207,6 +212,82 @@ public class DetailInfoStok extends AppCompatActivity {
         edtTanggal.setText(dateNow);
 
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
+    }
+
+    private void getSaldoLinkAja() {
+
+        dialogBox.showDialog(false);
+        final JSONObject jBody = new JSONObject();
+        try {
+            jBody.put("receiver", session.getUsername());
+            //jBody.put("receiver", "081215351409");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.getStokLinkAja, new ApiVolley.VolleyCallback() {
+            @Override
+            public void onSuccess(String result) {
+
+                dialogBox.dismissDialog();
+                try {
+                    JSONObject response = new JSONObject(result);
+                    String status = response.getJSONObject("metadata").getString("status");
+
+                    boolean isLoadData = false;
+
+                    if(status.equals("200")){
+
+                        JSONArray jArray = response.getJSONObject("response").getJSONArray("tcash_account_balance");
+                        if(jArray.length() > 0){
+
+                            JSONObject data = jArray.getJSONObject(0);
+                            String accountName = data.getString("account_holder_name");
+                            String balance = data.getString("current_balance");
+                            isLoadData = true;
+                            saveInfoStok("TCASH", accountName + " " + iv.ChangeToCurrencyFormat(iv.parseNullDouble(balance)));
+                        }
+                    }
+
+                    if(!isLoadData){
+
+                        getHistoryBalasan();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    getTableBalasan(null);
+
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialogBox.dismissDialog();
+                            getSaldoLinkAja();
+
+                        }
+                    };
+
+                    dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan saat mengambil data");
+                }
+            }
+
+            @Override
+            public void onError(String result) {
+
+                dialogBox.dismissDialog();
+                View.OnClickListener clickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialogBox.dismissDialog();
+                        getSaldoLinkAja();
+
+                    }
+                };
+
+                dialogBox.showDialog(clickListener, "Ulangi Proses", "Terjadi kesalahan saat mengambil data");
+            }
+        });
     }
 
     @Override
@@ -668,7 +749,7 @@ public class DetailInfoStok extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.saveInfoStok, new ApiVolley.VolleyCallback() {
+        new ApiVolley(context, jBody, "POST", ServerURL.saveInfoStok, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 

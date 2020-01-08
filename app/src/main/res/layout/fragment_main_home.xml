@@ -220,6 +220,7 @@
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_info_stok_ppob"
                             android:padding="@dimen/margin_tiny"
+                            android:visibility="gone"
                             android:gravity="center"
                             android:weightSum="1">
 
@@ -381,6 +382,7 @@
                             android:orientation="vertical"
                             android:background="?attr/selectableItemBackground"
                             android:id="@+id/ll_tcash"
+                            android:visibility="gone"
                             android:padding="@dimen/margin_tiny"
                             android:gravity="center"
                             android:weightSum="1">
@@ -536,7 +538,7 @@
                         android:layout_marginRight="@dimen/margin_default"
                         android:background="@color/color_grey"/>
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/rv_kategori"
@@ -545,7 +547,7 @@
                         android:nestedScrollingEnabled="false"
                         android:layout_below="@id/ll_search">
 
-                    </android.support.v7.widget.RecyclerView>
+                    </androidx.recyclerview.widget.RecyclerView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -681,6 +683,85 @@
                             </LinearLayout>
                         </LinearLayout>
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Link Aja"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="@dimen/margin_big"
+                            android:layout_marginLeft="@dimen/margin_default"
+                            android:layout_marginRight="@dimen/margin_default"
+                            android:textColor="@color/color_white"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/menu_text"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_line"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_big"
+                            android:layout_marginLeft="@dimen/margin_default"
+                            android:layout_marginRight="@dimen/margin_default"
+                            android:background="@color/color_grey"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/margin_default"
+                            android:paddingRight="@dimen/margin_default"
+                            android:paddingBottom="@dimen/margin_big"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:background="?attr/selectableItemBackground"
+                                android:id="@+id/ll_aktivasi_linkaja"
+                                android:padding="@dimen/margin_tiny"
+                                android:gravity="center"
+                                android:weightSum="1">
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/margin_medium">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/menu_height"
+                                        android:layout_height="@dimen/menu_height"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/ic_order_tcash" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingLeft="@dimen/margin_default"
+                                    android:paddingRight="@dimen/margin_default"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="Aktivasi LinkAja"
+                                        style="@style/form_control_menu"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
 
                     <TextView

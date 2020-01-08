@@ -6,10 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +65,9 @@ public class OrderMKIOS extends AppCompatActivity {
     private String pin = "", flagPin = "";
     private TextView tvDenom5, tvDenom10, tvDenom20, tvDenom25, tvDenom50, tvDenom100, tvHarga5, tvHarga10, tvHarga20, tvHarga25, tvHarga50, tvHarga100;
     private EditText edtJumlah5, edtJumlah10, edtJumlah20, edtJumlah25, edtJumlah50, edtJumlah100;
+    private RadioGroup rgBayar;
+    private boolean isLinkAja = false;
+    private final String TAG = "MKIOS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +99,9 @@ public class OrderMKIOS extends AppCompatActivity {
         tvNomor = (TextView) findViewById(R.id.tv_nomor);
         tvNomor.setText(session.getUsername());
 
+        rgBayar = (RadioGroup) findViewById(R.id.rg_bayar);
+
+        // Dibuat 1 1 karena lsitview tidak cocok untuk list dengan edittext dinamis.
         tvDenom5 = (TextView) findViewById(R.id.tv_denom5);
         tvDenom10 = (TextView) findViewById(R.id.tv_denom10);
         tvDenom20 = (TextView) findViewById(R.id.tv_denom20);
@@ -120,6 +128,17 @@ public class OrderMKIOS extends AppCompatActivity {
 
         dialogBox = new DialogBox(context);
         //getNoRs();
+
+        //Aturan Pembayaran
+        //isLinkAja = false;
+        isLinkAja = true;
+        rgBayar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                isLinkAja = checkedId == R.id.rb_link_aja;
+            }
+        });
 
         getDataDenom();
 
@@ -424,6 +443,8 @@ public class OrderMKIOS extends AppCompatActivity {
 
         JSONArray jArrayBarang = new JSONArray();
 
+        String url = ServerURL.beliMkios;
+
         //MKIOS
         if(listDenom != null && listDenom.size() > 0){
 
@@ -451,11 +472,16 @@ public class OrderMKIOS extends AppCompatActivity {
             jBody.put("barang", jArrayBarang);
             jBody.put("pin", pin);
             jBody.put("nomor", session.getUsername());
+            if(isLinkAja){
+
+                url = ServerURL.beliMkiosLinkAja;
+                jBody.put("crbayar", "linkaja");
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ApiVolley request = new ApiVolley(context, jBody, "POST", ServerURL.beliMkios, new ApiVolley.VolleyCallback() {
+        ApiVolley request = new ApiVolley(context, jBody, "POST", url, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
 
