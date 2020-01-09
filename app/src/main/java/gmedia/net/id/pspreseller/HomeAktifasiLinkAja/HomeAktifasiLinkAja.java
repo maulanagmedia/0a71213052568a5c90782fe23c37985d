@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +47,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import gmedia.net.id.pspreseller.R;
 import gmedia.net.id.pspreseller.Utils.ServerURL;
@@ -53,7 +57,7 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
     private Activity context;
     private SessionManager session;
     private TextView tvNomor;
-    private TextView tvStatus;
+    private TextView tvStatus, tvVA, tvKeterangan;
     private ImageView ivKTP, ivSelfie;
     private Button btnKTP, btnSelfie;
     private Button btnProses;
@@ -63,7 +67,7 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
     private ProgressDialog dialog;
     private int statusUploadKTP = 0, statusUploadSelfi = 0;
     private File sourceFileKTP, sourceFileSelfi;
-    private String filePathURIKTP, filePathURISelfi;
+    private String filePathURIKTP = "", filePathURISelfi = "";
     private int totalSizeKTP = 0, totalSizeSelfi = 0;
     private ItemValidation iv = new ItemValidation();
     private String token0 = "", token1 = "", token2 = "", token3 = "", token4 = "";
@@ -99,6 +103,8 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
         tvNomor = (TextView) findViewById(R.id.tv_nomor);
         tvNomor.setText(session.getUsername());
         tvStatus = (TextView) findViewById(R.id.tv_status);
+        tvVA = (TextView) findViewById(R.id.tv_va);
+        tvKeterangan = (TextView) findViewById(R.id.tv_keterangan);
         ivKTP = (ImageView) findViewById(R.id.iv_ktp);
         ivSelfie = (ImageView) findViewById(R.id.iv_selfie);
         btnKTP = (Button) findViewById(R.id.btn_ktp);
@@ -110,6 +116,11 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
     private void initData() {
 
         dialogBox.showDialog(true);
+        idAktivasi = "";
+        tvStatus.setText("");
+        tvVA.setText("");
+        tvKeterangan.setText("");
+
         ApiVolley request = new ApiVolley(context, new JSONObject(), "GET", ServerURL.getAktivasiLinkAja, new ApiVolley.VolleyCallback() {
             @Override
             public void onSuccess(String result) {
@@ -125,7 +136,10 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
                     if(status.equals("200")){
 
                         JSONObject jo = response.getJSONObject("response");
+                        idAktivasi = jo.getString("id");
                         tvStatus.setText(jo.getString("status_text"));
+                        tvVA.setText(jo.getString("no_va"));
+                        tvKeterangan.setText(jo.getString("alasan"));
                         iu.LoadRealImage(context, jo.getString("foto_ktp"), ivKTP);
                         iu.LoadRealImage(context, jo.getString("foto_selfi"), ivSelfie);
 
@@ -226,7 +240,35 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
 
     private void saveData() {
 
-        new UploadFileToServer().execute();
+        //Baru
+        if(idAktivasi.isEmpty()){
+
+            if(bitmapKTP == null){
+
+                Toast.makeText(context, "Harap ambil foto KTP anda", Toast.LENGTH_LONG).show();
+                return;
+            }else if(bitmapSelfie == null){
+
+                Toast.makeText(context, "Harap ambil foto selfie anda", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }else{
+
+            // KTP Kosong
+            if(filePathURIKTP.isEmpty() && filePathURISelfi.isEmpty()){
+
+                Toast.makeText(context, "Tidak ada perubahan data", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if(filePathURIKTP.isEmpty()){
+
+                new UploadFileToServerSelfi().execute();
+            }else{
+
+                new UploadFileToServer().execute();
+            }
+        }
     }
 
     private class UploadFileToServer extends AsyncTask<String, String, String> {
@@ -392,7 +434,7 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
                     if(statusUploadKTP == 1){
 
                         idAktivasi = response.getJSONObject("response").getString("id");
-                        new UploadFileToServerSelfi().execute();
+                        if(!filePathURISelfi.isEmpty()) new UploadFileToServerSelfi().execute();
                     }
                     //berhasil
                 }else{
@@ -570,7 +612,7 @@ public class HomeAktifasiLinkAja extends AppCompatActivity {
 
                     if(statusUploadSelfi == 1){
 
-                        //getChatData();
+                        initData();
                     }
                     //berhasil
                 }else{

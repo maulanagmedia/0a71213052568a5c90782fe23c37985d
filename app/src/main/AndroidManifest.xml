@@ -35,7 +35,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HomeAktifasiLinkAja.HomeAktifasiLinkAja"></activity>
+        <activity android:name=".HomeAktifasiLinkAja.HomeAktifasiLinkAja"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="ACT_LINKAJA" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".DetailSharePrintout"
             android:screenOrientation="portrait"
